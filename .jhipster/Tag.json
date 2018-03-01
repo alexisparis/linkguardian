@@ -1,0 +1,21 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "label",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "255"
+        }
+    ],
+    "changelogDate": "20180228200708",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "tag",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

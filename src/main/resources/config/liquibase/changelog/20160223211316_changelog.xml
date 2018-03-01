@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <!--<changeSet author="alexisparis (generated)" id="1456261999812-1">-->
+      <!--<addDefaultValue columnDataType="bigint"-->
+                       <!--columnName="event_id"-->
+                       <!--defaultValueComputed="nextval('jhi_persistent_audit_event_event_id_seq'::regclass)"-->
+                       <!--tableName="jhi_persistent_audit_event"/>-->
+      <!--<addAutoIncrement columnDataType="bigint"-->
+                        <!--columnName="event_id"-->
+                        <!--tableName="jhi_persistent_audit_event"/>-->
+   <!--</changeSet>-->
+   <!--<changeSet author="alexisparis (generated)" id="1456261999812-2">-->
+      <!--<addDefaultValue columnDataType="bigint"-->
+                       <!--columnName="id"-->
+                       <!--defaultValueComputed="nextval('jhi_social_user_connection_id_seq'::regclass)"-->
+                       <!--tableName="jhi_social_user_connection"/>-->
+      <!--<addAutoIncrement columnDataType="bigint"-->
+                        <!--columnName="id"-->
+                        <!--tableName="jhi_social_user_connection"/>-->
+   <!--</changeSet>-->
+   <!--<changeSet author="alexisparis (generated)" id="1456261999812-3">-->
+      <!--<addDefaultValue columnDataType="bigint"-->
+                       <!--columnName="id"-->
+                       <!--defaultValueComputed="nextval('jhi_user_id_seq'::regclass)"-->
+                       <!--tableName="jhi_user"/>-->
+      <!--<addAutoIncrement columnDataType="bigint" columnName="id" tableName="jhi_user"/>-->
+   <!--</changeSet>-->
+   <!--<changeSet author="alexisparis (generated)" id="1456261999812-4">-->
+      <!--<addDefaultValue columnDataType="bigint"-->
+                       <!--columnName="id"-->
+                       <!--defaultValueComputed="nextval('link_id_seq'::regclass)"-->
+                       <!--tableName="link"/>-->
+      <!--<addAutoIncrement columnDataType="bigint" columnName="id" tableName="link"/>-->
+   <!--</changeSet>-->
+   <!--<changeSet author="alexisparis (generated)" id="1456261999812-5">-->
+      <!--<addDefaultValue columnDataType="bigint"-->
+                       <!--columnName="id"-->
+                       <!--defaultValueComputed="nextval('tag_id_seq'::regclass)"-->
+                       <!--tableName="tag"/>-->
+      <!--<addAutoIncrement columnDataType="bigint" columnName="id" tableName="tag"/>-->
+   <!--</changeSet>-->
+</databaseChangeLog>

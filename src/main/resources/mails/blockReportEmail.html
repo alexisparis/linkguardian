@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="parent">
+<head>
+    <title>Linkguardian block report</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+        <tr>
+            <h2>Report content</h2>
+        </tr>
+        <tr>
+            <p th:each="entry : ${report.activitiesPerLogin()}">
+            <div>
+                <b th:text="${entry.key}"></b>
+            </div>
+            <div style="margin-left: 30px;">
+                <b th:each="item : ${entry.value}">
+                    <span th:text="${item.toString()}"/> <br/>
+                </b>
+            </div>
+            </p>
+        </tr>
+        <tr></tr>
+        <tr>
+            <h2>block duration per user :</h2>
+        </tr>
+        <tr>
+            <p th:each="entry : ${blockDurationPerUser}">
+            <div>
+                <b th:text="${entry.key}"></b>
+            </div>
+            <div style="margin-left: 30px;">
+                <b th:text="${entry.value}"></b>
+            </div>
+            </p>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

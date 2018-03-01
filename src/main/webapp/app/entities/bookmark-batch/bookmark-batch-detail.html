@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="linkguardianApp.bookmarkBatch.detail.title">Bookmark Batch</span> {{vm.bookmarkBatch.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="linkguardianApp.bookmarkBatch.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{vm.bookmarkBatch.creationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatch.statusDate">Status Date</span></dt>
+        <dd>
+            <span>{{vm.bookmarkBatch.statusDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatch.status">Status</span></dt>
+        <dd>
+            <span data-translate="{{'linkguardianApp.BookmarkBatchStatus.' + vm.bookmarkBatch.status}}">{{vm.bookmarkBatch.status}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatch.user">User</span></dt>
+        <dd>
+            {{vm.bookmarkBatch.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="bookmark-batch-detail.edit({id:vm.bookmarkBatch.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

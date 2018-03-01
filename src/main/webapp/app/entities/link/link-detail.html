@@ -1,0 +1,65 @@
+
+<div>
+    <h2><span data-translate="linkguardianApp.link.detail.title">Link</span> {{vm.link.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="linkguardianApp.link.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{vm.link.creationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.description">Description</span></dt>
+        <dd>
+            <span>{{vm.link.description}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.domain">Domain</span></dt>
+        <dd>
+            <span>{{vm.link.domain}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.locked">Locked</span></dt>
+        <dd>
+            <span>{{vm.link.locked}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.note">Note</span></dt>
+        <dd>
+            <span>{{vm.link.note}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.read">Read</span></dt>
+        <dd>
+            <span>{{vm.link.read}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.title">Title</span></dt>
+        <dd>
+            <span>{{vm.link.title}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.url">Url</span></dt>
+        <dd>
+            <span>{{vm.link.url}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.originalUrl">Original Url</span></dt>
+        <dd>
+            <span>{{vm.link.originalUrl}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.user">User</span></dt>
+        <dd>
+            {{vm.link.user.login}}
+        </dd>
+        <dt><span data-translate="linkguardianApp.link.tags">Tags</span></dt>
+        <dd>
+            <span ng-repeat="tags in vm.link.tags">
+                <a ui-sref="tag-detail({id: tags.id})">{{tags.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="link-detail.edit({id:vm.link.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

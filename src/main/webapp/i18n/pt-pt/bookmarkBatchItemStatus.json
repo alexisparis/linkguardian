@@ -1,0 +1,10 @@
+{
+    "linkguardianApp": {
+        "BookmarkBatchItemStatus" : {
+            "null": "",
+            "CREATED": "CREATED",
+            "NOT_IMPORTED": "NOT_IMPORTED",
+            "FAILED": "FAILED"
+        }
+    }
+}

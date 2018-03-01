@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="linkguardianApp.bookmarkBatchItem.detail.title">Bookmark Batch Item</span> {{vm.bookmarkBatchItem.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="linkguardianApp.bookmarkBatchItem.url">Url</span></dt>
+        <dd>
+            <span>{{vm.bookmarkBatchItem.url}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatchItem.tags">Tags</span></dt>
+        <dd>
+            <span>{{vm.bookmarkBatchItem.tags}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatchItem.linkCreationDate">Link Creation Date</span></dt>
+        <dd>
+            <span>{{vm.bookmarkBatchItem.linkCreationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatchItem.status">Status</span></dt>
+        <dd>
+            <span data-translate="{{'linkguardianApp.BookmarkBatchItemStatus.' + vm.bookmarkBatchItem.status}}">{{vm.bookmarkBatchItem.status}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.bookmarkBatchItem.errorMsgCode">Error Msg Code</span></dt>
+        <dd>
+            <span>{{vm.bookmarkBatchItem.errorMsgCode}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="bookmark-batch-item-detail.edit({id:vm.bookmarkBatchItem.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,114 @@
+
+//.walkthrough-done-button {
+//    font-weight: 400;
+//}
+//.walkthrough-text-container .walkthrough-element {
+//    white-space: pre-wrap;
+//    white-space: -moz-pre-wrap;
+//    white-space: -o-pre-wrap;
+//    word-wrap: break-word;
+//    word-break: normal;
+//    background-color: transparent;
+//    border:none;
+//    font-weight: 400;
+//}
+
+@import "variables";
+
+.onboarding-popover-content {
+    font-weight:400;
+    font-size: 14px;
+    padding-top: 18px;
+}
+a.onboarding-button:hover, a.onboarding-button:focus {
+    text-decoration: none;
+}
+.onboarding-popover-title {
+    background-color: $navbar-color;
+    color: rgba(255,255,255,0.87);
+    border-radius: 0px;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 23px;
+    padding-bottom: 23px;
+
+}
+.onboarding-overlay {
+    height: 100%;
+}
+.onboarding-popover {
+    position: fixed;
+    border-radius: 0px;
+    padding: 0px;
+    border: 0px;
+    min-width: 300px;
+    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
+}
+.demo-step-show-search-panel .onboarding-popover {
+    position: absolute;
+}
+
+.onboarding-close-button, .onboarding-close-button:hover, .onboarding-close-button:visited,
+.onboarding-close-button > md-icon{
+    color: rgba(255,255,255,0.87);
+}
+.onboarding-step-info {
+    font-weight: 400;
+}
+.onboarding-popover.onboarding-top .onboarding-arrow {
+    border-top-color: transparent;
+}
+.onboarding-popover.onboarding-top .onboarding-arrow:after {
+    border-top-color: #f4f4f4;
+}
+.onboarding-popover.onboarding-bottom .onboarding-arrow {
+    border-bottom-color: transparent;
+}
+.onboarding-popover.onboarding-bottom .onboarding-arrow:after {
+    border-bottom-color: $navbar-color;
+}
+.onboarding-popover.onboarding-right .onboarding-arrow {
+    border-right-color: transparent;
+}
+.onboarding-popover.onboarding-right .onboarding-arrow:after {
+    border-right-color: white;
+}
+.onboarding-popover.onboarding-left .onboarding-arrow {
+    border-left-color: transparent;
+}
+.onboarding-popover.onboarding-left .onboarding-arrow:after {
+    border-left-color: white;
+}
+
+// override margin for action buttons on a link in the demo section
+.onboarding-popover-content .md-button.md-fab:not(.md-link-action) {
+    margin: 1px 3px 3px 1px;
+}
+
+.onboarding-focus {
+    z-index: auto;
+}
+.onboarding-overlay {
+    // hack when a scroll appear during demo
+    position: fixed;
+}
+
+// override default min-width of 300 on devices that are not able to show too large elements
+@media (max-width: 400px) {
+    .demo-step-show-add-url-button .onboarding-popover, .demo-step-show-add-url-tag-input .onboarding-popover {
+        min-width: auto;
+    }
+}
+.demo-step-show-add-url-button .onboarding-popover.onboarding-bottom .onboarding-arrow,
+.demo-step-show-add-url-tag-input .onboarding-popover.onboarding-bottom .onboarding-arrow {
+    left: 20px;
+}
+.demo-step-show-add-url-button .onboarding-popover.onboarding-left .onboarding-arrow,
+.demo-step-show-add-url-tag-input .onboarding-popover.onboarding-left .onboarding-arrow {
+    top: 30px;
+}
+.demo-step-show-add-url-button .onboarding-popover.onboarding-left .onboarding-arrow:after,
+.demo-step-show-add-url-tag-input .onboarding-popover.onboarding-left .onboarding-arrow:after {
+    border-left-color: $navbar-color;
+}
+

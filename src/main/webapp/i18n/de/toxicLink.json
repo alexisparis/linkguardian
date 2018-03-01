@@ -1,0 +1,26 @@
+
+{
+    "linkguardianApp": {
+        "toxicLink" : {
+            "home": {
+                "title": "Toxic Links",
+                "createLabel": "Toxic Link erstellen",
+                "createOrEditLabel": "Toxic Link erstellen oder bearbeiten",
+                "search": "Suche nach Toxic Link"
+            },
+            "created": "Toxic Link erstellt mit ID {{ param }}",
+            "updated": "Toxic Link aktualisiert mit ID {{ param }}",
+            "deleted": "Toxic Link gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Toxic Link {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Toxic Link"
+            },
+            "email": "Email",
+            "url": "Url",
+            "creation_date": "Creation Date",
+            "error": "Error"
+        }
+    }
+}

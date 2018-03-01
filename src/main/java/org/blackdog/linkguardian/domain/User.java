@@ -1,5 +1,6 @@
 package org.blackdog.linkguardian.domain;
 
+import java.time.ZonedDateTime;
 import org.blackdog.linkguardian.config.Constants;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -69,9 +70,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "lang_key", length = 6)
     private String langKey;
 
-    @Size(max = 256)
-    @Column(name = "image_url", length = 256)
-    private String imageUrl;
+//    @Size(max = 256)
+//    @Column(name = "image_url", length = 256)
+//    private String imageUrl;
 
     @Size(max = 20)
     @Column(name = "activation_key", length = 20)
@@ -85,6 +86,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private Instant resetDate = null;
+
+    @Column(name = "lock_end_date", nullable = true)
+    private ZonedDateTime lockEndDate = null;
 
     @JsonIgnore
     @ManyToMany
@@ -145,13 +149,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.email = email;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+//    public String getImageUrl() {
+//        return imageUrl;
+//    }
+//
+//    public void setImageUrl(String imageUrl) {
+//        this.imageUrl = imageUrl;
+//    }
 
     public boolean getActivated() {
         return activated;
@@ -201,6 +205,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+    public ZonedDateTime getLockEndDate() {
+        return lockEndDate;
+    }
+
+    public void setLockEndDate(ZonedDateTime lockEndDate) {
+        this.lockEndDate = lockEndDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -226,7 +238,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
+//            ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +

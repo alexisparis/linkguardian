@@ -40,6 +40,7 @@ apply plugin: 'com.moowork.node'
 apply plugin: 'com.moowork.gulp'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
+apply plugin: "jacoco"
 
 dependencyManagement {
   imports {
@@ -184,6 +185,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-mail"
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-starter-aop"
+    compile "org.springframework.boot:spring-boot-starter-batch"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.boot:spring-boot-starter-data-elasticsearch"
     // needed to get around elasticsearch stacktrace about jna not found
@@ -232,6 +234,17 @@ dependencies {
     optional ("org.springframework.boot:spring-boot-configuration-processor") {
         exclude group: 'com.vaadin.external.google', module: 'android-json'
     }
+
+    // of my own
+    compile "com.google.apis:google-api-services-urlshortener:v1-rev43-1.21.0"
+    compile "com.mashape.unirest:unirest-java:1.4.9"
+    compile "org.apache.httpcomponents:httpasyncclient:4.0.2"
+    compile "org.apache.httpcomponents:httpmime:4.3.6"
+    compile "org.json:json:20140107"
+    compile "net.htmlparser.jericho:jericho-html:3.4"
+//    compile group: 'com.google.guava', name: 'guava', version: '24.0-jre'
+
+
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

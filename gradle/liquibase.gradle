@@ -44,9 +44,9 @@ def liquibaseCommand(command) {
 
         args "--changeLogFile=src/main/resources/config/liquibase/changelog/" + buildTimestamp() +"_changelog.xml"
         args "--referenceUrl=hibernate:spring:org.blackdog.linkguardian.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
-        args "--username=linkguardian"
-        args "--password="
-        args "--url=jdbc:postgresql://localhost:5432/linkguardian"
+        args "--username=postgres"
+        args "--password=postgres"
+        args "--url=jdbc:postgresql://localhost:5432/prod"
         args "--driver=org.postgresql.Driver"
         args command
     }

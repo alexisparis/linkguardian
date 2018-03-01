@@ -1,0 +1,85 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myToxicLinkLabel" data-translate="linkguardianApp.toxicLink.home.createOrEditLabel">Create or edit a Toxic Link</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.toxicLink.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.toxicLink.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="linkguardianApp.toxicLink.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.toxicLink.email"
+                    required ng-maxlength="254"/>
+            <div ng-show="editForm.email.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.email.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.email.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="254">
+                    This field cannot be longer than 254 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="linkguardianApp.toxicLink.url" for="field_url">Url</label>
+                <textarea class="form-control" name="url" id="field_url"
+                    ng-model="vm.toxicLink.url" required></textarea>
+            <div ng-show="editForm.url.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.url.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="linkguardianApp.toxicLink.creationDate" for="field_creation_date">Creation Date</label>
+                <div class="input-group">
+                    <input id="field_creation_date" type="text" class="form-control" name="creationDate" datetime-picker="{{dateformat}}" ng-model="vm.toxicLink.creationDate" is-open="vm.datePickerOpenStatus.creationDate"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('creationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.creationDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.creationDate.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.creationDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="linkguardianApp.toxicLink.error" for="field_error">Error</label>
+            <input type="text" class="form-control" name="error" id="field_error"
+                    ng-model="vm.toxicLink.error"
+                    ng-maxlength="30"/>
+            <div ng-show="editForm.error.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.error.$error.maxlength" data-translate="entity.validation.maxlength" translate-value-max="30">
+                    This field cannot be longer than 30 characters.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

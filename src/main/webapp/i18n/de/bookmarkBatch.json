@@ -1,0 +1,27 @@
+
+{
+    "linkguardianApp": {
+        "bookmarkBatch" : {
+            "home": {
+                "title": "Bookmark Batches",
+                "createLabel": "Bookmark Batch erstellen",
+                "createOrEditLabel": "Bookmark Batch erstellen oder bearbeiten",
+                "search": "Suche nach Bookmark Batch"
+            },
+            "created": "Bookmark Batch erstellt mit ID {{ param }}",
+            "updated": "Bookmark Batch aktualisiert mit ID {{ param }}",
+            "deleted": "Bookmark Batch gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Bookmark Batch {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Bookmark Batch"
+            },
+            "creation_date": "Creation Date",
+            "status_date": "Status Date",
+            "status": "Status",
+            "user": "User",
+            "items": "Items"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+
+{
+    "linkguardianApp": {
+        "bookmarkBatch" : {
+            "home": {
+                "title": "Bookmark Batches",
+                "createLabel": "创建新 Bookmark Batch",
+                "createOrEditLabel": "创建或编辑 Bookmark Batch",
+                "search": "查找 Bookmark Batch"
+            },
+            "created": "Bookmark Batch {{ param }} 创建成功",
+            "updated": "Bookmark Batch {{ param }} 更新成功",
+            "deleted": "Bookmark Batch {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Bookmark Batch {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Bookmark Batch"
+            },
+            "creation_date": "Creation Date",
+            "status_date": "Status Date",
+            "status": "Status",
+            "user": "User",
+            "items": "Items"
+        }
+    }
+}

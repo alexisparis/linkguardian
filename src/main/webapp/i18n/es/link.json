@@ -1,0 +1,33 @@
+
+{
+    "linkguardianApp": {
+        "link" : {
+            "home": {
+                "title": "Links",
+                "createLabel": "Crear nuevo Link",
+                "createOrEditLabel": "Crear o editar Link",
+                "search": "Search for Link"
+            },
+            "created": "Un nuevo Link ha sido creado con el identificador {{ param }}",
+            "updated": "Un Link ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Link ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Link {{ id }}?"
+            },
+            "detail": {
+                "title": "Link"
+            },
+            "creation_date": "Creation Date",
+            "description": "Description",
+            "domain": "Domain",
+            "locked": "Locked",
+            "note": "Note",
+            "read": "Read",
+            "title": "Title",
+            "url": "Url",
+            "original_url": "Original Url",
+            "user": "User",
+            "tags": "Tags"
+        }
+    }
+}

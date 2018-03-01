@@ -46,6 +46,13 @@ public class CacheConfiguration {
             cm.createCache(org.blackdog.linkguardian.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(org.blackdog.linkguardian.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(org.blackdog.linkguardian.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.Tag.class.getName(), jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.Link.class.getName(), jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.Link.class.getName() + ".tags", jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.ToxicLink.class.getName(), jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.BookmarkBatchItem.class.getName(), jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.BookmarkBatch.class.getName(), jcacheConfiguration);
+            cm.createCache(org.blackdog.linkguardian.domain.BookmarkBatch.class.getName() + ".items", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

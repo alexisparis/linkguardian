@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="parent">
+<head>
+    <title>Linkguardian statistics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+        <tr>
+            <td colspan="4"><h2 th:text="${message}"></h2></td>
+        </tr>
+        <tr th:each="linksCreated : ${linkCreatedCount}">
+            <td th:text="${linksCreated.userLogin}"></td>
+            <td th:text="${linksCreated.mail}"></td>
+            <td th:text="${linksCreated.count}"></td>
+            <td>links</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td colspan="4"><h2>Toxic users count :</h2></td>
+        </tr>
+        <tr th:each="toxicLink : ${toxicLinksPerMail}">
+            <td>
+                <b th:text="${toxicLink.key}">mail</b> tried <span th:text="${#lists.size(toxicLink.value)}">toxic links</span> toxic links :
+            </td>
+            <td style="margin-left: 30px;" colspan="3">
+                <table>
+                    <tr th:each="link : ${toxicLink.value}">
+                        <td>
+                            <span th:text="${link.url}"></span> (<span th:text="${link.error}"></span>)
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td colspan="4"><h2>Bookmark batch not completed count :</h2></td>
+        </tr>
+        <tr th:each="batch : ${batchNotCompletedCount}">
+            <td th:text="${batch.userLogin}"></td>
+            <td th:text="${batch.mail}"></td>
+            <td th:text="${batch.count}"></td>
+            <td>batchs</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td colspan="4"><h2>Bookmark batch item not completed count :</h2></td>
+        </tr>
+        <tr th:each="batchItem : ${batchItemNotCompletedCount}">
+            <td th:text="${batchItem.userLogin}"></td>
+            <td th:text="${batchItem.mail}"></td>
+            <td th:text="${batchItem.count}"></td>
+            <td>items</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

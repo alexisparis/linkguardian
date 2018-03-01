@@ -11,6 +11,7 @@ import com.codahale.metrics.servlets.MetricsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.*;
 import org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory;
 import io.undertow.UndertowOptions;
@@ -27,6 +28,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.*;
 import javax.servlet.*;
+import org.springframework.web.filter.RequestContextFilter;
 
 /**
  * Configuration of web application with Servlet 3.0 APIs.
@@ -41,6 +43,9 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     private final JHipsterProperties jHipsterProperties;
 
     private MetricRegistry metricRegistry;
+
+    @Value("${secure.cookie}")
+    private boolean cookiesSecured = true;
 
     public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties) {
 
@@ -58,6 +63,13 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
             initCachingHttpHeadersFilter(servletContext, disps);
         }
+
+        // from https://stackoverflow.com/questions/39252924/add-secure-flag-to-jsessionid-cookie-in-spring-automatically/39258586
+        servletContext.getSessionCookieConfig().setHttpOnly(true);
+        servletContext.getSessionCookieConfig().setSecure(cookiesSecured);
+
+        servletContext.addFilter("requestContextFilter", new RequestContextFilter() );
+
         log.info("Web application fully configured");
     }
 

@@ -1,0 +1,23 @@
+
+{
+    "linkguardianApp": {
+        "tag" : {
+            "home": {
+                "title": "Tags",
+                "createLabel": "Criar um(a) novo(a) Tag",
+                "createOrEditLabel": "Criar ou editar um(a) Tag",
+                "search": "Search for Tag"
+            },
+            "created": "A new Tag is created with identifier {{ param }}",
+            "updated": "A Tag is updated with identifier {{ param }}",
+            "deleted": "A Tag is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tem a certeza que pretende eliminar o(a) Tag {{ id }}?"
+            },
+            "detail": {
+                "title": "Tag"
+            },
+            "label": "Label"
+        }
+    }
+}

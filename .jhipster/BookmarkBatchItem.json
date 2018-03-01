@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "url",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "2400"
+        },
+        {
+            "fieldName": "tags",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "2400"
+        },
+        {
+            "fieldName": "link_creation_date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "BookmarkBatchItemStatus",
+            "fieldValues": "CREATED, NOT_IMPORTED, FAILED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "error_msg_code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        }
+    ],
+    "changelogDate": "20180228204010",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "bookmark_batch_item",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

@@ -8,6 +8,7 @@ import org.blackdog.linkguardian.security.SecurityUtils;
 import org.blackdog.linkguardian.service.MailService;
 import org.blackdog.linkguardian.service.UserService;
 import org.blackdog.linkguardian.service.dto.UserDTO;
+import org.blackdog.linkguardian.service.exception.MailNotSentException;
 import org.blackdog.linkguardian.web.rest.errors.*;
 import org.blackdog.linkguardian.web.rest.vm.KeyAndPasswordVM;
 import org.blackdog.linkguardian.web.rest.vm.ManagedUserVM;
@@ -16,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,14 +57,21 @@ public class AccountResource {
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
         userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+        try {
+            mailService.sendActivationEmail(user);
+        } catch (MailNotSentException e) {
+            userService.deleteUser(user.getLogin());
+            log.error("error while sending activation mail to " + user.getLogin(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /**
@@ -153,11 +162,17 @@ public class AccountResource {
      */
     @PostMapping(path = "/account/reset-password/init")
     @Timed
-    public void requestPasswordReset(@RequestBody String mail) {
-       mailService.sendPasswordResetMail(
-           userService.requestPasswordReset(mail)
-               .orElseThrow(EmailNotFoundException::new)
-       );
+    public ResponseEntity<?> requestPasswordReset(@RequestBody String mail) {
+        try {
+           mailService.sendPasswordResetMail(
+               userService.requestPasswordReset(mail)
+                   .orElseThrow(EmailNotFoundException::new)
+           );
+        } catch (MailNotSentException e) {
+            log.error("could not send password reset for user with email " + mail, e);
+            return new ResponseEntity<>("e-mail was not sent", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("e-mail was sent", HttpStatus.OK);
     }
 
     /**

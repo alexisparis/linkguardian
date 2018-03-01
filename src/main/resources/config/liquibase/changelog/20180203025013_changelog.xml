@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="para042 (generated)" id="1517626222782-10">
+      <createIndex indexName="bookmark_batch_idx_1" tableName="bookmark_batch">
+         <column name="status"/>
+      </createIndex>
+   </changeSet>
+   <changeSet author="para042 (generated)" id="1517626222782-11">
+      <createIndex indexName="bookmark_batch_item_idx_1" tableName="bookmark_batch_item">
+         <column name="status"/>
+      </createIndex>
+   </changeSet>
+   <changeSet author="para042 (generated)" id="1517626222782-12">
+      <createIndex indexName="link_idx_1" tableName="link">
+         <column name="title"/>
+      </createIndex>
+   </changeSet>
+   <changeSet author="para042 (generated)" id="1517626222782-13">
+      <createIndex indexName="link_idx_2" tableName="link">
+         <column name="url"/>
+      </createIndex>
+   </changeSet>
+   <changeSet author="para042 (generated)" id="1517626222782-14">
+      <createIndex indexName="link_idx_3" tableName="link">
+         <column name="original_url"/>
+      </createIndex>
+   </changeSet>
+   <changeSet author="para042 (generated)" id="1517626222782-15">
+      <createIndex indexName="link_idx_4" tableName="link">
+         <column name="creation_date"/>
+      </createIndex>
+   </changeSet>
+   <changeSet author="para042 (generated)" id="1517626222782-16">
+      <createIndex indexName="toxic_link_idx_1" tableName="toxic_link">
+         <column name="creation_date"/>
+         <column name="email"/>
+      </createIndex>
+   </changeSet>
+</databaseChangeLog>

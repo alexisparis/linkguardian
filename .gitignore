@@ -2,6 +2,8 @@
 # Project Specific
 ######################
 /src/main/webapp/content/css/main.css
+/src/main/webapp/bower_components
+/src/test/nightwatch/drivers/
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
@@ -27,6 +29,7 @@ npm-debug.log.*
 .project
 .metadata
 tmp/
+out/
 tmp/**/*
 *.tmp
 *.bak

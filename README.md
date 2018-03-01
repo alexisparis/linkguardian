@@ -118,3 +118,14 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
+
+## run jacoco coverage report
+    ./gradlew jacocoTestReport
+
+    report is in build/reports/jacoco/test/html/index.html
+    
+
+## run locally
+    ./gradlew bootRun
+    
+

@@ -1,0 +1,26 @@
+
+{
+    "linkguardianApp": {
+        "toxicLink" : {
+            "home": {
+                "title": "ToxicLinks",
+                "createLabel": "Genera un nuovo Toxic Link",
+                "createOrEditLabel": "Genera o modifica un Toxic Link",
+                "search": "Cerca Toxic Link"
+            },
+            "created": "&Egrave; stato generato un nuovo Toxic Link con identificatore {{ param }}",
+            "updated": "&Egrave; stato aggiornato Toxic Link identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Toxic Link con identificatore {{ param }}",
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Toxic Link {{ id }}?"
+            },
+            "detail": {
+                "title": "Toxic Link"
+            },
+            "email": "Email",
+            "url": "Url",
+            "creation_date": "Creation Date",
+            "error": "Error"
+        }
+    }
+}

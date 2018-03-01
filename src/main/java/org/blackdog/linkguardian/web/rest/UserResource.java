@@ -9,6 +9,7 @@ import org.blackdog.linkguardian.security.AuthoritiesConstants;
 import org.blackdog.linkguardian.service.MailService;
 import org.blackdog.linkguardian.service.UserService;
 import org.blackdog.linkguardian.service.dto.UserDTO;
+import org.blackdog.linkguardian.service.exception.MailNotSentException;
 import org.blackdog.linkguardian.web.rest.errors.BadRequestAlertException;
 import org.blackdog.linkguardian.web.rest.errors.EmailAlreadyUsedException;
 import org.blackdog.linkguardian.web.rest.errors.LoginAlreadyUsedException;
@@ -108,7 +109,12 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
+            try {
+                mailService.sendCreationEmail(newUser);
+            } catch (MailNotSentException e) {
+                log.error("could not send password reset for user with email " + newUser.getEmail(), e);
+                return new ResponseEntity<User>(newUser, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
                 .body(newUser);

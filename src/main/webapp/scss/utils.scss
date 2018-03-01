@@ -1,0 +1,100 @@
+
+@import "variables";
+
+@mixin no-padding($side) {
+    @if $side == 'all' {
+        .no-padding {
+            padding: 0 !important;
+        }
+    } @else {
+        .no-padding-#{$side} {
+            padding-#{$side}: 0 !important;
+        }
+    }
+}
+@include no-padding("left");
+@include no-padding("right");
+@include no-padding("top");
+@include no-padding("bottom");
+@include no-padding("all");
+
+@mixin padding($side, $value) {
+    @if $side == 'all' {
+        .padding-#{$value} {
+            padding: unquote($value+'px') !important;
+        }
+    } @else {
+        .padding-#{$side}-#{$value} {
+            padding-#{$side}: unquote($value + 'px') !important;
+        }
+    }
+}
+@include padding("left", 5);
+@include padding("right", 5);
+@include padding("top", 5);
+@include padding("bottom", 5);
+@include padding("all", 5);
+
+@mixin no-margin($side) {
+    @if $side == 'all' {
+        .no-padding {
+            margin: 0 !important;
+        }
+    } @else {
+        .no-padding-#{$side} {
+            margin-#{$side}: 0 !important;
+        }
+    }
+}
+@include no-margin("left");
+@include no-margin("right");
+@include no-margin("top");
+@include no-margin("bottom");
+@include no-margin("all");
+
+@mixin margin($side, $value) {
+    @if $side == 'all' {
+        .margin-#{$value} {
+            margin: unquote($value+'px') !important;
+        }
+    } @else {
+        .margin-#{$side}-#{$value} {
+            margin-#{$side}: unquote($value + 'px') !important;
+        }
+    }
+}
+@include margin("left", 5);
+@include margin("right", 5);
+@include margin("top", 5);
+@include margin("bottom", 5);
+@include margin("all", 5);
+
+@include margin("left", 10);
+@include margin("right", 10);
+@include margin("top", 10);
+@include margin("bottom", 10);
+@include margin("all", 10);
+
+@include margin("left", 20);
+@include margin("right", 20);
+@include margin("top", 20);
+@include margin("bottom", 20);
+@include margin("all", 20);
+
+.margin-auto {
+    margin: auto;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+.overflow-y-visible {
+    overflow-y: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+.text-error {
+    color: $error-color !important;
+}

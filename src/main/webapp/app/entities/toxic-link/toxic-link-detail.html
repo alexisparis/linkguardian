@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="linkguardianApp.toxicLink.detail.title">Toxic Link</span> {{vm.toxicLink.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="linkguardianApp.toxicLink.email">Email</span></dt>
+        <dd>
+            <span>{{vm.toxicLink.email}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.toxicLink.url">Url</span></dt>
+        <dd>
+            <span>{{vm.toxicLink.url}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.toxicLink.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{vm.toxicLink.creationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="linkguardianApp.toxicLink.error">Error</span></dt>
+        <dd>
+            <span>{{vm.toxicLink.error}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="toxic-link-detail.edit({id:vm.toxicLink.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

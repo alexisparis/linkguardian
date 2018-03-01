@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "bookmarkBatch"
+        },
+        {
+            "relationshipName": "items",
+            "otherEntityName": "bookmarkBatchItem",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "bookmarkBatch"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "creation_date",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status_date",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "BookmarkBatchStatus",
+            "fieldValues": "NOT_IMPORTED,IMPORTED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180228204628",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "bookmark_batch",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

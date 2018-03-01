@@ -7,6 +7,11 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entità",
+                "tag": "Tag",
+                "link": "Link",
+                "toxicLink": "Toxic Link",
+                "bookmarkBatchItem": "Bookmark Batch Item",
+                "bookmarkBatch": "Bookmark Batch",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

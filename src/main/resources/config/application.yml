@@ -52,7 +52,22 @@ spring:
         name: linkguardian
     jackson:
         serialization.write_dates_as_timestamps: false
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/prod
+        name:
+        username: postgres
+        password: postgres
     jpa:
+        database-platform: org.blackdog.linkguardian.domain.util.FixedPostgreSQL82Dialect
+        database: POSTGRESQL
+        show-sql: true
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
         open-in-view: false
         hibernate:
             ddl-auto: none
@@ -66,6 +81,13 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    mail:
+        host: ns0.ovh.net
+        port: 587
+        username: linkguardian@blackdog-project.org
+        password: 2U6GDpf24iqDWtWw7Ayi
+        protocol: smtp
+        tls: true
     social:
         # see https://developers.google.com/+/web/signin/server-side-flow#step_1_create_a_client_id_and_client_secret
         google:
@@ -92,6 +114,21 @@ server:
         cookie:
             http-only: true
 
+admin:
+    mail: alexis.rt.paris@gmail.com
+
+secure:
+    cookie: false
+service:
+    bookmark:
+        parse:
+            url: https://us-central1-linkguardian-193618.cloudfunctions.net/html2links
+
+batch:
+    bookmarks:
+        job:
+            interval_seconds: 10
+
 info:
     project:
         version: #project.version#
@@ -116,7 +153,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: linkguardian@localhost
+        from: linkguardian@blackdog-project.org
     swagger:
         default-include-pattern: /api/.*
         title: linkguardian API

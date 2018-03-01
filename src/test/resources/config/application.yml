@@ -15,12 +15,15 @@
 
 eureka:
     client:
-        enabled: true
+        enabled: false
     instance:
         appname: linkguardian
         instanceId: linkguardian:${spring.application.instance-id:${random.value}}
 
 spring:
+    batch:
+        job:
+            enabled: false
     application:
         name: linkguardian
     jackson:
@@ -48,7 +51,7 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.hbm2ddl.auto: validate
+            hibernate.hbm2ddl.auto: create-drop
     data:
         elasticsearch:
             cluster-name:
@@ -66,6 +69,12 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
+        base-url: http://localhost:9411
+        enabled: false
+        locator:
+            discovery:
+                enabled: false
 
 liquibase:
     contexts: test
@@ -73,6 +82,19 @@ liquibase:
 server:
     port: 10344
     address: localhost
+
+admin:
+    mail: alexis.rt.paris@gmail.com
+batch:
+    bookmarks:
+        job:
+            interval_seconds: 10
+secure:
+    cookie: false
+service:
+    bookmark:
+        parse:
+            url: https://us-central1-linkguardian-193618.cloudfunctions.net/html2links
 
 info:
     project:

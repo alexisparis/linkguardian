@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180228200708_added_entity_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180228202048_added_entity_Link.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180228203043_added_entity_ToxicLink.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180228204010_added_entity_BookmarkBatchItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180228204628_added_entity_BookmarkBatch.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase_new changelogs here -->
+    <include file="config/liquibase/changelog/20180228202048_added_entity_constraints_Link.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180228204628_added_entity_constraints_BookmarkBatch.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase_new constraints changelogs here -->
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+
+{
+    "linkguardianApp": {
+        "link" : {
+            "home": {
+                "title": "Links",
+                "createLabel": "创建新 Link",
+                "createOrEditLabel": "创建或编辑 Link",
+                "search": "查找 Link"
+            },
+            "created": "Link {{ param }} 创建成功",
+            "updated": "Link {{ param }} 更新成功",
+            "deleted": "Link {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Link {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Link"
+            },
+            "creation_date": "Creation Date",
+            "description": "Description",
+            "domain": "Domain",
+            "locked": "Locked",
+            "note": "Note",
+            "read": "Read",
+            "title": "Title",
+            "url": "Url",
+            "original_url": "Original Url",
+            "user": "User",
+            "tags": "Tags"
+        }
+    }
+}

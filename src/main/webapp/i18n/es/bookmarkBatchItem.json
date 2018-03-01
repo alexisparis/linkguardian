@@ -1,0 +1,27 @@
+
+{
+    "linkguardianApp": {
+        "bookmarkBatchItem" : {
+            "home": {
+                "title": "Bookmark Batch Items",
+                "createLabel": "Crear nuevo Bookmark Batch Item",
+                "createOrEditLabel": "Crear o editar Bookmark Batch Item",
+                "search": "Search for Bookmark Batch Item"
+            },
+            "created": "Un nuevo Bookmark Batch Item ha sido creado con el identificador {{ param }}",
+            "updated": "Un Bookmark Batch Item ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Bookmark Batch Item ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Bookmark Batch Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Bookmark Batch Item"
+            },
+            "url": "Url",
+            "tags": "Tags",
+            "link_creation_date": "Link Creation Date",
+            "status": "Status",
+            "error_msg_code": "Error Msg Code"
+        }
+    }
+}

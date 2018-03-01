@@ -110,7 +110,7 @@ public class SocialService {
         newUser.setActivated(true);
         newUser.setAuthorities(authorities);
         newUser.setLangKey(langKey);
-        newUser.setImageUrl(imageUrl);
+//        newUser.setImageUrl(imageUrl);
 
         userSearchRepository.save(newUser);
         return userRepository.save(newUser);

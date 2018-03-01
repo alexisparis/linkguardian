@@ -1,5 +1,6 @@
 package org.blackdog.linkguardian.service;
 
+import java.time.ZonedDateTime;
 import org.blackdog.linkguardian.config.CacheConfiguration;
 import org.blackdog.linkguardian.domain.Authority;
 import org.blackdog.linkguardian.domain.User;
@@ -57,6 +58,24 @@ public class UserService {
         this.cacheManager = cacheManager;
     }
 
+    /**
+     * return true if the user is locked
+     * @param user a User
+     * @return a boolean
+     */
+    public boolean isLockedTemporary(User user) {
+        boolean result = false;
+
+        if (user != null) {
+            ZonedDateTime lockEndDate = user.getLockEndDate();
+            if (lockEndDate != null) {
+                result = lockEndDate.toInstant().compareTo(Instant.now()) >= 0;
+            }
+        }
+
+        return result;
+    }
+
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository.findOneByActivationKey(key)
@@ -111,7 +130,7 @@ public class UserService {
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
         newUser.setEmail(userDTO.getEmail());
-        newUser.setImageUrl(userDTO.getImageUrl());
+//        newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
         newUser.setActivated(false);
@@ -133,7 +152,7 @@ public class UserService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
-        user.setImageUrl(userDTO.getImageUrl());
+//        user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
@@ -175,7 +194,7 @@ public class UserService {
                 user.setLastName(lastName);
                 user.setEmail(email);
                 user.setLangKey(langKey);
-                user.setImageUrl(imageUrl);
+//                user.setImageUrl(imageUrl);
                 userSearchRepository.save(user);
                 cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
                 cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(user.getEmail());
@@ -197,7 +216,7 @@ public class UserService {
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
                 user.setEmail(userDTO.getEmail());
-                user.setImageUrl(userDTO.getImageUrl());
+//                user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
@@ -238,6 +257,16 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public User getUserWithLogin(String login) {
+        User result = null;
+        if (login != null) {
+            result = this.userRepository.findOneByLogin(login).get();
+        }
+
+        return result;
+    }
+
+    @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
@@ -262,7 +291,7 @@ public class UserService {
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(cron = "0 4 0 * * ?")
     public void removeNotActivatedUsers() {
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS));
         for (User user : users) {

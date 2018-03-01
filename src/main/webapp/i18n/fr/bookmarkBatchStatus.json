@@ -1,0 +1,9 @@
+{
+    "linkguardianApp": {
+        "BookmarkBatchStatus" : {
+            "null": "",
+            "NOT_IMPORTED": "NOT_IMPORTED",
+            "IMPORTED": "IMPORTED"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Link.
+    -->
+    <changeSet id="20180228202048-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="link"
+                                 constraintName="fk_link_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="links_id"
+                                 baseTableName="link_tags"
+                                 constraintName="fk_link_tags_links_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="link"/>
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="link_tags"
+                                 constraintName="fk_link_tags_tags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+        
+    </changeSet>
+</databaseChangeLog>

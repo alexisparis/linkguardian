@@ -1,62 +1,285 @@
-body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+
+@import "variables";
+// bower:scss
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+@import "utils";
+@import "onboarding";
+
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
+    background-color: $main-button-color;
 }
 
-/* ==========================================================================
-Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
-========================================================================== */
+.animate-show-hide.ng-hide {
+    opacity: 0;
+    padding: 0px 0px 0px 0px;
+    height: 0px;
+}
+
+.panel-body {
+    padding: 15px 15px 5px 15px;
+}
+
+#logo {
+    margin-left: 5px;
+    margin-right: 15px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+#explanation {
+    overflow-wrap: break-word;
+
+    .characteristics div {
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 992px) {
+    .signin-title {
+        margin-top: 0px;
+    }
+}
+
+#cloud-of-tags-button {
+    padding-right: 30px !important;
+}
+
+#cloud-of-tags-button, #refresh-button2-container {
+    margin-bottom: 5px;
+}
+
+md-option .md-text {
+    font-weight: 400;
+}
+.link {
+    .star-button-container {
+        border-left-width: 20px !important;
+        margin-right: -14px !important;
+    }
+    .title-container {
+        word-break: break-all !important;
+        font-size: small !important;
+        font-weight: bolder !important;
+        line-height: 0px !important;
+    }
+    .favicon {
+        width: 16px !important;
+        height: 16px !important;
+        display: inline !important;
+    }
+
+    md-card-actions {
+        margin-right: 6px !important;
+        overflow: visible !important;
+
+        md-content {
+            padding-top: 3px !important;
+            overflow: visible !important;
+        }
+        md-fab-speed-dial {
+            right: 0px !important;
+            bottom: 4px !important;
+        }
+    }
+}
+
+.animate-show-hide.ng-hide-add,
+.animate-show-hide.ng-hide-remove {
+    transition: height linear 0.5s, opacity linear 0.5s;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: white !important;
+}
+
+.lg-panel:first-of-type {
+    margin-right: 2px;
+}
+.lg-panel:last-of-type {
+    margin-left: 2px;
+}
+
+#cloud {
+    width: 100%;
+    height: 100%;
+    min-width: 350px;
+    min-height: 200px;
+    max-width: 550px;
+    max-height: 300px;
+}
+
+@media (max-width: 600px) {
+    .lg-panel:first-of-type {
+        margin-right: 0px;
+    }
+    .lg-panel:last-of-type {
+        margin-left: 0px;
+    }
+}
+
+img.logo.login {
+    width : 60%;
+    max-width : 300px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top : 20px;
+    margin-left: 18px;
+}
+
+@media (max-width: 991px) {
+    img.logo.login {
+        display: none;
+    }
+}
+
+md-chips.md-default-theme .md-chips, md-chips .md-chips,
+md-chips.md-default-theme .md-chips.md-focused, md-chips .md-chips.md-focused {
+    box-shadow: none;
+}
+
+md-chips.md-default-theme md-chip, md-chips md-chip {
+    color: black;
+    font-weight: 400;
+}
+.md-chips md-chip .md-chip-remove {
+    width: 24px;
+    height: 24px;
+    margin-top: 4px;
+    margin-right: 4px;
+}
+.md-chips md-chip .md-chip-remove-container {
+    height:28px;
+}
+md-chips.md-default-theme md-chip.md-focused, md-chips md-chip.md-focused {
+    background-color: rgb(224,224,224);
+    color: black;
+}
+
+.md-chips md-chip .md-chip-remove md-icon:hover  {
+    background-color: #bebebe;
+    border-radius: 50%;
+}
+.md-chips md-chip.md-focused .md-chip-remove md-icon,
+.md-chips.md-default-theme md-chip.md-focused .md-chip-remove md-icon {
+    color: rgb(97,97,97);
+}
+.md-chips.md-removable md-chip .md-chip-content {
+    padding-right: 6px;
+}
+.md-select-value {
+    font-weight: 400;
+}
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: white;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ccc;
+    }
+    navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:focus {
+        background-color: $navbar-color !important;
+        color: white;
+    }
+}
+.navbar .navbar-nav > li > a {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+.navbar .navbar-brand {
+    height: 30px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.navbar .navbar-brand h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 24px;
+    font-weight: 700;
+    display: inline;
+}
+.form-group .help-block {
+    display: block;
+}
+
+.alert.alert-warning, .alert.alert-danger, .alert.alert-success, .alert.alert-info {
+    font-weight: bold;
+}
+
+.alert-link {
+    font-weight: bolder;
+}
+
+.form-group .help-block, .form-control, .form-group label.control-label,
+input, md-toast .md-toast-content {
+    font-size: 16px;
+    font-weight: bold;
+}
+.md-dialog-container, md-backdrop {
+    position: fixed;
+    top: 0;
+}
+.md-dialog-container { height: 100vh !important; top: 0 !important; position: fixed !important; }
+
+md-chips.md-default-theme .md-chips .md-chip-input-container input, md-chips .md-chips .md-chip-input-container input {
+    font-size: 14px;
+}
+
+html, body {
+    background: white;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    padding-top: 0px !important;
+    top: 0px !important;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
 
-/* ==========================================================================
-Development Ribbon
-========================================================================== */
-.ribbon {
-    background-color: #a00;
-    box-shadow: 0 0 10px #888;
-    left: -3.5em;
-    moz-box-shadow: 0 0 10px #888;
-    moz-transform: rotate(-45deg);
-    ms-transform: rotate(-45deg);
-    o-transform: rotate(-45deg);
-    overflow: hidden;
+.md-button.md-default-theme.md-accent[disabled], .md-button.md-accent[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-warn[disabled], .md-button.md-warn[disabled], .md-button.md-default-theme[disabled], .md-button[disabled],
+.md-button.md-default-theme.md-accent[disabled] md-icon, .md-button.md-accent[disabled] md-icon, .md-button.md-default-theme.md-fab[disabled] md-icon, .md-button.md-fab[disabled] md-icon, .md-button.md-default-theme.md-raised[disabled] md-icon, .md-button.md-raised[disabled] md-icon, .md-button.md-default-theme.md-warn[disabled] md-icon, .md-button.md-warn[disabled] md-icon, .md-button.md-default-theme[disabled] md-icon, .md-button[disabled] md-icon{
+    color: #afafaf;
+}
+
+
+.development {
     position: absolute;
-    top: 40px;
-    transform: rotate(-45deg);
-    webkit-box-shadow: 0 0 10px #888;
-    webkit-transform: rotate(-45deg);
-    white-space: nowrap;
-    width: 15em;
-    z-index: 9999;
-    pointer-events: none;
-    a {
-        border: 1px solid #faa;
-        color: #fff;
-        display: block;
-        font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        margin: 1px 0;
-        padding: 10px 50px;
-        text-align: center;
-        text-decoration: none;
-        text-shadow: 0 0 5px #444;
-        pointer-events: none;
-    }
+    width: 5px;
+    height: 5px;
+    top: 0;
+    left: 0;
+    border: 0;
+    z-index: 1000;
+    background-color: red;
 }
 
-/* ==========================================================================
-Version number in navbar
-========================================================================== */
+.navbar-brand, .navbar-default .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ccc;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #ccc;
+}
+
 .navbar-version {
-    font-size: 10px;
-    color: #ccc
+    font-size: 12px;
+    font-weight: bolder;
+    color: #bbb;
 }
 
-/* ==========================================================================
-Browser Upgrade Prompt
-========================================================================== */
 .browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
@@ -64,22 +287,6 @@ Browser Upgrade Prompt
     padding: 0.2em 0;
 }
 
-/* ==========================================================================
-Logo styles
-========================================================================== */
-.navbar-brand {
-    &.logo {
-        padding: 5px 15px;
-        .logo-img {
-            height: 45px;
-            display: inline-block;
-        }
-    }
-}
-
-/* ==========================================================================
-Main page styles
-========================================================================== */
 .hero-unit {
     margin: 50px auto 0 auto;
     width: 300px;
@@ -89,11 +296,17 @@ Main page styles
     background-color: #eee;
     border-radius: 6px;
     padding: 60px;
-    h1 {
-        font-size: 60px;
-        line-height: 1;
-        letter-spacing: -1px;
-    }
+}
+
+.hero-unit h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.error {
+    color: white;
+    background-color: red;
 }
 
 .hipster {
@@ -104,7 +317,11 @@ Main page styles
     background-size: contain;
 }
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
+.pad {
+    padding: 10px;
+}
+
+/* wait autoprefixer update to allow simple generation empty high pixel density media query */
 @media
 only screen and (-webkit-min-device-pixel-ratio: 2),
 only screen and (   min--moz-device-pixel-ratio: 2),
@@ -118,49 +335,15 @@ only screen and (                min-resolution: 2dppx) {
     }
 }
 
-/* ==========================================================================
-Generic styles
-========================================================================== */
-.error {
-    color: white;
-    background-color: red;
+/* make sure browsers use the pointer cursor for anchors, even with no href */
+a:hover {
+  cursor: pointer;
 }
 
-.pad {
-    padding: 10px;
-}
-
-.break {
-    white-space: normal;
-    word-break:break-all;
-}
-
-.voffset  { margin-top: 2px; }
-.voffset1 { margin-top: 5px; }
-.voffset2 { margin-top: 10px; }
-.voffset3 { margin-top: 15px; }
-.voffset4 { margin-top: 30px; }
-.voffset5 { margin-top: 40px; }
-.voffset6 { margin-top: 60px; }
-.voffset7 { margin-top: 80px; }
-.voffset8 { margin-top: 100px; }
-.voffset9 { margin-top: 150px; }
-
-.readonly {
-    background-color: #eee;
-    opacity: 1;
-}
-
-/* ==========================================================================
-make sure browsers use the pointer cursor for anchors, even with no href
-========================================================================== */
-a:hover, .hand, [jh-sort-by] {
+.hand {
     cursor: pointer;
 }
 
-/* ==========================================================================
-Metrics and Health styles
-========================================================================== */
 #threadDump .popover, #healthCheck .popover {
     top: inherit;
     display: block;
@@ -176,9 +359,18 @@ Metrics and Health styles
     min-width: 400px;
 }
 
-/* ==========================================================================
-start Password strength bar style
-========================================================================== */
+.voffset  { margin-top: 2px; }
+.voffset1 { margin-top: 5px; }
+.voffset2 { margin-top: 10px; }
+.voffset3 { margin-top: 15px; }
+.voffset4 { margin-top: 30px; }
+.voffset5 { margin-top: 40px; }
+.voffset6 { margin-top: 60px; }
+.voffset7 { margin-top: 80px; }
+.voffset8 { margin-top: 100px; }
+.voffset9 { margin-top: 150px; }
+
+/* start Password strength bar style */
 ul#strength {
     display:inline;
     list-style:none;
@@ -188,6 +380,9 @@ ul#strength {
     vertical-align:2px;
 }
 
+.point:last {
+    margin:0 !important;
+}
 .point {
     background:#DDD;
     border-radius:2px;
@@ -195,45 +390,45 @@ ul#strength {
     height:5px;
     margin-right:1px;
     width:20px;
-    &:last {
-        margin:0 !important;
-    }
+}
+/* end Password strength bar style */
+/* Custom alerts for notification */
+
+.alerts .alert{
+    text-overflow: ellipsis;
+}
+.alert pre{
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    padding: 0;
+    margin: 0;
 }
 
-/* ==========================================================================
-Custom alerts for notification
-========================================================================== */
-.alerts {
-    .alert {
-        text-overflow: ellipsis;
-        pre{
-            background: none;
-            border: none;
-            font: inherit;
-            color: inherit;
-            padding: 0;
-            margin: 0;
-        }
-        .popover pre {
-            font-size: 10px;
-        }
-    }
-    .toast {
-        position: fixed;
-        width: 100%;
-        &.left {
-            left: 5px;
-        }
-        &.right {
-            right: 5px;
-        }
-        &.top {
-            top: 55px;
-        }
-        &.bottom {
-            bottom: 55px;
-        }
-    }
+.alert .popover pre {
+    font-size: 10px;
+}
+
+.alerts .toast {
+    position: fixed;
+    width: 100%;
+}
+
+.alerts .toast.left {
+    left: 5px;
+}
+
+.alerts .toast.right {
+    right: 5px;
+}
+
+.alerts .toast.top {
+    top: 55px;
+}
+
+.alerts .toast.bottom {
+    bottom: 55px;
 }
 
 @media screen and (min-width: 480px) {
@@ -242,104 +437,8 @@ Custom alerts for notification
     }
 }
 
-/* ==========================================================================
-entity tables helpers
-========================================================================== */
-
-/* Remove Bootstrap padding from the element
-   http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-@mixin no-padding($side) {
-    @if $side == 'all' {
-        .no-padding {
-            padding: 0 !important;
-        }
-    } @else {
-        .no-padding-#{$side} {
-            padding-#{$side}: 0 !important;
-        }
-    }
-}
-@include no-padding("left");
-@include no-padding("right");
-@include no-padding("top");
-@include no-padding("bottom");
-@include no-padding("all");
-
-/* bootstrap 3 input-group 100% width
-   http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min { width: 1% !important; }
-
-/* Makes toolbar not wrap on smaller screens
-   http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
-.flex-btn-group-container {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: row;
-   flex-direction: row;
-   -webkit-justify-content: flex-end;
-   justify-content: flex-end;
-}
-
-.jh-table > {
-    tbody > tr > td {
-        /* Align text in td vertically (top aligned by Bootstrap) */
-        vertical-align: middle;
-    }
-    thead > tr > th > {
-        .glyphicon-sort, .glyphicon-sort-by-attributes, .glyphicon-sort-by-attributes-alt {
-            /* less visible sorting icons */
-            opacity: 0.5;
-            &:hover {
-                /* full visible sorting icons and pointer when mouse is over them */
-                opacity: 1;
-                cursor: pointer;
-            }
-        }
-    }
-}
-
-/* ==========================================================================
-entity detail page css
-========================================================================== */
-.dl-horizontal.jh-entity-details > {
-    dd {
-        margin-bottom: 15px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .dl-horizontal.jh-entity-details > {
-        dt {
-            margin-bottom: 15px;
-        }
-        dd {
-            border-bottom: 1px solid #eee;
-            padding-left: 180px;
-            margin-left: 0;
-        }
-    }
-}
-
-/* ==========================================================================
-ui bootstrap tweaks
-========================================================================== */
-.nav, .pagination, .carousel, .panel-title a {
-    cursor: pointer;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default,
-.uib-datepicker-popup  > li > div.uib-datepicker > table .btn-default {
-    border: 0;
-}
-
-.datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup  > li > div.uib-datepicker > table:focus {
-    outline: none;
-}
-
-/* ==========================================================================
-Social button
-========================================================================== */
+/* end empty Custom alerts for notification */
+/* Social button */
 .jh-btn-social {
     margin-bottom: 5px;
 }
@@ -379,6 +478,443 @@ Social button
     border-color: rgba(0, 0, 0, 0.2);
     color: #fff;
 }
+/* end empty Social Button */
 
+/* entity tables helpers */
+
+/* Remove Bootstrap padding from the element
+   http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
+
+/* bootstrap 3 input-group 100% width
+   http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
+.width-min { width: 1% !important; }
+
+/* Makes toolbar not wrap on smaller screens
+   http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
+.flex-btn-group-container {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+   -webkit-justify-content: flex-end;
+   justify-content: flex-end;
+}
+
+/* Align text in td verifically (top aligned by Bootstrap) */
+.jh-table > tbody > tr > td {
+    vertical-align: middle;
+}
+/* end empty entity tables helpers */
+
+/* ==========================================================================
+Fix error field display
+========================================================================== */
+.form-group .help-block {
+    position: static;
+}
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: white;
+    font-weight: bold;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+    color: #000;
+}
+
+// specific part
+md-input-container {
+    margin: 2px 0px !important;
+
+}
+
+
+$indigo-400: #5c6bc0 !default;
+
+.btn:not(.btn-raised).btn-primary, .input-group-btn .btn:not(.btn-raised).btn-primary {
+    color : white !important;
+    background-color: $indigo-400;
+}
+.btn:not(.btn-raised):not(.btn-link):hover, .input-group-btn .btn:not(.btn-raised):not(.btn-link):hover, .btn:not(.btn-raised):not(.btn-link):focus, .input-group-btn .btn:not(.btn-raised):not(.btn-link):focus {
+    background-color: $indigo-400;
+}
+i.small-medium {
+    font-size: 15px !important;
+}
+label {
+    font-size: 12px;
+}
+.lg-panel {
+    margin-bottom:5px;
+}
+
+md-option {
+    height: 38px !important;
+}
+
+md-card.link.link-read {
+  background-color: $link-read-color !important;
+}
+
+md-card.link.link-unread {
+  background-color: $link-unread-color !important;
+}
+
+md-card.link {
+
+    margin: 0px;
+
+    .md-chips {
+        font-size: 12px;
+        //padding: 0 0 0px 3px;
+    }
+    .md-chips .md-chip {
+        border-radius: 8px;
+        height: 28px;
+        line-height: 28px;
+        margin: 4px 4px 0 0;
+    }
+    .md-chips .md-chip .md-chip-remove md-icon {
+        top: 45%;
+    }
+    md-card-title {
+        padding: 4px 12px 12px;
+    }
+    md-card-actions {
+        overflow-x: hidden;
+    }
+    md-fab-speed-dial {
+        right: 10px;
+        bottom: 10px;
+    }
+}
+
+/*
+  angular-dynamic-layout css
+*/
+
+@media (min-width: 1200px) {
+    [dynamic-layout]{
+        //width: 1200px;
+        width: 1136px;
+        //margin-top: 20px;
+    }
+    .dynamic-layout-col-4{
+        width : 284px;
+    }
+    .dynamic-layout-col-8{
+        width : 600px;
+    }
+}
+@media (min-width: 900px) and (max-width: 1200px) {
+    [dynamic-layout]{
+        width: 900px;
+        //margin-top: 20px;
+    }
+    .dynamic-layout-col-4{
+        width : 300px;
+    }
+    .dynamic-layout-col-8{
+        width : 600px;
+    }
+}
+@media (min-width: 600px) and (max-width: 900px){
+    [dynamic-layout]{
+        width: 600px;
+    }
+    .dynamic-layout-col-4{
+        width : 300px;
+    }
+    .dynamic-layout-col-8{
+        width : 600px;
+    }
+}
+@media (max-width: 600px){
+    [dynamic-layout]{
+        width: 300px;
+    }
+    .dynamic-layout-col-4{
+        width : 300px;
+    }
+    .dynamic-layout-col-8{
+        width : 300px;
+    }
+}
+.dynamic-layout-item {
+    padding: 4px;
+}
+.move-items-animation{
+    transition-property: none;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
+.dynamic-layout-item-parent.ng-enter{
+    transition: .5s ease-in-out;
+    opacity:0;
+}
+.dynamic-layout-item-parent.ng-enter.ng-enter-active{
+    opacity:1;
+}
+.dynamic-layout-item-parent.ng-leave{
+    transition: .5s ease-in-out;
+    opacity:1;
+}
+.dynamic-layout-item-parent.ng-leave.ng-leave-active{
+    opacity:0;
+}
+[dynamic-layout]{
+    float: left;
+    position: relative;
+}
+.container-fluid{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+#main-container {
+    margin-top: -15px;
+}
+.title{
+    margin-bottom: 50px;
+}
+
+md-toast.md-error-theme div.md-toast-content{
+    color: white !important;
+    background-color: red !important;
+}
+
+md-toast.md-success-theme div.md-toast-content{
+    color: white !important;
+    background-color: green !important;
+}
+
+.form-group {
+    border-bottom: 0px !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.color-white {
+    color : white;
+}
+
+#link-lifecycle-dialog {
+    .message .link-title {
+        max-width: 350px;
+        overflow-x: hidden;
+        font-weight: bolder;
+    }
+    .actions {
+        padding-left: 8px;
+    }
+}
+
+#no-links-message {
+    height: 100%;
+    padding-bottom: 10px;
+}
+
+md-button.white-icon > md-icon {
+    color: white;
+}
+
+#cloud-of-tags-dialog-content {
+    max-width : 582px;
+    max-height: 344px;
+}
+
+input[type=url], input[type=search], md-input-container:not(.md-input-has-value) input:not(:focus) {
+    border-bottom-color: rgba(0, 0, 0, 0.117647);
+}
+
+.search-section.md-subheader > .md-subheader-inner {
+    padding-top:0px;
+    padding-bottom: 0px;
+    padding-left:0px;
+    padding-right: 0px;
+}
+md-input-container .md-errors-spacer {
+    min-height: 0;
+}
+
+md-autocomplete.md-default-theme, md-autocomplete {
+  background-color: transparent;
+}
+md-autocomplete[md-floating-label] md-input-container {
+  padding-bottom:0px;
+}
+
+.navbar, .navbar.navbar-default, .panel.panel-primary > .panel-heading,
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: $navbar-color !important;
+}
+.panel-title {
+  color: white !important;
+}
+
+.md-button-file-upload {
+    background-color: $file-upload-button-color !important;
+    color: white !important;
+}
+
+a.md-button.md-default-theme.md-primary.md-raised, a.md-button.md-primary.md-raised,
+a.md-button.md-default-theme.md-primary.md-fab, a.md-button.md-primary.md-fab,
+.md-button.md-default-theme.md-primary.md-raised, .md-button.md-primary.md-raised,
+.md-button.md-default-theme.md-primary.md-fab, .md-button.md-primary.md-fab
+{
+  background-color: $main-button-color !important;
+}
+a.md-button.md-default-theme.md-primary.md-raised:not([disabled]):hover, a.md-button.md-primary.md-raised:not([disabled]):hover, a.md-button.md-default-theme.md-primary.md-fab:not([disabled]):hover, a.md-button.md-primary.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-primary.md-raised:not([disabled]):hover, .md-button.md-primary.md-raised:not([disabled]):hover, .md-button.md-default-theme.md-primary.md-fab:not([disabled]):hover, .md-button.md-primary.md-fab:not([disabled]):hover {
+  background-color: $main-button-hover-color !important;
+}
+
+a.md-button.needAction.md-default-theme.md-primary.md-raised:not([disabled]):hover,
+a.md-button.needAction.md-primary.md-raised:not([disabled]):hover,
+a.md-button.needAction.md-default-theme.md-primary.md-fab:not([disabled]):hover,
+a.md-button.needAction.md-primary.md-fab:not([disabled]):hover,
+.md-button.needAction.md-default-theme.md-primary.md-raised:not([disabled]):hover,
+.md-button.needAction.md-primary.md-raised:not([disabled]):hover,
+.md-button.needAction.md-default-theme.md-primary.md-fab:not([disabled]):hover,
+.md-button.needAction.md-primary.md-fab:not([disabled]):hover,
+a.md-button.needAction.md-default-theme.md-primary.md-raised,
+a.md-button.needAction.md-primary.md-raised,
+a.md-button.needAction.md-default-theme.md-primary.md-fab,
+a.md-button.needAction.md-primary.md-fab,
+.md-button.needAction.md-default-theme.md-primary.md-raised,
+.md-button.needAction.md-primary.md-raised,
+.md-button.needAction.md-default-theme.md-primary.md-fab,
+.md-button.needAction.md-primary.md-fab{
+  background-color: $error-color !important;
+}
+.navbar-brand, .navbar-default .navbar-brand, .navbar-version {
+  color : $brand-color;
+}
+
+a.md-button.md-default-theme.md-link-action.md-fab,
+a.md-button.md-fab.md-link-action,
+.md-button.md-default-theme.md-fab.md-link-action,
+.md-button.md-fab.md-link-action,
+.navbar .dropdown-menu .active > a, .navbar.navbar-default .dropdown-menu .active > a,
+button.md-icon-button.cloudOfTags
+//a.md-button.md-link-action.md-mini
+{
+  background-color: $navbar-color !important;
+}
+
+
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input,
+md-input-container:not(.md-input-invalid).md-input-focused .md-input,
+md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
+  border-color: $navbar-color;
+}
+
+
+.navbar .dropdown-menu li > a:hover, .navbar.navbar-default .dropdown-menu li > a:hover, .navbar .dropdown-menu li > a:focus, .navbar.navbar-default .dropdown-menu li > a:focus {
+  color: $main-button-color;
+}
+
+// info
+md-toast.md-info2-theme .md-toast-content {
+  background-color: $main-button-color !important;
+}
+// error
+md-toast.md-error2-theme div.md-toast-content {
+  background-color: $error-color !important;
+}
+// success
+md-toast.md-success2-theme div.md-toast-content {
+  background-color: $success-color !important;
+}
+
+.form-group.is-focused .form-control {
+  background-image: -webkit-gradient(linear, left top, left bottom, from($navbar-color), to($navbar-color)), -webkit-gradient(linear, left top, left bottom, from($navbar-color), to($navbar-color)) !important;
+  background-image: -webkit-linear-gradient($navbar-color, $navbar-color), -webkit-linear-gradient(#D2D2D2, #D2D2D2) !important;
+  background-image: -o-linear-gradient($navbar-color, $navbar-color), -o-linear-gradient(#D2D2D2, #D2D2D2) !important;
+  background-image: linear-gradient($navbar-color, $navbar-color), linear-gradient(#D2D2D2, #D2D2D2) !important;
+}
+
+.form-group.is-focused label, .form-group.is-focused label.control-label,
+md-select-menu.md-default-theme md-option[selected], md-select-menu md-option[selected],
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input,
+md-input-container:not(.md-input-invalid).md-input-focused .md-input,
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label,
+md-input-container:not(.md-input-invalid).md-input-focused label
+{
+  color : $navbar-color;
+}
+
+.form-block {
+  background-color: white;
+}
+
+md-toast {
+  z-index: 10000;
+}
+.md-top {
+  position: fixed;
+}
+.move-items-animation{
+  //visibility: hidden;
+  //transition-property: left, top;
+  transition-duration: 0s;
+  //transition-timing-function: ease-in-out;
+}
+
+div.jqcloud > span {
+  cursor : pointer;
+}
+
+
+//.note {
+//  color: white !important;
+//}
+//.note- {
+//  color: #ededed !important;
+//  background-color: white !important;
+//}
+//.note-5 {
+//  color: rgb(37,52,72) !important;
+//}
+//.note-4 {
+//  color: rgb(80,92,109) !important;
+//}
+//.note-3 {
+//  color: rgb(123,132,146) !important;
+//}
+//.note-2 {
+//  color: rgb(166,172,183) !important;
+//}
+//.note-1 {
+//  color: rgb(209,212,220) !important;
+//}
+
+md-input-container:not(.md-input-has-value) input:not(:focus), md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-ampm-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-day-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-hour-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-millisecond-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-minute-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-month-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-second-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-week-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-year-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-text {
+  color: black;
+}
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+
+.md-dialog-container {
+  position:fixed;
+}
+
+md-toast {
+  position : fixed !important;
+}
+
+md-toast.no-transition {
+  transition: none !important;
+  transition-duration: 0 !important;
+}
+
+md-content.md-default-theme, md-content,
+.md-subheader.md-default-theme, .md-subheader {
+  background-color: transparent;
+}
+
+.bookmark-containers {
+    overflow-y: auto;
+}

@@ -1,0 +1,26 @@
+
+{
+    "linkguardianApp": {
+        "toxicLink" : {
+            "home": {
+                "title": "Toxic Links",
+                "createLabel": "创建新 Toxic Link",
+                "createOrEditLabel": "创建或编辑 Toxic Link",
+                "search": "查找 Toxic Link"
+            },
+            "created": "Toxic Link {{ param }} 创建成功",
+            "updated": "Toxic Link {{ param }} 更新成功",
+            "deleted": "Toxic Link {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Toxic Link {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Toxic Link"
+            },
+            "email": "Email",
+            "url": "Url",
+            "creation_date": "Creation Date",
+            "error": "Error"
+        }
+    }
+}

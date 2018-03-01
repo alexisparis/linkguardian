@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity Link.
+    -->
+    <changeSet id="20160220023615" author="jhipster">
+        <createTable tableName="link">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="description" type="varchar(255)"/>
+            
+            <column name="domain" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="locked" type="bit"/>
+            
+            <column name="note" type="integer"/>
+            
+            <column name="read" type="bit"/>
+            
+            <column name="title" type="varchar(255)"/>
+            
+            <column name="url" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="original_url" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="user_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="link" columnName="creation_date" columnDataType="datetime"/>
+
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="link"
+                                 constraintName="fk_link_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <createTable tableName="link_tag">
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="links_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="links_id, tags_id" tableName="link_tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="links_id"
+                                 baseTableName="link_tag"
+                                 constraintName="fk_link_tag_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="link"/>
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="link_tag"
+                                 constraintName="fk_link_tag_link_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+        
+    </changeSet>
+</databaseChangeLog>
