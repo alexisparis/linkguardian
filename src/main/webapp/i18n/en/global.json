@@ -1,8 +1,13 @@
 {
     "global": {
-        "title": "Linkguardian",
+        "description_long" : "Linkguardian is a free tool allowing to save and keep your bookmarks organized.",
+        "contact_us" : "For any bug, improvement or support, feel free to contact us :",
+        "title" : "Linkguardian",
+        "title_main": "Linkguardian | Online bookmark manager",
+        "linkguardian_description" : "Bookmarks manager",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
+            "about" : "About",
             "home": "Home",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
@@ -36,7 +41,14 @@
                 "database": "Database",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Language"
+            "language": "Language",
+            "tools" : {
+                "main" : "Tools",
+                "import" : "Import bookmarks"
+            }
+        },
+        "close": {
+            "label" : "Close"
         },
         "form": {
             "username": "Username",

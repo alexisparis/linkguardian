@@ -4,21 +4,22 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import io.github.jhipster.config.JHipsterProperties;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 import org.blackdog.linkguardian.config.Constants;
 import org.blackdog.linkguardian.domain.ToxicLink;
 import org.blackdog.linkguardian.domain.User;
-
-import io.github.jhipster.config.JHipsterProperties;
-
-import org.apache.commons.lang3.CharEncoding;
 import org.blackdog.linkguardian.domain.transfer.CountPerUser;
 import org.blackdog.linkguardian.report.ActivityReport;
 import org.blackdog.linkguardian.service.exception.MailNotSentException;
@@ -33,10 +34,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.mail.internet.MimeMessage;
-import java.util.Locale;
 
 /**
  * Service for sending emails.
@@ -73,6 +70,11 @@ public class MailService {
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
+
+//        ((TemplateEngine)templateEngine).addDialect(
+//            new nz.net.ultraq.thymeleaf.LayoutDialect());
+//
+////            new LayoutDialect(new GroupingStrategy()));
     }
 
     /**

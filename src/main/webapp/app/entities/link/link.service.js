@@ -2,7 +2,88 @@
     'use strict';
     angular
         .module('linkguardianApp')
-        .factory('Link', Link);
+        .factory('Link', Link)
+        .factory('MyLinks', function($resource, $log) {
+            return $resource('api/my_links', {}, {
+                'getByPage': {
+                    method: 'GET',
+                    isArray: true
+                },
+                'countPerTags' : {
+                    method: 'GET',
+                    url: 'api/my_links/count_per_tags',
+                    isArray: true
+                },
+                'addLink' : {
+                    method : 'POST',
+                    params:{
+                        newurl: '@newurl',
+                        tag: '@tag'
+                    },
+                    interceptor: {
+                        response: function(response) {
+                            var result = response.resource;
+                            result.status = response.status;
+                            return result;
+                        }
+                    }
+                },
+                'addTag' : {
+                    method : 'PUT',
+                    url: 'api/my_links/tag',
+                    params:{
+                        id: '@id',
+                        tag: '@tag'
+                    }
+                },
+                'removeTag' : {
+                    method : 'DELETE',
+                    url: 'api/my_links/tag',
+                    params:{
+                        id: '@id',
+                        tag: '@tag'
+                    }
+                },
+                'deleteLink' : {
+                    method : 'DELETE',
+                    params:{
+                        id: '@id'
+                    },
+                    transformResponse: function (data) {
+                        console.log("dt : " + data);
+                        try {
+                            data = angular.fromJson(data);
+                            return data;
+                        } catch(e) {
+                            $log.error("unable to parse " + data);
+                        }
+                    }
+                },
+                'markAsRead' : {
+                    url : 'api/my_links/read',
+                    method : 'PUT',
+                    params:{
+                        id: '@id'
+                    }
+                },
+                'markAsUnread' : {
+                    url : 'api/my_links/unread',
+                    method : 'PUT',
+                    params:{
+                        id: '@id'
+                    }
+                },
+                'updateNote' : {
+                    url : 'api/my_links/note',
+                    method : 'PUT',
+                    params:{
+                        id: '@id',
+                        score : '@score'
+                    }
+                }
+            });
+        });
+    ;
 
     Link.$inject = ['$resource', 'DateUtils'];
 

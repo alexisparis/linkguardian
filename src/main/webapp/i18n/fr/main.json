@@ -1,0 +1,258 @@
+{
+    "main": {
+        "title": "Mes liens",
+        "addLink": {
+            "tooltip": "Ajouter un lien",
+            "title": "Ajouter un lien",
+            "url": {
+                "placeholder": "url : http://..."
+            },
+            "tags": {
+                "placeholder": "(facultatif) actualité, économie...",
+                "optional": "Optionnel",
+                "title": "Catégories"
+            },
+            "messages": {
+                "linkExists": "Le lien existe déjà"
+            }
+        },
+        "searchLinks": {
+            "tooltip": "Rechercher parmis vos liens",
+            "noLinksFound": "Aucun lien trouvé",
+            "title": "Recherche",
+            "sort": {
+                "label": "Tri par",
+                "types": {
+                    "creation_date": "date de création",
+                    "note": "note"
+                },
+                "direction": {
+                    "asc": "croissant",
+                    "desc": "décroissant"
+                }
+            },
+            "filter": {
+                "label": "Filtrer",
+                "types": {
+                    "all": "tous",
+                    "read": "lus",
+                    "unread": "non-lus"
+                },
+                "tags": {
+                    "label": "avec",
+                    "noTagFound": "Aucune catégorie trouvée.",
+                    "placeholder": "Catégorie"
+                }
+            }
+        },
+        "cloudOfTags": {
+            "title": "Nuage de catégories",
+            "explanation": "Clicker sur une catégorie pour l'appliquer en filtre",
+            "actions": {
+                "close": "Fermer"
+            },
+            "tooltip": "Afficher le nuage de catégories"
+        }
+    },
+    "link": {
+        "tags": {
+            "tagInput": {
+                "placeholder": "+ catégorie",
+                "placeholder_noTag": "+ catégorie"
+            }
+        },
+        "actions": {
+            "tweetIt": {
+                "tooltip": "Tweeter"
+            },
+            "markAsRead": {
+                "tooltip": "Marquer comme lu"
+            },
+            "copyClipboard" : {
+                "tooltip": "Copier l'adresse",
+                "done" : "Url copié"
+            },
+            "markAsUnread": {
+                "tooltip": "Marquer comme non lu"
+            },
+            "delete": {
+                "tooltip": "Supprimer"
+            },
+            "goTo": {
+                "tooltip": "Y Aller"
+            },
+            "change_note": {
+                "title": "Noter",
+                "label": "Note",
+                "actions": {
+                    "unset": "Aucune"
+                }
+            },
+            "linkClicked": {
+                "dialog": {
+                    "title": "Que faire?",
+                    "message": "Vous avez clické sur le lien : ",
+                    "question": "Que voulez-vous en faire?",
+                    "actions": {
+                        "markAsRead": "Marquer comme lu",
+                        "delete": "Supprimer",
+                        "nothing": "Ne rien faire"
+                    }
+                }
+            }
+        },
+        "messages": {
+            "global": {
+                "unknown": "Error inconnu"
+            },
+            "list": {
+                "inProgress": "chargement des liens...",
+                "forbidden": "Non autorisé"
+            },
+            "delete": {
+                "inProgress": "suppression du lien...",
+                "forbidden": "Non autorisé",
+                "success": "Lien supprimé",
+                "not_found": "Le lien n'existe pas"
+            },
+            "markAsRead": {
+                "inProgress": "marque le lien comme lu...",
+                "forbidden": "Non autorisé",
+                "success": "Lien marqué comme lu"
+            },
+            "markAsUnread": {
+                "inProgress": "marque le lien comme non-lu...",
+                "forbidden": "Non autorisé",
+                "success": "Lien marqué comme non-lu"
+            },
+            "add": {
+                "inProgress": "ajout du lien...",
+                "success": "Lien ajouté",
+                "invalidConnectionType": "Type de connection invalide",
+                "defaultError": "Erreur lors e l'ajout du lien",
+                "redirectionLoop": "Redirection invalide",
+                "tooMuchRedirections": "Trop de redirections",
+                "unknownHost": "Serveur inconnu",
+                "invalidUrlWithCause": "Url invalide",
+                "temporaryBlockedCozTooManyToxicLinks": "Bloqué temporairement"
+            },
+            "addTag": {
+                "inProgress": "ajout catégorie...",
+                "forbidden": "Non autorisé",
+                "success": "Catégorie ajoutée",
+                "tagsExists": "Catégorie déjà existante",
+                "tagsExist": "Catégorie déjà existante",
+                "invalidTag": "Catégorie invalide",
+                "someTagsAdded": "Certaines catégories ont été ajoutées",
+                "tagsAdded": "Catégories ajoutés",
+                "tagAdded": "Catégorie ajouté",
+                "tagTooLong": "Catégorie trop longue"
+            },
+            "removeTag": {
+                "inProgress": "suppression de la catégorie...",
+                "forbidden": "Non autorisé",
+                "success": "Catégorie supprimée",
+                "tagDoesNotExist": "Catégorie non trouvée"
+            },
+            "updateNote": {
+                "inProgress": "mise à jour de la note...",
+                "success": "Note mise à jour",
+                "forbidden": "Non autorisé",
+                "defaultError": "Erreur lors de la mise à jour de la note"
+            }
+        }
+    },
+    "tagOfCloud": {
+        "messages": {
+            "computing": "Récupération des catégories"
+        }
+    },
+    "onboarding": {
+        "url": "www.linkguardian.io",
+        "tag": "url manager",
+        "created_link": "{\"id\":1,\"description\":\"Free bookmark manager\",\"domain\":\"www.linkguardian.io\",\"locked\":null,\"note\":null,\"read\":false,\"title\":\"linkguardian\",\"url\":\"https://www.linkguardian.io/\",\"originalUrl\":\"https://www.linkguardian.io/\",\"user\":{\"id\":1000,\"login\":\"demo\",\"firstName\":null,\"lastName\":null,\"email\":\"demo@linkguardian.io\"},\"tags\":[{\"id\":1,\"label\":\"url\"},{\"id\":2,\"label\":\"manager\"}],\"computedTags\":[\"url\",\"manager\"]}",
+        "gotIt": {
+            "label": "J ai compris"
+        },
+        "welcome": {
+            "title": "Bienvenue sur Linkguardian",
+            "description": "Voici les principales fonctionnalités de cet outil."
+        },
+        "tools": {
+            "title": "Les outils",
+            "description": "Linkguardian permet :<br/><ul><li>l'import des marques-pages de votre navigateur.</li></ul>"
+        },
+        "show-add-url-input": {
+            "title": "Ajouter une url",
+            "description": "Taper l'url de la page dans cette zone."
+        },
+        "show-add-url-tag-input": {
+            "title": "Specifier des tags",
+            "description": "<i>Optionnel</i><br/>Vous pouvez préciser des catégories<br/>pour classer cette adresse."
+        },
+        "show-add-url-button": {
+            "title": "Ajout de l'url",
+            "description": "Cliquez sur ce bouton pour<br/>enregistrer cette adresse."
+        },
+        "link-added": {
+            "title": "Lien ajouté",
+            "description": "L'adresse est désormais enregistrée."
+        },
+        "note-button-on-link": {
+            "title": "Noter un lien",
+            "description": "Utilisez <button class=\"md-fab md-raised md-mini note note- md-button\" type=\"button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 -5 51 48\"><path fill=\"\" stroke=\"\" d=\"m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z\"></path></svg></button>pour noter cette adresse"
+        },
+        "action-button-on-link": {
+            "title": "Action sur un lien",
+            "description": "Clickez  sur <button class=\"md-fab md-link-action md-mini md-button md-ink-ripple md-default-theme\" type=\"button\"><span class=\"ion-navicon-round ng-scope\" data-pack=\"default\" data-tags=\"sort\"></span></button> pour ouvrir un menu et utiliser :<br/><button class=\"md-fab md-raised md-mini md-button md-ink-ripple md-default-theme\" type=\"button\"><span class=\"ion-forward\" data-pack=\"default\" data-tags=\"sort\"></span></button> pour visiter le lien<br/><button class=\"md-fab md-raised md-mini md-button md-ink-ripple md-default-theme\" type=\"button\"><span class=\"ion-social-twitter\" data-pack=\"default\" data-tags=\"sort\"></span></button> pour partager le lien sur Twitter<br/><button class=\"md-fab md-raised md-mini md-button\"><span class=\"ion-ios-copy\"></span></button> pour copier l'adresse du lien<br/><button class=\"md-fab md-raised md-mini md-button md-ink-ripple md-default-theme\" type=\"button\"><span class=\"ion-eye\" data-pack=\"default\" data-tags=\"sort\"></span></button> pour marquer le lien comme lu (ou non lu)<br/><button class=\"md-fab md-raised md-mini md-button md-ink-ripple md-default-theme\" type=\"button\"><span class=\"ion-trash-a\" data-pack=\"default\" data-tags=\"sort\"></span></button> pour supprimer le lien"
+        },
+        "show-search-panel": {
+            "title": "Rechercher ses liens",
+            "description": "Il y a différentes options permettant<br/>de rechercher parmis ses liens."
+        },
+        "show-cloud-of-tags": {
+            "title": "Nuage de tags",
+            "description": "Vous pouvez également utiliser un nuage de tags<br/>constitué de tous les tags définis précédemment.<br/>Utiliser <button style=\"display: inline;\" class=\"md-icon-button md-fab md-mini md-primary cloudOfTags white-icon md-button md-ink-ripple layout-align-start-stretch layout-row\" type=\"button\"><md-icon md-svg-icon=\"/content/images/cloud.svg\" class=\"ng-scope\" role=\"img\" aria-hidden=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Layer_1\" x=\"0px\" y=\"0px\" width=\"100%\" height=\"100%\" viewBox=\"0.328 0 512 352.51\" enable-background=\"new 0.328 0 512 352.51\" xml:space=\"preserve\" fit=\"\" preserveAspectRatio=\"xMidYMid meet\" focusable=\"false\"><g><path d=\"M430.489,139.595c1.479-24.113-4.74-45.955-18.196-62.927c-15.563-19.635-39.372-30.892-65.335-30.892   c-16.272,0-32.239,4.432-46.593,12.746C273.596,21.041,235.872,0,194.101,0c-41.271,0-80.97,21.105-103.569,55.073   c-18.247,27.417-23.585,59.396-15.655,91.806c-62.784,27.46-79.316,79.63-73.443,118.665c7.526,50.048,48.138,86.379,96.512,86.379   c1.847,0,187.192,0.587,299.482,0.587c73.856,0,111.193-51.844,114.632-100.028C515.214,208.282,490.655,157.025,430.489,139.595z    M470.366,249.521c-2.173,30.453-25.569,61.192-72.933,61.192c-112.224,0-297.502-0.593-299.426-0.593   c-31.249,0-51.44-25.554-55.237-50.792c-5.404-35.943,18.661-65.804,64.371-79.867c5.639-1.732,10.276-5.766,12.777-11.113   c2.5-5.333,2.633-11.489,0.347-16.929c-10.869-25.976-9.078-51.958,5.047-73.183c14.971-22.475,41.326-36.436,68.789-36.436   c33.423,0,62.579,20.231,82.071,56.964c3.088,5.812,8.736,9.835,15.242,10.848c6.485,1.008,13.104-1.092,17.818-5.689   c10.803-10.55,24.197-16.352,37.72-16.352c13.124,0,24.993,5.493,32.58,15.066c9.328,11.762,11.782,28.528,7.108,48.493   c-1.347,5.712-0.214,11.711,3.092,16.553c3.302,4.846,8.491,8.067,14.283,8.909C452.946,183.605,472.592,218.273,470.366,249.521z\" fill=\"#FFFFFF\"></path><path d=\"M186.641,62.781c-43.011,3.794-56.14,38.102-54.472,60.234c0.725,9.604,8.741,16.908,18.207,16.908   c0.474,0,0.938-0.016,1.408-0.051c10.067-0.764,17.619-9.543,16.859-19.615c-0.327-4.468,0.193-19.199,21.222-21.049   c10.058-0.888,17.497-9.759,16.609-19.824C205.583,69.333,196.709,61.84,186.641,62.781z\" fill=\"#FFFFFF\"></path></g></svg></md-icon></button>"
+        },
+        "end": {
+            "title": "Merci",
+            "description": "Vous connaissez les fonctionnalités essentielles.<br/>C'est parti pour la création de compte..."
+        }
+    },
+    "bookmarks" : {
+        "import" : {
+            "title" : "Import de favoris",
+            "description" : "Permet d'importer plusieurs liens d'un seul coup:",
+            "subdescription1" : "Exporter vos favoris depuis votre navigateur et transférer le fichier dans Linkguardian",
+            "subdescription2" : "Utiliser un fichier HTML standard et chaque lien présent sera importé",
+            "clickButton" : "Appuyer sur le bouton ci-dessous...",
+            "chrome_link_explanation" : "Exporter vos favoris avec Google Chrome",
+            "firefox_link_explanation" : "Exporter vos favoris avec Firefox",
+            "safari_link_explanation" : "Exporter vos favoris avec Safari",
+            "button" : {
+                "label" : "Transférer un fichier HTML"
+            },
+            "inprogress" : {
+                "label" : "Importation en cours.."
+            },
+            "success" : {
+                "label1" : "Merci.",
+                "label2" : "Vos favoris seront disponibles bientôt.",
+                "label3" : "Un mail vous sera envoyé à la fin du processus."
+            },
+            "failed" : {
+                "label1" : "Désolé, l'import de vos favoris n'a pu aboutir.",
+                "label2" : "Réessayer dans quelques minutes ou adresser un mail à "
+            },
+            "messages" : {
+                "noLinksFound" : "Aucun lien trouvé",
+                "fileSizeExceeded" : "Fichier trop volumineux (2Mo maximum)",
+                "wrongFileType" : "Seuls les fichiers HTML sont supportés",
+                "bookmarkParsingServiceUnavailable" : "Service indisponible"
+            }
+        }
+    },
+    "error": {
+        "423": "Bloqué temporairement"
+    }
+}

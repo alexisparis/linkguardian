@@ -14,7 +14,9 @@ import java.util.Objects;
  * A Tag.
  */
 @Entity
-@Table(name = "tag")
+@Table(name = "tag", indexes = {
+    @Index(name = "tag_idx_1", columnList = "label")
+})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "tag")
 public class Tag implements Serializable {

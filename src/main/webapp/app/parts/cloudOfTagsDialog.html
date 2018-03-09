@@ -1,0 +1,27 @@
+<md-dialog aria-label="Cloud of tags"  ng-cloak id="cloudOfTagDialog">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'main.cloudOfTags.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="hide()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content id="cloud-of-tags-dialog-content">
+            <div class="md-dialog-content padding-5" layout-margin>
+
+                <p>{{'main.cloudOfTags.explanation' | translate}}</p>
+                <div ng-if="tagsLoaded == false" layout-align="center center" class="text-center">
+                    <img src="/content/images/spinner.gif" width="20px" class="margin-right-10"/>
+                </div>
+                <p ng-if="tagsLoaded != false" class="no-margin">
+                    <jqcloud id="cloud" words="tags" steps="7" fontSize="{ from: 0.15, to: 0.06 }"></jqcloud>
+                </p>
+
+            </div>
+        </md-dialog-content>
+
+    </form>
+</md-dialog>

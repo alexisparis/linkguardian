@@ -13,7 +13,27 @@
             }
         },
         "password" : {
-            "forgot": "Did you forget your password?"
+            "forgot": "forgot password?"
+        },
+        "register" : {
+            "button": "Register"
+        },
+        "demo" : {
+            "button": "Demo"
+        }
+    },
+    "description" : {
+        "main" : "Bookmark Manager",
+        "functionalities" : {
+            "functionality1" : "Organize and share bookmarks",
+            "functionality2" : "Don't forget to read articles later"
+        },
+        "characteristics" : {
+            "characteristic1" : "Free",
+            "characteristic2" : "Access your bookmarks everywhere",
+            "characteristic3" : "Manage your bookmarks and organize them",
+            "characteristic4" : "Ease sharing on Twitter",
+            "characteristic5" : "Import your bookmarks easily"
         }
     }
 }

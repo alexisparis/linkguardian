@@ -17,8 +17,8 @@ import java.util.Map;
 public class PersistentAuditEvent implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @SequenceGenerator(name="jhi_persistent_audit_event_id_seq", sequenceName="jhi_persistent_audit_event_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="jhi_persistent_audit_event_id_seq")
     @Column(name = "event_id")
     private Long id;
 

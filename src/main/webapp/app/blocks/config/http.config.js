@@ -11,6 +11,10 @@
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
 
+        //enable CSRF
+        $httpProvider.defaults.xsrfCookieName = 'CSRF-TOKEN';
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
+
         $urlRouterProvider.otherwise('/');
 
         $httpProvider.interceptors.push('errorHandlerInterceptor');

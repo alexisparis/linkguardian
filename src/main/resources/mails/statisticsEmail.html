@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="parent">
-<head>
-    <title>Linkguardian statistics</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
 <div layout:fragment="content">
     <table>
         <tr>
@@ -24,13 +19,15 @@
         </tr>
         <tr th:each="toxicLink : ${toxicLinksPerMail}">
             <td>
-                <b th:text="${toxicLink.key}">mail</b> tried <span th:text="${#lists.size(toxicLink.value)}">toxic links</span> toxic links :
+                <b th:text="${toxicLink.key}">mail</b> tried <span
+                th:text="${#lists.size(toxicLink.value)}">toxic links</span> toxic links :
             </td>
             <td style="margin-left: 30px;" colspan="3">
                 <table>
                     <tr th:each="link : ${toxicLink.value}">
                         <td>
-                            <span th:text="${link.url}"></span> (<span th:text="${link.error}"></span>)
+                            <span th:text="${link.url}"></span> (<span
+                            th:text="${link.error}"></span>)
                         </td>
                     </tr>
                 </table>
@@ -58,5 +55,4 @@
         </tr>
     </table>
 </div>
-</body>
 </html>

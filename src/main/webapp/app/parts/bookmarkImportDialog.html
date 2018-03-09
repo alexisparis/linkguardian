@@ -1,0 +1,109 @@
+<md-dialog aria-label="About Linkguardian" class="import-dialog">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'bookmarks.import.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="column" layout-align="center start" layout-margin flex style="font-size: 14px; font-weight: 500;">
+
+            <div layout="column" ng-show="step == 'choose-file'">
+                <div class="well" style="margin-bottom: 5px; ">
+                    {{'bookmarks.import.description' | translate}}<br>
+                    <i class="icon ion-ios-arrow-forward"></i>&nbsp;{{'bookmarks.import.subdescription1' | translate}}<br/>
+                    <i class="icon ion-ios-arrow-forward"></i>&nbsp;{{'bookmarks.import.subdescription2' | translate}}
+                </div>
+                <div class="well" style="margin-bottom: 5px; ">
+                    <a href="https://support.google.com/chrome/answer/96816">{{'bookmarks.import.chrome_link_explanation' | translate}}</a><br/>
+                    <a href="https://support.mozilla.org/en-US/kb/export-firefox-bookmarks-to-backup-or-transfer">{{'bookmarks.import.firefox_link_explanation' | translate}}</a><br/>
+                    <a href="http://support.apple.com/kb/PH17154">{{'bookmarks.import.safari_link_explanation' | translate}}</a><br/>
+                </div>
+                <div style="margin-bottom: 5px;">
+                    {{'bookmarks.import.clickButton' | translate}}
+                </div>
+
+                <label class="md-button md-primary md-button-file-upload" ng-disabled="uploadInProgress" style="margin: 0px 40px;">
+                    <i class="icon ion-android-upload" style="font-size: 24px; margin-right: 5px; "></i>
+                    {{'bookmarks.import.button.label' | translate}}<input type="file" style="display: none;" nv-file-select="" uploader="uploader">
+                </label>
+                <div class="containers" style="margin-top: 15px;" ng-class="{'invisible' : !uploadInProgress}">
+                    <md-progress-linear md-mode="indeterminate" value="{{uploader.progress}}"></md-progress-linear>
+                </div>
+            </div>
+
+            <style>
+                .bookmark-container:not(:last-child) {
+                    border-bottom: 1px #f1f1f1 solid !important;
+                }
+                .import-message {
+                    min-width: 300px;
+                    min-height: 80px;
+                }
+            </style>
+
+            <div layout="column" class="import-message" ng-show="step == 'upload-in-progress'">
+                {{'bookmarks.import.inprogress.label' | translate}}
+                <md-progress-linear md-mode="indeterminate" class="margin-top-5"></md-progress-linear>
+            </div>
+
+            <div layout="column" class="import-message" ng-show="step == 'upload-finished'">
+                {{'bookmarks.import.success.label1' | translate}}<br/>
+                {{'bookmarks.import.success.label2' | translate}}<br/>
+                {{'bookmarks.import.success.label3' | translate}}
+            </div>
+            <div layout="column" class="text-error import-message" ng-show="step == 'upload-failed'">
+                {{'bookmarks.import.failed.label1' | translate}}<br/>
+                {{'bookmarks.import.failed.label2' | translate}} <a href="mailto:linkguardian@blackdog-project.org">linkguardian@blackdog-project.org</a>
+            </div>
+
+            <div layout="column" ng-show="step == 'links-customization'" class="bookmark-containers" >
+                <div ng-repeat="bookmark in bookmarks" class="bookmark-container"
+                     style="margin-bottom: 4px;">
+                    <md-button class="md-icon-button" ng-click="removeBookmark(bookmark)"
+                               aria-label="remove bookmark"
+                               style="float: right; padding-top: 0px;"
+                               data-toggle="tooltip" title="{{'entity.action.delete' | translate}}">
+                        <i class="icon ion-trash-a" style="font-size: 24px; color: rgb(97,97,97);"></i>
+                    </md-button>
+                    <a href="{{bookmark.url}}" style="text-decoration: none;">
+                        <i class="icon ion-link" style="font-size: 28px;"
+                           data-toggle="tooltip" data-placement="bottom"
+                            title="{{bookmark.url}}"></i>
+                        <span style="top: -5px; position: relative; font-weight: 400; font-size: 16px; white-spacea: nowrap;"
+                              class="bookmark" data-toggle="tooltip" data-placement="bottom"
+                              title="{{bookmark.title}}">{{bookmark.title}}</span>
+                    </a>
+                    <div style="margin-left: 20px;">
+                        <md-chips
+                            flex
+                            ng-model="bookmark.path"
+                            md-separator-keys="keys"
+                            md-add-on-blur="true"
+                            placeholder="{{'link.tags.tagInput.placeholder' | translate}}"
+                            secondary-placeholder="{{'link.tags.tagInput.placeholder' | translate}}"
+                            md-on-add="addTagOnBookmark(bookmark, $chip)"
+                            md-on-remove="removeTagOnBookmark(bookmark, $chip)"/>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="returnToFileSelection()"  ng-show="step == 'links-customization'">
+                {{'entity.action.back' | translate}}
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="cancel()" ng-show="step == 'choose-file' || step == 'upload-failed'">
+                {{'global.close.label' | translate}}
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="next()" ng-show="step == 'links-customization' || step == 'upload-finished'">
+                <!--{{'global.close.label' | translate}}-->
+                <span ng-show="step == 'links-customization'">Upload</span>
+                <span ng-show="step == 'upload-finished'">Close</span>
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

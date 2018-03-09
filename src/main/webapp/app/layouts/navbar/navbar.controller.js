@@ -5,9 +5,9 @@
         .module('linkguardianApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$window', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$mdDialog', 'TEMPLATES_PATH'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController ($window, $state, Auth, Principal, ProfileService, LoginService, $mdDialog, TEMPLATES_PATH) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -32,7 +32,7 @@
         function logout() {
             collapseNavbar();
             Auth.logout();
-            $state.go('home');
+            $state.go('login');
         }
 
         function toggleNavbar() {
@@ -42,5 +42,26 @@
         function collapseNavbar() {
             vm.isNavbarCollapsed = true;
         }
+
+        vm.reload = function() {
+            $window.location.reload();
+        }
+
+        function AboutDialogController($scope, $mdDialog) {
+
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+        };
+
+        vm.showAboutDialog = function() {
+
+            $mdDialog.show({
+                controller: AboutDialogController,
+                templateUrl: TEMPLATES_PATH + 'aboutDialog.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true
+            });
+        };
     }
 })();

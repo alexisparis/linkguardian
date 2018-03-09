@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row form-block">
+        <div class="col-lg-6 col-md-6 text-center" style="background-image: url(/content/images/shield.svg); background-size: contain; background-repeat: no-repeat; background-position-x: center; max-height: 50vh;">
+            <!--<div class="text-right pull-right visible-phone">-->
+                <!--<md-button class="md-raised" translate="login.register.button" href="#/register">-->
+                    <!--Register a new account-->
+                <!--</md-button>-->
+                <!--<md-button type="submit" class="md-raised md-primary show-xs" translate="login.form.button">Sign in</md-button>-->
+            <!--</div>-->
+            <div class="row" id="explanation">
+                <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12 col-sm-12">
+                    <h2 translate="description.main">Bookmark Manager</h2>
+                    <h4 translate="description.functionalities.functionality1">Organize and share bookmarks</h4>
+                    <h4 translate="description.functionalities.functionality2">Don't forget to read articles later</h4>
+
+                    <div class="text-center characteristics">
+                        <div translate="description.characteristics.characteristic1">Free</div>
+                        <div translate="description.characteristics.characteristic2">Access your bookmarks everywhere</div>
+                        <div translate="description.characteristics.characteristic3">Manage your bookmarks and organize them</div>
+                        <div translate="description.characteristics.characteristic4">Ease sharing on Twitter</div>
+                        <div translate="description.characteristics.characteristic5">Import your bookmarks easily</div>
+                    </div>
+                </div>
+            </div>
+
+            <md-button class="md-raised" translate="login.demo.button" href="#/demo">
+                Demonstration
+            </md-button>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+            <div>
+                <h3 class="signin-title" translate="login.title">Sign in</h3>
+
+                <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
+                    <strong>Failed to sign in!</strong> Please check your credentials and try again. <br/>
+                    Please use your login and not your mail adress...
+                </div>
+                <div class="alert alert-danger" ng-show="blockedError" translate="login.messages.error.authentication_blocked">
+                    <strong>Account blocked</strong>
+                </div>
+            </div>
+            <form class="form" role="form" ng-submit="login($event)">
+                <div class="form-group">
+                    <label for="username" translate="global.form.email">Login</label>
+                    <input type="text" class="form-control" id="username" placeholder="{{'global.form.email.placeholder' | translate}}" ng-model="username">
+                </div>
+                <div class="form-group">
+                    <label for="password" translate="login.form.password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                           ng-model="password">
+                </div>
+                <div class="form-groupa" layout="row">
+                    <label for="rememberMe" flex>
+                        <input type="checkbox" id="rememberMe" ng-model="rememberMe" checked>
+                        <span translate="login.form.rememberme">Remember me</span>
+                    </label>
+                    <md-button ng-disabled="signInInProgress"
+                               type="submit" class="md-raised md-primary">
+                        <span ng-show="!signInInProgress" translate="login.form.button">Sign in</span>
+                        <md-progress-circular ng-show="signInInProgress"
+                                              class="margin-auto"
+                                              md-mode="indeterminate" md-diameter="25px">
+                        </md-progress-circular>
+                    </md-button>
+                </div>
+            </form>
+            <div class="text-right">
+                <a class="alert-link text-info reset-password-button" href="#/reset/request" translate="login.password.forgot">forgot password?</a>
+            </div>
+            <div class="text-right margin-top-10">
+                <md-button class="md-raised register-button" translate="login.register.button" href="#/register">
+                    Register a new account
+                </md-button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    html, body {
+        background: white;
+    }
+</style>

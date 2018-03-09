@@ -2,7 +2,18 @@
     'use strict';
     angular
         .module('linkguardianApp')
-        .factory('BookmarkBatch', BookmarkBatch);
+        .factory('BookmarkBatch', BookmarkBatch)
+
+        .factory('Bookmark', function($resource, $log) {
+
+            return $resource('api/bookmarks', {}, {
+                'batch': {
+                    url: 'api/bookmarks/batch',
+                    method: 'POST'
+                },
+            });
+        })
+    ;
 
     BookmarkBatch.$inject = ['$resource', 'DateUtils'];
 

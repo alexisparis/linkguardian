@@ -202,7 +202,7 @@ public class Link implements Serializable {
         return originalUrl;
     }
 
-    public Link original_url(String original_url) {
+    public Link originalUrl(String original_url) {
         this.originalUrl = original_url;
         return this;
     }

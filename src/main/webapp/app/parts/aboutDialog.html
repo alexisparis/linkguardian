@@ -1,0 +1,30 @@
+<md-dialog aria-label="About Linkguardian" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Linkguardian</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="about-container" layout="column" layout-align="center start" layout-margin flex>
+            <strong layout="row">
+                {{'global.description_long' | translate}}
+            </strong>
+            <strong layout="row">
+                {{'global.contact_us' | translate}}
+            </strong>
+            <div class="margin-auto">
+                <b><a href="mailto:linkguardian@blackdog-project.org">linkguardian@blackdog-project.org</a></b>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" ng-click="cancel()">
+                {{'global.close.label' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

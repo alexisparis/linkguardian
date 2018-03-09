@@ -1,0 +1,282 @@
+<div class="demo-step-{{onboardingSteps[onboardingIndex].name}}">
+    <onboarding-popover enabled="onboardingEnabled" steps="onboardingSteps" on-finish-callback='onboardingFinished' step-index='onboardingIndex'></onboarding-popover>
+</div>
+
+<div class="container" ng-cloak id="infinite-scroll-container">
+    <div layout="row" layout-xs="column">
+        <div class="panel panel-primary lg-panel panel-add" flex>
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="icon ion-pin"></i>
+                    &nbsp;&nbsp;<span translate="main.addLink.title"></span>
+                    <span class="pull-right glyphicon "
+                          ng-class="{'glyphicon-chevron-down': !panelAddOpened, 'glyphicon-chevron-up' : panelAddOpened}"
+                          ng-click="panelAddOpenerClicked()">
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body animate-show-hide" layout="column" layout-align="start stretch" ng-show="panelAddOpened">
+                <md-content layout="row">
+                    <md-input-container flex>
+                        <label><span translate="main.addLink.url.placeholder"></span></label>
+                        <input flex ng-model="newLink.newurl" id="urlInput" type="text"
+                               maxlength="2400"
+                               ng-keyup="$event.keyCode == 13 && addLink()"
+                               md-select-on-focus
+                               autofocus
+                               tabindex="1">
+                    </md-input-container>
+                    <md-button class="md-fab md-mini md-primary white-icon" layout-align="center end"
+                               id="submitUrlButton"
+                               ng-click="addLink()" ng-disabled="addUrlInProgress == true"
+                               aria-label="add link"
+                               data-toggle="tooltip" data-placement="right"
+                               title="{{'main.addLink.tooltip' | translate}}"
+                               tabindex="3">
+                        <md-icon id="submitUrlButton-img" md-svg-src="/content/images/checkmark.svg"></md-icon>
+                    </md-button>
+                </md-content>
+                <md-content layout="row">
+                    <md-subheader class="search-section margin-right-20"><span translate="main.addLink.tags.title"></span>&nbsp;&nbsp;</md-subheader>
+                    <md-input-container flex>
+                        <label><small><span translate="main.addLink.tags.placeholder"></span></small></label>
+                        <input flex ng-model="newLink.tag" type="text"
+                               id="tagInput"
+                               maxlength="500"
+                               ng-keyup="$event.keyCode == 13 && addLink()"
+                               tabindex="2">
+                    </md-input-container>
+                </md-content>
+            </div>
+        </div>
+        <div class="panel panel-primary lg-panel panel-search" flex>
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="icon ion-search"></i>
+                    &nbsp;&nbsp;<span translate="main.searchLinks.title"></span>
+                    <span class="pull-right glyphicon "
+                          ng-class="{'glyphicon-chevron-down': !panelSearchOpened, 'glyphicon-chevron-up' : panelSearchOpened}"
+                    ng-click="panelSearchOpenerClicked()">
+                    </span>
+                </h3>
+            </div>
+            <div class="panel-body animate-show-hide" layout="column" layout-align="start stretch" ng-show="panelSearchOpened">
+                <md-content layout="row" class="md-block" layout-paddinga layout-sm="column" layout-xs="column" layout-fill layout-wrap="" layout-align="start stretch">
+
+                    <md-subheader class="search-section"><span translate="main.searchLinks.sort.label"></span></md-subheader>
+
+                    <md-input-container flex flex-sm="100" flex-xs="100">
+                        <!--<label hide-xs>Sort by</label>-->
+                        <md-select id="sort" ng-model="search.sort" aria-label="sort"
+                            ng-change="searchCriteriaChanged()"
+                            tabindex="4">
+                            <md-option value="CREATION_DATE">
+                                &nbsp;<i class="icon ion-ios-calendar-outline"></i>
+                                &nbsp;<span translate="main.searchLinks.sort.types.creation_date"></span>
+                            </md-option>
+                            <md-option value="NOTE">
+                                &nbsp;<i class="icon ion-android-star"></i>
+                                &nbsp;<span translate="main.searchLinks.sort.types.note"></span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="100" flex-gt-sm="30">
+                        <!--<label hide-xs>direction</label>-->
+                        <md-select id="sortDirection" ng-model="search.sort_direction" aria-label="sort direction"
+                                   ng-change="searchCriteriaChanged()"
+                                   tabindex="5">
+                            <md-option value="ASC">
+                                &nbsp;<i class="icon ion-ios-arrow-thin-up"></i>&nbsp;<span translate="main.searchLinks.sort.direction.asc"></span>
+                            </md-option>
+                            <md-option value="DESC">
+                                &nbsp;<i class="icon ion-ios-arrow-thin-down"></i>&nbsp;<span translate="main.searchLinks.sort.direction.desc"></span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </md-content>
+                <md-content layout="row"
+                            layout-sm="column" layout-xs="column">
+
+                    <md-subheader class="search-section"><span translate="main.searchLinks.filter.label"></span></md-subheader>
+                    <md-input-container>
+                        <!--<label>Type</label>-->
+                        <md-select id="type" ng-model="search.type" aria-label="type"
+                                   ng-change="searchCriteriaChanged()"
+                                   tabindex="6">
+                            <md-option value="ALL">
+                                &nbsp;<i class="icon ion-earth"></i>
+                                &nbsp;<span translate="main.searchLinks.filter.types.all"></span>
+                            </md-option>
+                            <md-option value="READ">
+                                &nbsp;<i class="icon ion-eye"></i>
+                                &nbsp;<span translate="main.searchLinks.filter.types.read"></span>
+                            </md-option>
+                            <md-option value="UNREAD">
+                                &nbsp;<i class="icon ion-eye-disabled"></i>
+                                &nbsp;<span translate="main.searchLinks.filter.types.unread"></span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-content layout="row" layout-align="start start" layout-fill>
+                        <md-content layout="row" layout-align="start start" class="overflow-hidden" flex="60">
+                            <md-subheader hide-sm hide-xs><small><span translate="main.searchLinks.filter.tags.label"></span></small></md-subheader>
+                            <md-input-container class="no-padding-top no-margin-top filter-tag-input-container" flex>
+                                <md-autocomplete flex
+                                                 md-selected-item="search.tag"
+                                                 md-autoselect="true"
+                                                 id="filterTagInput"
+                                                 md-input-minlength="0"
+                                                 md-min-length="0"
+                                                 md-search-text-change="tagTextChanged()"
+                                                 md-selected-item-change="tagTextChanged()"
+                                                 md-floating-label="{{'main.searchLinks.filter.tags.placeholder' | translate}}"
+                                                 type="search"
+                                                 md-search-text="search.tag_input"
+                                                 md-item-text="item"
+                                                 md-items="item in tagsAjaxRequest()"
+                                                 ng-keyup="keyUpOnFilterTag($event)"
+                                                 md-require-match="true"
+                                                 md-match-case-insensitive="true"
+                                                 md-select-on-match="true"
+                                                 tabindex="7">
+                                    <md-item-template>
+                                        <span md-highlight-text="search.tag_input">{{item}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        <span translate="main.searchLinks.filter.tags.noTagFound"></span>
+                                    </md-not-found>
+                                </md-autocomplete>
+                            </md-input-container>
+                        </md-content>
+                        <md-button id="cloud-of-tags-button"
+                                   layout="row"
+                                   layout-align="start none"
+                                   class="md-icon-button md-fab md-mini md-primary cloudOfTags white-icon"
+                                   ng-click="openCloudOfTagDialog()"
+                                   aria-label="open cloud of tags"
+                                   data-toggle="tooltip" data-placement="right"
+                                   title="{{'main.cloudOfTags.tooltip' | translate}}"
+                                   tabindex="8">
+                            <md-icon md-svg-icon="/content/images/cloud.svg"></md-icon>
+                        </md-button>
+                    </md-content>
+                </md-content>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="no-links-message" ng-show="noResults == true && links.length == 0" class="text-center row">
+    {{'main.searchLinks.noLinksFound' | translate}}
+</div>
+
+<div infinite-scroll="isAuthenticated() == true && loadAdditionalLinks()"
+   infinite-scroll-disabled='searchInProgress'
+   performant-scroll="true"
+   class="container overflow-y-visible links-container">
+  <div class="dynamic-grid"
+       angular-grid="links" ag-grid-width="250" ag-gutter-size="5" ag-id="gallery" ag-grid-no="auto">
+    <div ng-repeat="card in links" class="link-container">
+
+      <md-card class="link" ng-class="card.read == true ? 'link-read' : 'link-unread'" md-theme="default" md-theme-watch>
+        <md-card-title ng-click="redirectToLink(card)">
+            <md-card-title-text>
+                <div class="md-headline">
+                    <span class="pull-right star-button-container">
+                        <md-button ng-click="showStarDialog(card);$event.stopPropagation();" aria-label="Twitter"
+                                   class="md-fab md-raised md-mini note note-{{card.note}}"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{'link.actions.change_note.label' | translate}} : {{card.note}}/5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 -5 51 48">
+                                <!--<title>Five Pointed Star</title>-->
+                                <path fill="{{noteBgColor(card)}}"
+                                      stroke="{{noteColor(card)}}"
+                                      d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                            </svg>
+                        </md-button>
+                    </span>
+                    <span class="title-container">
+                        <img class="favicon" ng-src="https://www.google.com/s2/favicons?domain={{::card.domain}}"/>
+                        {{::card.title}}
+                    </span>
+                </div>
+                <span class="md-subhead">{{::card.description}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row">
+            <md-content layout="row" flex>
+                <md-chips
+                    flex
+                    ng-model="card.computedTags"
+                    md-separator-keys="keys"
+                    md-add-on-blur="true"
+                    placeholder="{{'link.tags.tagInput.placeholder' | translate}}"
+                    secondary-placeholder="{{'link.tags.tagInput.placeholder' | translate}}"
+                    md-on-add="addTag(card.id, $chip)"
+                    md-on-remove="removeTag(card.id, $chip)">
+                </md-chips>
+                <md-fab-speed-dial md-open="card.isOpen" md-direction="up"
+                                   ng-cloaks
+                                   md-scale
+                                   layout-align="end end"
+                                   class="md-scale md-fab-bottom-right"
+                                   ng-classa="{ 'md-hover-full': card.hover }"
+                                   ng-mouseentera="card.isOpen=true" ng-mouseleavea="card.isOpen=false">
+                    <md-fab-trigger>
+                        <md-button aria-label="menu" class="md-fab md-link-action md-mini">
+                            <span class="ion-navicon-round" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                    </md-fab-trigger>
+                    <md-fab-actions>
+                        <md-button aria-label="Delete" class="md-fab md-raised md-mini"
+                                   ng-click="deleteLink(card.id)"
+                                   data-toggle="tooltip" data-placement="right"
+                                   title="{{'link.actions.delete.tooltip' | translate}}">
+                            <span class="ion-trash-a" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                        <md-button ng-show="card.read != true" aria-label="Mark as read" class="md-fab md-raised md-mini"
+                                   ng-click="markAsRead(card.id)"
+                                   data-toggle="tooltip" data-placement="right"
+                                   title="{{'link.actions.markAsRead.tooltip' | translate}}">
+                            <span class="ion-eye" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                        <md-button ng-show="card.read == true" aria-label="Mark as unread" class="md-fab md-raised md-mini"
+                                   ng-click="markAsUnread(card.id)"
+                                   data-toggle="tooltip" data-placement="right"
+                                   title="{{'link.actions.markAsUnread.tooltip' | translate}}">
+                            <span class="ion-eye-disabled" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                        <md-button class="md-fab md-raised md-mini" aria-label="Copy to clipboard" ngclipboard data-clipboard-text="{{card.original_url}}"
+                                   ngclipboard-success="urlCopiedToClipboard(card)"
+                                   title="{{'link.actions.copyClipboard.tooltip' | translate}}">
+                            <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                        <md-button aria-label="Tweet" class="md-fab md-raised md-mini"
+                                   ng-click="tweet(card.id)"
+                                   data-toggle="tooltip" data-placement="right"
+                                   title="{{'link.actions.tweetIt.tooltip' | translate}}">
+                            <span class="ion-social-twitter" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                        <md-button aria-label="Go to" class="md-fab md-raised md-mini"
+                                   ng-click="redirectToLink(card)"
+                                   data-toggle="tooltip" data-placement="right"
+                                   title="{{'link.actions.goTo.tooltip' | translate}}">
+                            <span class="ion-forward" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                    </md-fab-actions>
+                </md-fab-speed-dial>
+              </md-content>
+            </md-content>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div>
+</div>
+<div ng-show="searchInProgress == true" class="container">
+    <md-progress-circular class="margin-auto" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+</div>
+<style>
+    html, body {
+        background: #f3f3f3;
+    }
+</style>

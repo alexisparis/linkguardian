@@ -30,7 +30,7 @@ eureka:
 spring:
     batch:
         job:
-            enabled: true
+            enabled: false
     profiles:
         active: dev
         include: swagger

@@ -161,7 +161,7 @@ public class LinkCriteria implements Serializable {
                 (read != null ? "read=" + read + ", " : "") +
                 (title != null ? "title=" + title + ", " : "") +
                 (url != null ? "url=" + url + ", " : "") +
-                (original_url != null ? "original_url=" + original_url + ", " : "") +
+                (original_url != null ? "originalUrl=" + original_url + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (tagsId != null ? "tagsId=" + tagsId + ", " : "") +
             "}";

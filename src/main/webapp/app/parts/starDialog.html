@@ -1,0 +1,33 @@
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'link.actions.change_note.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="row" layout-align="center center" layout-margin>
+            <div>
+            {{'link.actions.change_note.label' | translate}} : <span class="star-rating" star-rating rating-value="rating"
+                 data-max="5" on-rating-selected="rateFunction(rating)"></span>
+                <md-button class="md-raised" ng-click="unset()">
+                    {{'link.actions.change_note.actions.unset' | translate}}
+                </md-button>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="cancel()">
+                <i class="icon ion-close"></i>
+                <!--Cancel-->
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="ok()">
+                <i class="icon ion-checkmark"></i>
+                <!--OK-->
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

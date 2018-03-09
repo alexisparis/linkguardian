@@ -7,9 +7,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png" alt="logo"/>
-                <span data-translate="global.title">Linkguardian</span> <span class="navbar-version">v{{VERSION}}</span>
+            <img id="logo" class="logo-img pull-left" src="content/images/shield_white.svg" alt="logo"
+                 width="48px"
+                 ng-click="vm.reload();"/>
+            <a class="navbar-brand logo" href="#/" ng-click="vm.reload();">
+                <h1 translate="global.title">Linkguardian</h1>
+                <span class="navbar-version hide-xs">{{'global.linkguardian_description' | translate}}</span>
             </a>
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
@@ -168,6 +171,23 @@
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                     </ul>
                 </li>
+                <li ui-sref-active="active" class="hide-xs" uib-dropdown ng-controller="ToolsController" ng-if="vm.isAuthenticated() || vm.$state.is('free_tour')">
+                    <a uib-dropdown-toggle href="" id="menu-tools">
+                        <span>
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <span class="hidden-sm" translate="global.menu.tools.main">Tools</span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ui-sref-active="active">
+                            <a ng-click="showBookmarkImportDialog()">
+                                <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                                &#xA0;<span translate="global.menu.tools.import">Import bookmarks</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
                         <span>
@@ -181,6 +201,13 @@
                             <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
                         </li>
                     </ul>
+                </li>
+                <li ui-sref-active="active">
+                    <a data-toggle="collapse" data-target=".navbar-collapse.in"
+                       ng-click="vm.showAboutDialog()">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <span class="hidden-sm" translate="global.menu.about">A propos</span>
+                    </a>
                 </li>
             </ul>
         </div>

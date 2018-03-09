@@ -1,0 +1,30 @@
+<md-dialog ng-cloak id="link-lifecycle-dialog">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'link.actions.linkClicked.dialog.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="row" layout-align="center center" layout-margin class="message">
+            {{'link.actions.linkClicked.dialog.message' | translate}}<span class="link-title">{{link.title}}</span>
+        </md-dialog-content>
+        <md-dialog-content layout="row" layout-align="center center" layout-margin>
+            {{'link.actions.linkClicked.dialog.question' | translate}}
+        </md-dialog-content>
+        <md-dialog-actions class="actions" layout="row" layout-align="space-between stretch" layout-xs="column" layout-align-xs="center stretch" layout-margin>
+            <md-button ng-if="link.read == false" class="md-raised no-margin-left" ng-click="markLinkAsRead()">
+                {{'link.actions.linkClicked.dialog.actions.markAsRead' | translate}}
+            </md-button>
+            <md-button class="md-raised md-warn no-margin-left" ng-click="deleteLink()">
+                {{'link.actions.linkClicked.dialog.actions.delete' | translate}}
+            </md-button>
+            <md-button class="md-raised md-primary no-margin-left" ng-click="doNothing()">
+                {{'link.actions.linkClicked.dialog.actions.nothing' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

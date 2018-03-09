@@ -13,7 +13,27 @@
             }
         },
         "password" : {
-            "forgot": "Avez-vous oublié votre mot de passe ?"
+            "forgot": "Mot de passe oublié?"
+        },
+        "register" : {
+            "button": "S'inscrire"
+        },
+        "demo" : {
+            "button": "Démonstration"
+        }
+    },
+    "description" : {
+        "main" : "Gestionnaire de favoris",
+        "functionalities" : {
+            "functionality1" : "Organiser et partager vos favoris",
+            "functionality2" : "Enregistrer vos articles à lire plus tard"
+        },
+        "characteristics" : {
+            "characteristic1" : "Gratuit",
+            "characteristic2" : "Accèder à vos favoris partout",
+            "characteristic3" : "Gérer et organiser vos favoris",
+            "characteristic4" : "Faciliter le partage sur twitter",
+            "characteristic5" : "Importer vos favoris facilement"
         }
     }
 }

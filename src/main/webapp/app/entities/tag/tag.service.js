@@ -2,7 +2,20 @@
     'use strict';
     angular
         .module('linkguardianApp')
-        .factory('Tag', Tag);
+        .factory('Tag', Tag)
+
+        .factory('SearchTags', function($resource, $log) {
+            return $resource('api/search/tags', {}, {
+                'tags': {
+                    method: 'GET',
+                    params:{
+                        filter: '@filter'
+                    },
+                    isArray: true
+                }
+            });
+        })
+    ;
 
     Tag.$inject = ['$resource'];
 

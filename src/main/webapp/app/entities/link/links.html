@@ -36,7 +36,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.link.creationDate">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.link.creation_date">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="linkguardianApp.link.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="domain"><span data-translate="linkguardianApp.link.domain">Domain</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="locked"><span data-translate="linkguardianApp.link.locked">Locked</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -44,7 +44,7 @@
                     <th jh-sort-by="read"><span data-translate="linkguardianApp.link.read">Read</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span data-translate="linkguardianApp.link.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="url"><span data-translate="linkguardianApp.link.url">Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="originalUrl"><span data-translate="linkguardianApp.link.originalUrl">Original Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="originalUrl"><span data-translate="linkguardianApp.link.original_url">Original Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.login"><span data-translate="linkguardianApp.link.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -52,7 +52,7 @@
             <tbody>
                 <tr ng-repeat="link in vm.links track by link.id">
                     <td><a ui-sref="link-detail({id:link.id})">{{link.id}}</a></td>
-                    <td>{{link.creationDate | date:'medium'}}</td>
+                    <td>{{link.creation_date | date:'medium'}}</td>
                     <td>{{link.description}}</td>
                     <td>{{link.domain}}</td>
                     <td>{{link.locked}}</td>
@@ -60,7 +60,7 @@
                     <td>{{link.read}}</td>
                     <td>{{link.title}}</td>
                     <td>{{link.url}}</td>
-                    <td>{{link.originalUrl}}</td>
+                    <td>{{link.original_url}}</td>
                     <td>
                         {{link.user.login}}
                     </td>

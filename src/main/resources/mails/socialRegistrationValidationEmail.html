@@ -2,22 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="parent">
-    <head>
-        <title th:text="#{email.social.registration.title}">Linkguardian activation</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
-    </head>
-    <body>
-        <p th:text="#{email.social.registration.greeting(${user.firstName})}">
-            Dear
-        </p>
-        <p th:text="#{email.social.registration.text1(${provider})}">
-            Your Linkguardian account has been created with the social connection: Provider.
-        </p>
-        <p>
-            <span th:text="#{email.social.registration.text2}">Regards, </span>
-            <br/>
-            <em th:text="#{email.signature}">Linkguardian team.</em>
-        </p>
-    </body>
+<div layout:fragment="content">
+    <p th:text="#{email.social.registration.greeting(${user.firstName})}">
+        Dear
+    </p>
+    <p th:text="#{email.social.registration.text1(${provider})}">
+        Your Linkguardian account has been created with the social connection: Provider.
+    </p>
+    <p>
+        <span th:text="#{email.social.registration.text2}">Regards, </span>
+        <br/>
+        <em th:text="#{email.signature}">Linkguardian team.</em>
+    </p>
+</div>
 </html>

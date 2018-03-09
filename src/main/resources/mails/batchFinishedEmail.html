@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="parent">
-<head>
-    <title th:text="#{email.batch_finished.title}">Linkguardian bookmark import</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
 <div layout:fragment="content">
     <p th:text="#{email.batch.finished.greeting(${user.login})}">
         Dear
@@ -24,5 +19,4 @@
         <em th:text="#{email.signature}">Linkguardian Team.</em>
     </p>
 </div>
-</body>
 </html>

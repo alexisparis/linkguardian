@@ -38,7 +38,7 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="email"><span data-translate="linkguardianApp.toxicLink.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="url"><span data-translate="linkguardianApp.toxicLink.url">Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.toxicLink.creationDate">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.toxicLink.creation_date">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="error"><span data-translate="linkguardianApp.toxicLink.error">Error</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -48,7 +48,7 @@
                     <td><a ui-sref="toxic-link-detail({id:toxicLink.id})">{{toxicLink.id}}</a></td>
                     <td>{{toxicLink.email}}</td>
                     <td>{{toxicLink.url}}</td>
-                    <td>{{toxicLink.creationDate | date:'medium'}}</td>
+                    <td>{{toxicLink.creation_date | date:'medium'}}</td>
                     <td>{{toxicLink.error}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

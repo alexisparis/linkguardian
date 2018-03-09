@@ -36,8 +36,8 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.bookmarkBatch.creationDate">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="statusDate"><span data-translate="linkguardianApp.bookmarkBatch.statusDate">Status Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.bookmarkBatch.creation_date">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusDate"><span data-translate="linkguardianApp.bookmarkBatch.status_date">Status Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span data-translate="linkguardianApp.bookmarkBatch.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.login"><span data-translate="linkguardianApp.bookmarkBatch.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -46,8 +46,8 @@
             <tbody>
                 <tr ng-repeat="bookmarkBatch in vm.bookmarkBatches track by bookmarkBatch.id">
                     <td><a ui-sref="bookmark-batch-detail({id:bookmarkBatch.id})">{{bookmarkBatch.id}}</a></td>
-                    <td>{{bookmarkBatch.creationDate | date:'medium'}}</td>
-                    <td>{{bookmarkBatch.statusDate | date:'medium'}}</td>
+                    <td>{{bookmarkBatch.creation_date | date:'medium'}}</td>
+                    <td>{{bookmarkBatch.status_date | date:'medium'}}</td>
                     <td data-translate="{{'linkguardianApp.BookmarkBatchStatus.' + bookmarkBatch.status}}">{{bookmarkBatch.status}}</td>
                     <td>
                         {{bookmarkBatch.user.login}}

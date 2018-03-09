@@ -38,9 +38,9 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="url"><span data-translate="linkguardianApp.bookmarkBatchItem.url">Url</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tags"><span data-translate="linkguardianApp.bookmarkBatchItem.tags">Tags</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="linkCreationDate"><span data-translate="linkguardianApp.bookmarkBatchItem.linkCreationDate">Link Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="linkCreationDate"><span data-translate="linkguardianApp.bookmarkBatchItem.link_creation_date">Link Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span data-translate="linkguardianApp.bookmarkBatchItem.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="errorMsgCode"><span data-translate="linkguardianApp.bookmarkBatchItem.errorMsgCode">Error Msg Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="errorMsgCode"><span data-translate="linkguardianApp.bookmarkBatchItem.error_msg_code">Error Msg Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -49,9 +49,9 @@
                     <td><a ui-sref="bookmark-batch-item-detail({id:bookmarkBatchItem.id})">{{bookmarkBatchItem.id}}</a></td>
                     <td>{{bookmarkBatchItem.url}}</td>
                     <td>{{bookmarkBatchItem.tags}}</td>
-                    <td>{{bookmarkBatchItem.linkCreationDate | date:'medium'}}</td>
+                    <td>{{bookmarkBatchItem.link_creation_date | date:'medium'}}</td>
                     <td data-translate="{{'linkguardianApp.BookmarkBatchItemStatus.' + bookmarkBatchItem.status}}">{{bookmarkBatchItem.status}}</td>
-                    <td>{{bookmarkBatchItem.errorMsgCode}}</td>
+                    <td>{{bookmarkBatchItem.error_msg_code}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
