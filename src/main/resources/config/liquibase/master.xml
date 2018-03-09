@@ -16,6 +16,9 @@
     <include file="config/liquibase/changelog/20171214085409_resize_url_columns.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203025013_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180206201135_user_add_column_lockEndDate.xml" relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/20180302093904_changelog.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase_new constraints changelogs here -->
 
 </databaseChangeLog>
