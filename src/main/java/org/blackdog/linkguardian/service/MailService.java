@@ -8,6 +8,7 @@ import io.github.jhipster.config.JHipsterProperties;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -26,7 +27,9 @@ import org.blackdog.linkguardian.service.exception.MailNotSentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -64,17 +67,12 @@ public class MailService {
     private Environment env;
 
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-            MessageSource messageSource, SpringTemplateEngine templateEngine) {
+            MessageSource emailMessageSource, SpringTemplateEngine templateEngine) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
-        this.messageSource = messageSource;
+        this.messageSource = emailMessageSource;
         this.templateEngine = templateEngine;
-
-//        ((TemplateEngine)templateEngine).addDialect(
-//            new nz.net.ultraq.thymeleaf.LayoutDialect());
-//
-////            new LayoutDialect(new GroupingStrategy()));
     }
 
     /**

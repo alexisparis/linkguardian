@@ -7,6 +7,7 @@ import org.blackdog.linkguardian.repository.UserRepository;
 import org.blackdog.linkguardian.security.SecurityUtils;
 import org.blackdog.linkguardian.service.MailService;
 import org.blackdog.linkguardian.service.UserService;
+import org.blackdog.linkguardian.service.dto.GenericResponse;
 import org.blackdog.linkguardian.service.dto.UserDTO;
 import org.blackdog.linkguardian.service.exception.MailNotSentException;
 import org.blackdog.linkguardian.web.rest.errors.*;
@@ -85,7 +86,7 @@ public class AccountResource {
     public void activateAccount(@RequestParam(value = "key") String key) {
         Optional<User> user = userService.activateRegistration(key);
         if (!user.isPresent()) {
-            throw new InternalServerErrorException("No user was found for this reset key");
+            throw new InternalServerErrorException("No user was found for this activation key");
         }
     }
 
@@ -99,7 +100,10 @@ public class AccountResource {
     @Timed
     public String isAuthenticated(HttpServletRequest request) {
         log.debug("REST request to check if the current user is authenticated");
-        return request.getRemoteUser();
+        String remoteUser = request.getRemoteUser();
+
+        log.debug("calling isAuthenticated returns " + remoteUser);
+        return remoteUser;
     }
 
     /**
@@ -170,9 +174,9 @@ public class AccountResource {
            );
         } catch (MailNotSentException e) {
             log.error("could not send password reset for user with email " + mail, e);
-            return new ResponseEntity<>("e-mail was not sent", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(GenericResponse.withMessage("e-mail was not sent"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("e-mail was sent", HttpStatus.OK);
+        return new ResponseEntity<>(GenericResponse.withMessage("e-mail was sent"), HttpStatus.OK);
     }
 
     /**

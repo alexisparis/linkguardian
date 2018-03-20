@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     es = require('event-stream'),
     naturalSort = require('gulp-natural-sort'),
     angularFilesort = require('gulp-angular-filesort'),
-    bowerFiles = require('main-bower-files');
+    bowerFiles = require('main-bower-files'),
+    print = require('gulp-print').default;
 
 var handleErrors = require('./handle-errors');
 
@@ -22,6 +23,7 @@ module.exports = {
 function app() {
     return gulp.src(config.app + 'index.html')
         .pipe(inject(gulp.src(config.app + 'app/**/*.js')
+            // .pipe(print())
             .pipe(plumber({errorHandler: handleErrors}))
             .pipe(naturalSort())
             .pipe(angularFilesort()), {relative: true}))
@@ -30,6 +32,7 @@ function app() {
 
 function vendor() {
     var stream = gulp.src(config.app + 'index.html')
+        .pipe(print())
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
             name: 'bower',
@@ -56,6 +59,7 @@ function test() {
                 return '\'' + filepath.substring(1, filepath.length) + '\',';
             }
         }))
+        // .pipe(print())
         .pipe(gulp.dest(config.test));
 }
 

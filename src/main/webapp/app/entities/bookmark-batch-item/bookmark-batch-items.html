@@ -1,7 +1,7 @@
 <div>
     <h2 data-translate="linkguardianApp.bookmarkBatchItem.home.title">Bookmark Batch Items</h2>
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="bookmark-batch-item.new" >
@@ -31,8 +31,8 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
+    <div class="table-responsive table-bordered">
+        <table class="jh-table table table-striped table-hover table-condensed">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -47,30 +47,32 @@
             <tbody>
                 <tr ng-repeat="bookmarkBatchItem in vm.bookmarkBatchItems track by bookmarkBatchItem.id">
                     <td><a ui-sref="bookmark-batch-item-detail({id:bookmarkBatchItem.id})">{{bookmarkBatchItem.id}}</a></td>
-                    <td>{{bookmarkBatchItem.url}}</td>
+                    <td style="min-width: 250px;">
+                        <a href="{{bookmarkBatchItem.url}}">{{bookmarkBatchItem.url  | characters:22}}...</a>
+                        <md-button class="md-fab md-raised md-mini" ngclipboard data-clipboard-text="{{bookmarkBatchItem.url}}">
+                            <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                    </td>
                     <td>{{bookmarkBatchItem.tags}}</td>
                     <td>{{bookmarkBatchItem.link_creation_date | date:'medium'}}</td>
                     <td data-translate="{{'linkguardianApp.BookmarkBatchItemStatus.' + bookmarkBatchItem.status}}">{{bookmarkBatchItem.status}}</td>
                     <td>{{bookmarkBatchItem.error_msg_code}}</td>
                     <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
+                        <div class="btn-group flex-btn-group-container audit-item-action-container">
                             <button type="submit"
                                     ui-sref="bookmark-batch-item-detail({id:bookmarkBatchItem.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="bookmark-batch-item.edit({id:bookmarkBatchItem.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="bookmark-batch-item.delete({id:bookmarkBatchItem.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
                             </button>
                         </div>
                     </td>

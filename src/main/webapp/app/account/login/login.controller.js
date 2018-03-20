@@ -20,12 +20,7 @@ angular.module('linkguardianApp')
                 $scope.signInInProgress = false;
                 $scope.authenticationError = false;
                 $scope.blockedError = false;
-                if ($rootScope.previousStateName === 'register') {
-                    $state.go('home');
-                } else {
-                    $window.history.back();
-                    // $rootScope.back();
-                }
+                $state.go('home');
             }).catch(function (error) {
                 $log.log("error while auth", error);
                 $scope.signInInProgress = false;

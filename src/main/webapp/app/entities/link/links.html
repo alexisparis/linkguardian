@@ -1,7 +1,7 @@
 <div>
     <h2 data-translate="linkguardianApp.link.home.title">Links</h2>
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="link.new" >
@@ -31,8 +31,12 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+    <div class="table-responsive table-bordered">
+        <table class="jh-table table table-striped table-hover table-condensed">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -59,39 +63,42 @@
                     <td>{{link.note}}</td>
                     <td>{{link.read}}</td>
                     <td>{{link.title}}</td>
-                    <td>{{link.url}}</td>
-                    <td>{{link.original_url}}</td>
+                    <td style="min-width: 200px;">
+                        <a href="{{link.url}}">{{link.url  | characters:12}}...</a>
+                        <md-button class="md-fab md-raised md-mini" ngclipboard data-clipboard-text="{{link.url}}">
+                            <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                    </td>
+                    <td style="min-width: 200px;">
+                        <a href="{{link.original_url}}">{{link.original_url  | characters:12}}...</a>
+                        <md-button class="md-fab md-raised md-mini" ngclipboard data-clipboard-text="{{link.original_url}}">
+                            <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
+                        </md-button>
+                    </td>
                     <td>
                         {{link.user.login}}
                     </td>
                     <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
+                        <div class="btn-group flex-btn-group-container audit-item-action-container">
                             <button type="submit"
                                     ui-sref="link-detail({id:link.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="link.edit({id:link.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="link.delete({id:link.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
                             </button>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>

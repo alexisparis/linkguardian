@@ -1,7 +1,7 @@
 <div>
     <h2 data-translate="linkguardianApp.bookmarkBatch.home.title">Bookmark Batches</h2>
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="bookmark-batch.new" >
@@ -31,8 +31,8 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
+    <div class="table-responsive table-bordered">
+        <table class="jh-table table table-striped table-hover table-condensed">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -53,24 +53,21 @@
                         {{bookmarkBatch.user.login}}
                     </td>
                     <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
+                        <div class="btn-group flex-btn-group-container audit-item-action-container">
                             <button type="submit"
                                     ui-sref="bookmark-batch-detail({id:bookmarkBatch.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="bookmark-batch.edit({id:bookmarkBatch.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="bookmark-batch.delete({id:bookmarkBatch.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
                             </button>
                         </div>
                     </td>

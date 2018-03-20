@@ -72,5 +72,8 @@
   "scripts": {
     "test": "gulp test",
     "postinstall": "webdriver-manager update"
+  },
+  "dependencies": {
+    "gulp-print": "^5.0.0"
   }
 }

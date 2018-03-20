@@ -128,4 +128,7 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 ## run locally
     ./gradlew bootRun
     
+## build 
+    ./gradlew clean build
+    
 

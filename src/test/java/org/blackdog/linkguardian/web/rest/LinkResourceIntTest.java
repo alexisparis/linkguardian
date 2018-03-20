@@ -306,7 +306,7 @@ public class LinkResourceIntTest {
             .andExpect(jsonPath("$.[*].read").value(hasItem(DEFAULT_READ.booleanValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
-            .andExpect(jsonPath("$.[*].originalUrl").value(hasItem(DEFAULT_ORIGINAL_URL.toString())));
+            .andExpect(jsonPath("$.[*].original_url").value(hasItem(DEFAULT_ORIGINAL_URL.toString())));
     }
 
     @Test
@@ -328,7 +328,7 @@ public class LinkResourceIntTest {
             .andExpect(jsonPath("$.read").value(DEFAULT_READ.booleanValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()))
-            .andExpect(jsonPath("$.originalUrl").value(DEFAULT_ORIGINAL_URL.toString()));
+            .andExpect(jsonPath("$.original_url").value(DEFAULT_ORIGINAL_URL.toString()));
     }
 
     @Test
@@ -704,10 +704,10 @@ public class LinkResourceIntTest {
         linkRepository.saveAndFlush(link);
 
         // Get all the linkList where originalUrl equals to DEFAULT_ORIGINAL_URL
-        defaultLinkShouldBeFound("originalUrl.equals=" + DEFAULT_ORIGINAL_URL);
+        defaultLinkShouldBeFound("original_url.equals=" + DEFAULT_ORIGINAL_URL);
 
         // Get all the linkList where originalUrl equals to UPDATED_ORIGINAL_URL
-        defaultLinkShouldNotBeFound("originalUrl.equals=" + UPDATED_ORIGINAL_URL);
+        defaultLinkShouldNotBeFound("original_url.equals=" + UPDATED_ORIGINAL_URL);
     }
 
     @Test
@@ -717,10 +717,10 @@ public class LinkResourceIntTest {
         linkRepository.saveAndFlush(link);
 
         // Get all the linkList where originalUrl in DEFAULT_ORIGINAL_URL or UPDATED_ORIGINAL_URL
-        defaultLinkShouldBeFound("originalUrl.in=" + DEFAULT_ORIGINAL_URL + "," + UPDATED_ORIGINAL_URL);
+        defaultLinkShouldBeFound("original_url.in=" + DEFAULT_ORIGINAL_URL + "," + UPDATED_ORIGINAL_URL);
 
         // Get all the linkList where originalUrl equals to UPDATED_ORIGINAL_URL
-        defaultLinkShouldNotBeFound("originalUrl.in=" + UPDATED_ORIGINAL_URL);
+        defaultLinkShouldNotBeFound("original_url.in=" + UPDATED_ORIGINAL_URL);
     }
 
     @Test
@@ -730,10 +730,10 @@ public class LinkResourceIntTest {
         linkRepository.saveAndFlush(link);
 
         // Get all the linkList where originalUrl is not null
-        defaultLinkShouldBeFound("originalUrl.specified=true");
+        defaultLinkShouldBeFound("original_url.specified=true");
 
         // Get all the linkList where originalUrl is null
-        defaultLinkShouldNotBeFound("originalUrl.specified=false");
+        defaultLinkShouldNotBeFound("original_url.specified=false");
     }
 
     @Test
@@ -789,7 +789,7 @@ public class LinkResourceIntTest {
             .andExpect(jsonPath("$.[*].read").value(hasItem(DEFAULT_READ.booleanValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
-            .andExpect(jsonPath("$.[*].originalUrl").value(hasItem(DEFAULT_ORIGINAL_URL.toString())));
+            .andExpect(jsonPath("$.[*].original_url").value(hasItem(DEFAULT_ORIGINAL_URL.toString())));
     }
 
     /**
@@ -919,7 +919,7 @@ public class LinkResourceIntTest {
             .andExpect(jsonPath("$.[*].read").value(hasItem(DEFAULT_READ.booleanValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
-            .andExpect(jsonPath("$.[*].originalUrl").value(hasItem(DEFAULT_ORIGINAL_URL.toString())));
+            .andExpect(jsonPath("$.[*].original_url").value(hasItem(DEFAULT_ORIGINAL_URL.toString())));
     }
 
     @Test

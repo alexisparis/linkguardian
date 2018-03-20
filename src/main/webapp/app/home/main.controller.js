@@ -42,7 +42,6 @@ angular.module('linkguardianApp')
             $scope.onboardingIndex = 0;
             $scope.onboardingSteps = [{}];
 
-            console.log("$scope.isAuthenticated() : " + $scope.isAuthenticated());
             if ($scope.isAuthenticated() === false) {
                 $state.go("login");
             } else {

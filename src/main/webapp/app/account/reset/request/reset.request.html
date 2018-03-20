@@ -1,16 +1,15 @@
 <div>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <h1 data-translate="reset.request.title">Reset your password</h1>
 
             <div class="alert alert-danger" data-translate="reset.request.messages.notfound" ng-show="vm.errorEmailNotExists">
                 <strong>Email address isn't registered!</strong> Please check and try again.
             </div>
 
-            <div class="alert alert-warning" ng-hide="vm.success">
+            <div class="alert alert-info" ng-hide="vm.success">
                 <p data-translate="reset.request.messages.info">Enter the email address you used to register.</p>
             </div>
-
             <div class="alert alert-success" ng-show="vm.success === 'OK'">
                 <p data-translate="reset.request.messages.success">Check your emails for details on how to reset your password.</p>
             </div>
@@ -39,7 +38,20 @@
                         </p>
                     </div>
                 </div>
-                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" data-translate="reset.request.form.button">Reset</button>
+
+                <div>
+                    <md-button ng-disabled="form.$invalid || vm.resetInProgress"
+                               type="submit" class="md-raised md-primary pull-right">
+                        <span ng-show="!vm.resetInProgress" translate="reset.request.form.button">Reset</span>
+                        <md-progress-circular ng-show="vm.resetInProgress"
+                                              class="margin-auto"
+                                              md-mode="indeterminate" md-diameter="25px">
+                        </md-progress-circular>
+                    </md-button>
+                    <md-button class="md-raised pull-right back-button" translate="entity.action.back" href="#/login">
+                        Back
+                    </md-button>
+                </div>
             </form>
 
         </div>

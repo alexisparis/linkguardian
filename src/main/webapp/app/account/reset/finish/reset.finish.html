@@ -1,13 +1,13 @@
 <div>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-12">
             <h1 data-translate="reset.finish.title">Reset password</h1>
 
             <div class="alert alert-danger" data-translate="reset.finish.messages.keymissing" ng-show="vm.keyMissing">
                 <strong>The password reset key is missing.</strong>
             </div>
 
-            <div class="alert alert-warning" ng-hide="vm.success || vm.keyMissing">
+            <div class="alert alert-info" ng-hide="vm.success || vm.keyMissing">
                 <p data-translate="reset.finish.messages.info">Choose a new password</p>
             </div>
 
@@ -17,6 +17,11 @@
 
             <div class="alert alert-success" ng-show="vm.success">
                 <p data-translate="reset.finish.messages.success" translate-compile><strong>Your password has been reset.</strong> Please <a class="alert-link" href="" ng-click="vm.login()">sign in</a>.</p>
+            </div>
+            <div ng-show="vm.success" class="text-center">
+                <md-button class="md-raised back-button" translate="entity.action.back" href="#/login">
+                    Sign in
+                </md-button>
             </div>
 
             <div class="alert alert-danger" ng-show="vm.doNotMatch" data-translate="global.messages.error.dontmatch">
@@ -65,7 +70,19 @@
                             </p>
                         </div>
                     </div>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" data-translate="reset.finish.form.button">Reset Password</button>
+                    <div>
+                        <md-button ng-disabled="vm.resetInProgress"
+                                   type="submit" class="md-raised md-primary pull-right">
+                            <span ng-show="!vm.resetInProgress" translate="reset.finish.form.button">Validate new password</span>
+                            <md-progress-circular ng-show="vm.resetInProgress"
+                                                  class="margin-auto"
+                                                  md-mode="indeterminate" md-diameter="25px">
+                            </md-progress-circular>
+                        </md-button>
+                        <md-button class="md-raised pull-right back-button" translate="entity.action.back" href="#/login">
+                            Back
+                        </md-button>
+                    </div>
                 </form>
             </div>
 

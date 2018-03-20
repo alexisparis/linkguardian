@@ -15,6 +15,7 @@
         vm.doNotMatch = null;
         vm.error = null;
         vm.finishReset = finishReset;
+        vm.resetInProgress = false;
         vm.login = LoginService.open;
         vm.resetAccount = {};
         vm.success = null;
@@ -27,9 +28,12 @@
             if (vm.resetAccount.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
+                vm.resetInProgress = true;
                 Auth.resetPasswordFinish({key: $stateParams.key, newPassword: vm.resetAccount.password}).then(function () {
+                    vm.resetInProgress = false;
                     vm.success = 'OK';
                 }).catch(function () {
+                    vm.resetInProgress = false;
                     vm.success = null;
                     vm.error = 'ERROR';
                 });

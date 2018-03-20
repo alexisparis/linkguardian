@@ -23,7 +23,8 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     changed = require('gulp-changed'),
     gulpIf = require('gulp-if'),
-    wbBuild = require('workbox-build');
+    wbBuild = require('workbox-build'),
+    print = require('gulp-print').default;
 
 var handleErrors = require('./gulp/handle-errors'),
     serve = require('./gulp/serve'),
@@ -56,7 +57,10 @@ gulp.task('images', function () {
     return gulp.src(config.app + 'content/images/**')
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist + 'content/images'))
-        .pipe(imagemin({optimizationLevel: 5, progressive: true, interlaced: true}))
+        // image full
+        .pipe(imagemin({optimizationLevel: 5, progressive: true, interlaced: true, verbose: true}))
+        // image excluded ?
+        .pipe(print())
         .pipe(rev())
         .pipe(gulp.dest(config.dist + 'content/images'))
         .pipe(rev.manifest(config.revManifest, {
@@ -91,7 +95,8 @@ gulp.task('inject', function() {
     runSequence('inject:dep', 'inject:app');
 });
 
-gulp.task('inject:dep', ['inject:test', 'inject:vendor']);
+// gulp.task('inject:dep', ['inject:test', 'inject:vendor']);
+gulp.task('inject:dep', ['inject:test']);
 
 gulp.task('inject:app', inject.app);
 
@@ -136,7 +141,8 @@ gulp.task('ngconstant:prod', function () {
         constants: {
             VERSION: util.parseVersion(),
             DEBUG_INFO_ENABLED: false,
-            BUILD_TIMESTAMP: new Date().getTime()
+            BUILD_TIMESTAMP: new Date().getTime(),
+            TEMPLATES_PATH : 'app/parts/'
         },
         template: config.constantTemplate,
         stream: true
@@ -207,7 +213,7 @@ gulp.task('install', function () {
 gulp.task('serve', ['install'], serve);
 
 gulp.task('build', ['clean'], function (cb) {
-    runSequence(['copy', 'inject:vendor', 'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', 'bundle-sw');
+    runSequence(['copy', /*'inject:vendor', */'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', 'bundle-sw');
 });
 
 gulp.task('default', ['serve']);

@@ -16,7 +16,7 @@
 
 eureka:
     client:
-        enabled: true
+        enabled: false
         healthcheck:
             enabled: true
         fetch-registry: true
@@ -36,7 +36,7 @@ eureka:
             version: ${info.project.version}
 ribbon:
     eureka:
-        enabled: true
+        enabled: false
 management:
     security:
         roles: ADMIN

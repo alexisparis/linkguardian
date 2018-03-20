@@ -36,6 +36,10 @@ md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
     }
 }
 
+.audit-item-action-container .btn:not(.btn-raised) > .glyphicon, .audit-item-action-container .input-group-btn .btn:not(.btn-raised) > .glyphicon {
+    color: #fff !important;
+}
+
 @media (max-width: 992px) {
     .signin-title {
         margin-top: 0px;
@@ -200,7 +204,7 @@ md-chips.md-default-theme md-chip.md-focused, md-chips md-chip.md-focused {
     padding-bottom: 10px !important;
 }
 .navbar .navbar-brand h1 {
-    margin: 0px;
+    margin: 0px 5px 0px 0px;
     padding: 0px;
     font-size: 24px;
     font-weight: 700;
