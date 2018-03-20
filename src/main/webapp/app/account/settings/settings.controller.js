@@ -14,6 +14,7 @@
         vm.save = save;
         vm.settingsAccount = null;
         vm.success = null;
+        vm.saveInProgress = false;
 
         /**
          * Store the "settings account" in a separate variable, and not in the shared "account" variable.
@@ -34,7 +35,9 @@
         });
 
         function save () {
+            vm.saveInProgress = true;
             Auth.updateAccount(vm.settingsAccount).then(function() {
+                vm.saveInProgress = false;
                 vm.error = null;
                 vm.success = 'OK';
                 Principal.identity(true).then(function(account) {
@@ -46,6 +49,7 @@
                     }
                 });
             }).catch(function() {
+                vm.saveInProgress = false;
                 vm.success = null;
                 vm.error = 'ERROR';
             });
