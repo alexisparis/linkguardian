@@ -40,14 +40,13 @@ public class AdministrativeTasks {
     @Inject
     private MailService mailService;
 
-    // near midnight
-//    @Scheduled(cron = "0 59 23 * * *")
     // every 2 hours
     @Scheduled(cron = "0 0 */2 * * *")
     @Profile(Constants.SPRING_PROFILE_PRODUCTION)
     public void sendStatusMailSinceYesterday() {
         java.time.ZonedDateTime dt = java.time.ZonedDateTime.now();
-        dt = dt.minusDays(1);
+        // every two hours
+        dt = dt.minusHours(2);
 
         List<CountPerUser> linkPerUserYesterday =
             this.linkRepository.findLinkCountPerUserAfter(dt);

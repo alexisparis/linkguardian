@@ -130,5 +130,181 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
     
 ## build 
     ./gradlew clean build
+
+## bootstrap-material
+    how to change color on bootstrap-material : 
+    edit
     
+    bower_components/bootstrap-material-design/less/_variables.less
+    
+    and set one of the color defined in
+    
+    bower_components/bootstrap-material-design/less/_colors.less
+    
+    then, 
+    
+    npm install
+    
+    and then
+    
+    grunt serve --force
+    
+    all files in dist folders has been updated
+
+
+## what to do if intellij has an infinite indexing while opening project?
+try File => invalidate caches / Restart
+
+if it does not work....
+delete folders bower_components and node_modules
+
+try to add :
+- release
+- node_modules
+- src/main/webapp/bower_components
+as excluded path in the configuration of the intellij project
+
+## usefull links
+### design, layout, icons
+[ion icons]: http://ionicons.com/
+[ion icons]: https://github.com/driftyco/ionicons
+[color palette]: http://www.dtelepathy.com/blog/inspiration/beautiful-color-palettes-for-your-next-web-project
+[material layout]: https://material.angularjs.org/latest/layout/options
+
+### masonry
+
+[masonry]: https://github.com/passy/angular-masonry
+[dynamic layout]: https://www.npmjs.com/package/angular-dynamic-layout
+[isotope modulo]: http://michieldewit.github.io/isotope-modulo-columns/
+[isotope]: http://mankindsoftware.github.io/angular-isotope/
+[angular isotope]: https://github.com/mankindsoftware/angular-isotope
+[search isotope]: https://www.google.fr/search?q=angular+isotope+modulo&oq=angular+isotope+modulo&aqs=chrome..69i57.4807j0j7&sourceid=chrome&es_sm=91&ie=UTF-8
+[on boarding]: https://github.com/adamalbrecht/ngOnboarding
+
+### cloud of tags
+[jQCloud]: https://github.com/mistic100/jQCloud
+
+### input starts
+[stars]: http://ngmodules.org/modules/angular-input-stars
+
+## backups db
+Autopostgresqlbackup is a shell script (usually executed from a cron job) designed to provide a fully automated tool to make periodic backups of PostgreSQL databases.
+
+On Debian systems, autopostgresqlbackup can be configured by editing some options in file /etc/default/autopostresqlbackup
+
+Install Autopostgresqlbackup on ubuntu
+
+Open the terminal and run the following command
+
+sudo apt-get install autopostgresqlbackup
+
+The above command will complete the installation process
+
+Using autopostresqlbackup
+
+You need to run the following command to run the backup
+
+sudo autopostgresqlbackup
+
+you have the backups in /var/lib/autopostgresqlbackup organized by daily/weekly/monthly folders then databasename folder.
+
+If you need to configure parameters such as host, restricted databases to backup, compression type, etc…, autopostgresqlbackup file in /etc/default/ is what you are looking for
+
+sudo vi /etc/default/autopostgresqlbackup
+
+Ubuntu installs a cron script with this program that will run it every day. It will organize the files to the appropriate directory.
+
+## star module 
+taken from http://www.angulartutorial.net/2014/03/rating-stars-in-angular-js-using.html
+
+## linkguardian's icon
+taken from http://www.flaticon.com/free-icon/security-shield_63801
+
+## UI theme
+taken from http://www.dtelepathy.com/blog/inspiration/beautiful-color-palettes-for-your-next-web-project
+theme 10 : Our Little Projects
+
+## angular dynamic layout
+about fixing the height of the parent container : 
+https://github.com/tristanguigue/angular-dynamic-layout/issues/24
+
+about problem of performance : 
+avoid ng-include in ng-repeat : 
+http://www.bennadel.com/blog/2738-using-ngrepeat-with-nginclude-hurts-performance-in-angularjs.htm
+
+## if ECONFLICT Unable to find suitable version for messageformat
+try to install it manually :
+    bower install messageformat --save
+    
+## bower lock
+https://www.npmjs.com/package/bower-locker
+bower-locker lock
+bower-locker unlock
+
+## npm lock
+use :
+    npm shrinkwrap
+    
+## nginx :
+    conf dans /etc/nginx/sites-available/default 
+
+## add a new entity
+    jhipster entity author
+    
+    this will add a new liquibase change, adapt them before apply
+
+## liquibase
+http://www.jhipster.tech/v2-documentation/development/
+http://www.liquibase.org/documentation/command_line.html
+
+en cas de probleme de checksum :
+    2018-02-05 22:10:00.451 ERROR 13745 --- [dian-Executor-1] o.b.l.c.liquibase.AsyncSpringLiquibase   : Liquibase could not start correctly, your database is NOT ready: Validation Failed:
+         1 change sets check sum
+              classpath:config/liquibase/changelog/00000000000000_initial_schema.xml::00000000000001::jhipster was: 7:a486c0c318ff0401b0ca1bcb5b5811bc but is now: 7:0a5a0ee7e081aa01dc7c5ea0792565ef
+    
+    
+    liquibase.exception.ValidationFailedException: Validation Failed:
+         1 change sets check sum
+              classpath:config/liquibase/changelog/00000000000000_initial_schema.xml::00000000000001::jhipster was: 7:a486c0c318ff0401b0ca1bcb5b5811bc but is now: 7:0a5a0ee7e081aa01dc7c5ea0792565ef
+    
+        at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:266)
+        at liquibase.Liquibase.update(Liquibase.java:210)
+        at liquibase.Liquibase.update(Liquibase.java:192)
+        at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:431)
+        at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:388)
+        at org.blackdog.linkguardian.config.liquibase.AsyncSpringLiquibase.initDb(AsyncSpringLiquibase.java:63)
+        at org.blackdog.linkguardian.config.liquibase.AsyncSpringLiquibase.lambda$afterPropertiesSet$0(AsyncSpringLiquibase.java:49)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+        at java.lang.Thread.run(Thread.java:745)
+lancer mvn liquibase:clearCheckSums
+
+    ./gradlew liquibaseDiffChangeLog
+
+## ssh config
+install cerbot in the host :
+    wget https://dl.eff.org/certbot-auto
+    chmod a+x certbot-auto
+    
+sudo certbot-auto certonly --webroot -w /opt/tomcat8/webapps/ -d linkguardian.io -d www.linkguardian.io    
+    
+## back up db
+    pg_dump linkguardian | gzip > linkguardian.gz
+
+## restore
+    psql -f infile postgres
+    
+    for gcp
+    
+    psql -h host -p port -d database -U user -W -f backup_linkguardian_2018-02-15_02_00_01_daily.sql
+    
+## launch nightwatch tests
+    node_modules/nightwatch/bin/nightwatch
+    
+## launch nightwatch for a given environment
+    node_modules/nightwatch/bin/nightwatch --env local
+    
+## launch a single test on nightwatch for a given environment
+    node_modules/nightwatch/bin/nightwatch src/test/nightwatch/test/demo.js --env local
+    node_modules/nightwatch/bin/nightwatch src/test/nightwatch/test/login.js --env local
 

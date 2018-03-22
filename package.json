@@ -64,7 +64,10 @@
     "proxy-middleware": "0.15.0",
     "run-sequence": "1.2.2",
     "workbox-build": "2.1.2",
-    "yargs": "5.0.0"
+    "yargs": "5.0.0",
+    "nightwatch": "0.9.20",
+    "chromedriver": "2.37.0",
+    "pg": "^7.4.1"
   },
   "engines": {
     "node": ">=6.9.0"

@@ -1,0 +1,64 @@
+{
+    "src_folders" : ["src/test/nightwatch/test/"],
+    "output_folder" : "target/nightwatch_reports",
+    "custom_commands_path" : "",
+    "custom_assertions_path" : "",
+    "page_objects_path" : "",
+    "globals_path" : "src/test/nightwatch/global.js",
+    "compatible_testcase_support" : true,
+
+    "selenium" : {
+        "start_process" : false,
+        "server_path" : "",
+        "log_path" : "",
+        "port" : 4444,
+        "cli_args" : {
+            "webdriver.chrome.driver" : "src/nightwatch/drivers/chromedriver",
+            "webdriver.gecko.driver" : "src/nightwatch/drivers/geckodriver",
+            "webdriver.edge.driver" : ""
+        }
+    },
+
+    "test_settings" : {
+        "default" : {
+            "launch_url" : "http://127.0.0.1:8080",
+            "selenium_port"  : 9515,
+            "selenium_host"  : "localhost",
+            "default_path_prefix" : "",
+
+            "desiredCapabilities": {
+                "browserName": "chrome",
+                "chromeOptions" : {
+                    "args" : ["--no-sandbox"]
+                },
+                "acceptSslCerts": true
+            }
+        },
+        "prod" : {
+            "launch_url" : "https://www.linkguardian.io",
+            "selenium_port"  : 9515,
+            "selenium_host"  : "localhost",
+            "default_path_prefix" : "",
+
+            "desiredCapabilities": {
+                "browserName": "chrome",
+                "chromeOptions" : {
+                    "args" : ["--no-sandbox"]
+                },
+                "acceptSslCerts": true
+            }
+        },
+
+        "chrome" : {
+            "desiredCapabilities": {
+                "browserName": "chrome"
+            }
+        },
+
+        "edge" : {
+            "desiredCapabilities": {
+                "browserName": "MicrosoftEdge"
+            }
+        }
+    }
+}

@@ -5,10 +5,10 @@ module.exports = {
             .url(browser.launchUrl);
 
         // click on about
-        browser.waitForElementPresent("a[ng-click=\"showAboutDialog()\"]", 10000);
+        browser.waitForElementPresent("a[ng-click=\"vm.showAboutDialog()\"]", 10000);
 
         browser.execute(function () {
-            document.querySelector("a[ng-click=\"showAboutDialog()\"]").click()
+            document.querySelector("a[ng-click=\"vm.showAboutDialog()\"]").click()
         });
         browser.waitForElementVisible('.about-container', 10000);
         browser.expect.element(".about-container").to.be.visible;

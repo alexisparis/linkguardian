@@ -38,9 +38,9 @@ module.exports = {
 
         browser.assert.urlEquals(browser.launchUrl + "/#/reset/request");
 
-        browser.waitForElementVisible("h1[translate=\"reset.request.title\"]", 4000);
+        browser.waitForElementVisible("h1[data-translate=\"reset.request.title\"]", 4000);
 
-        browser.expect.element("h1[translate=\"reset.request.title\"]").to.be.visible;
+        browser.expect.element("h1[data-translate=\"reset.request.title\"]").to.be.visible;
 
         browser.expect.element("#email").to.be.visible;
 
@@ -64,11 +64,11 @@ module.exports = {
 
         browser.setValue('#email', 'nightwatch');
 
-        browser.waitForElementVisible('p[translate=\"global.messages.validate.email.invalid\"]', 3000);
+        browser.waitForElementVisible('p[data-translate=\"global.messages.validate.email.invalid\"]', 3000);
 
         browser.setValue('#email', 'alexis.rt.paris@gmail.com');
 
-        browser.waitForElementNotVisible('p[translate=\"global.messages.validate.email.invalid\"]', 3000);
+        browser.waitForElementNotVisible('p[data-translate=\"global.messages.validate.email.invalid\"]', 3000);
 
         browser.expect.element('button[type=\"submit\"]').to.be.enabled;
 
@@ -84,10 +84,10 @@ module.exports = {
         browser.click(".register-button");
 
         browser.waitForElementVisible("h1[translate=\"register.title\"]", 4000);
-        browser.waitForElementVisible("#email", 3000);
-        browser.waitForElementVisible("#login", 3000);
-        browser.waitForElementVisible("#password", 3000);
-        browser.waitForElementVisible("#confirmPassword", 3000);
+        browser.waitForElementPresent("#email", 3000);
+        browser.waitForElementPresent("#login", 3000);
+        browser.waitForElementPresent("#password", 3000);
+        browser.waitForElementPresent("#confirmPassword", 3000);
 
         // cancel available
         browser.expect.element("a[href=\"#/login\"]").to.be.present.before(1000);
@@ -115,10 +115,10 @@ module.exports = {
         // and
         browser.expect.element('button[type=\"submit\"]').to.be.not.enabled;
 
-        browser.setValue('#login', 'a');
-        browser.clearValue('#login');
+        browser.setValue('input[name=\"login\"]', 'a');
+        browser.clearValue('input[name=\"login\"]');
         browser.waitForElementVisible('p[translate=\"register.messages.validate.login.required\"]', 3000);
-        browser.setValue('#login', browser.globals.login);
+        browser.setValue('input[name=\"login\"]', browser.globals.login);
         browser.waitForElementNotVisible('p[translate=\"register.messages.validate.login.required\"]', 3000);
         // and
         browser.expect.element('button[type=\"submit\"]').to.be.not.enabled;
@@ -154,7 +154,7 @@ module.exports = {
         });
 
 
-        // browser.saveScreenshot("test.png");
+        browser.saveScreenshot("test.png");
 
         // success
         browser.waitForElementVisible('div[translate=\"register.messages.success\"]', 10000);
@@ -163,68 +163,68 @@ module.exports = {
 
         // ok, now the new user is registered, normally, user must wait for the email to get the activation link
         // access the database and get the activation key
-        // browser.perform(function (self, done) {
-        //
-        //     var client = new pg.Client();
-        //     client.connect();
-        //
-        //     client.query("SELECT activation_key FROM jhi_user where email like '" + browser.globals.mail + "';",
-        //         function (err, res) {
-        //             console.log("res", res);
-        //             var activation_key = res.rows[0].activation_key;
-        //             console.log("activation_key : " + activation_key);
-        //             client.end();
-        //             console.log("client end()");
-        //
-        //             console.log("before pause 1");
-        //             // try with a wrong activation key
-        //             browser.pause( 1000 );
-        //             console.log("after pause 1");
-        //             browser.url(browser.launchUrl + '/#/activate?key=aaa');// + activation_key + '_bad');
-        //             // browser.pause( 1000 );
-        //             // browser.waitForElementPresent('h1[translate=\"activate.title\"]', 10000);
-        //
-        //             console.log("before pause 2");
-        //             // browser.pause( 1000 );
-        //             console.log("after pause 2");
-        //             // browser.saveScreenshot("test.png");
-        //
-        //             // browser.waitForElementPresent('[translate=\"activate.messages.error\"]', 10000);
-        //             browser.waitForElementPresent('#activate-message-error', 5000);
-        //
-        //             browser.saveScreenshot("test.png");
-        //             browser.pause( 1000 );
-        //             // activate user
-        //             browser.url(browser.launchUrl + '/#/activate?key=' + activation_key);
-        //             // browser.saveScreenshot("test.png");
-        //             // browser.pause( 1000 );
-        //
-        //             done();
-        //         }
-        //     );
-        // });
+        browser.perform(function (self, done) {
+
+            var client = new pg.Client();
+            client.connect();
+
+            client.query("SELECT activation_key FROM jhi_user where email like '" + browser.globals.mail + "';",
+                function (err, res) {
+                    console.log("res", res);
+                    var activation_key = res.rows[0].activation_key;
+                    console.log("activation_key : " + activation_key);
+                    client.end();
+                    console.log("client end()");
+
+                    console.log("before pause 1");
+                    // try with a wrong activation key
+                    browser.pause( 1000 );
+                    console.log("after pause 1");
+                    browser.url(browser.launchUrl + '/#/activate?key=aaa');// + activation_key + '_bad');
+                    // browser.pause( 1000 );
+                    // browser.waitForElementPresent('h1[translate=\"activate.title\"]', 10000);
+
+                    console.log("before pause 2");
+                    // browser.pause( 1000 );
+                    console.log("after pause 2");
+                    // browser.saveScreenshot("test.png");
+
+                    // browser.waitForElementPresent('[translate=\"activate.messages.error\"]', 10000);
+                    browser.waitForElementPresent('[data-translate=\"activate.messages.error\"]', 5000);
+
+                    browser.saveScreenshot("test.png");
+                    browser.pause( 1000 );
+                    // activate user
+                    browser.url(browser.launchUrl + '/#/activate?key=' + activation_key);
+                    // browser.saveScreenshot("test.png");
+                    // browser.pause( 1000 );
+
+                    done();
+                }
+            );
+        });
 
         // XXAP
 
-        browser.url(browser.launchUrl + '/#/activate?key=' + activation_key + '_bad');
+        //browser.url(browser.launchUrl + '/#/activate?key=' + activation_key + '_bad');
         // browser.pause( 1000 );
         // browser.waitForElementPresent('h1[translate=\"activate.title\"]', 10000);
 
-        console.log("before pause 2");
+        //console.log("before pause 2");
         // browser.pause( 1000 );
-        console.log("after pause 2");
+        //console.log("after pause 2");
         // browser.saveScreenshot("test.png");
 
-        browser.waitForElementPresent('div[translate=\"activate.messages.error\"]', 10000);
+        //browser.waitForElementPresent('div[data-translate=\"activate.messages.error\"]', 10000);
         // browser.waitForElementPresent('#activate-message-error', 5000);
 
-        browser.saveScreenshot("test.png");
-        browser.pause( 1000 );
+        //browser.saveScreenshot("test.png");
+        //browser.pause( 1000 );
         // activate user
-        browser.url(browser.launchUrl + '/#/activate?key=' + activation_key);
+        //browser.url(browser.launchUrl + '/#/activate?key=' + activation_key);
         // XXAP
 
-        browser.waitForElementPresent('[translate=\"activate.messages.success\"]', 5000);
+        browser.waitForElementPresent('[data-translate=\"activate.messages.success\"]', 5000);
         browser.waitForElementPresent('a[href="#/login"]', 5000);
 
         // click on login link
@@ -276,7 +276,7 @@ module.exports = {
 
         browser.assert.urlEquals(browser.launchUrl + "/#/reset/request");
 
-        browser.waitForElementVisible('p[translate=\"reset.request.messages.info\"]', 5000);
+        browser.waitForElementVisible('p[data-translate=\"reset.request.messages.info\"]', 5000);
 
         // click on back
         browser.execute(function () {
@@ -290,7 +290,7 @@ module.exports = {
 
         browser.assert.urlEquals(browser.launchUrl + "/#/reset/request");
 
-        browser.waitForElementVisible('p[translate=\"reset.request.messages.info\"]', 5000);
+        browser.waitForElementVisible('p[data-translate=\"reset.request.messages.info\"]', 5000);
 
         browser.expect.element('button[type=\"submit\"]').to.be.not.enabled;
 
@@ -304,7 +304,7 @@ module.exports = {
         // browser.saveScreenshot("test.png");
 
         // success
-        browser.waitForElementVisible('p[translate=\"reset.request.messages.success\"]', 10000);
+        browser.waitForElementVisible('p[data-translate=\"reset.request.messages.success\"]', 10000);
 
         // ok, now the new user is registered, normally, user must wait for the email to get the activation link
         // access the database and get the activation key
@@ -327,7 +327,7 @@ module.exports = {
             );
         });
 
-        browser.waitForElementVisible('p[translate=\"reset.finish.messages.info\"]', 5000);
+        browser.waitForElementVisible('p[data-translate=\"reset.finish.messages.info\"]', 5000);
 
         browser.expect.element("#password").to.be.visible;
         browser.expect.element("#confirmPassword").to.be.visible;
@@ -338,7 +338,7 @@ module.exports = {
             document.querySelector('button[type="submit"]').click()
         });
 
-        browser.waitForElementVisible('p[translate=\"reset.finish.messages.success\"]', 5000);
+        browser.waitForElementVisible('p[data-translate=\"reset.finish.messages.success\"]', 5000);
 
         // go to login
         browser.execute(function () {
@@ -393,7 +393,7 @@ module.exports = {
             document.querySelector('a[href=\"#/password\"]').click()
         });
 
-        browser.waitForElementVisible('h2[translate=\"password.title\"]', 15000);
+        browser.waitForElementVisible('h2[data-translate=\"password.title\"]', 15000);
 
         browser.expect.element('button[type=\"submit\"]').to.be.not.enabled;
 
@@ -406,7 +406,7 @@ module.exports = {
             document.querySelector('button[type="submit"]').click()
         });
 
-        browser.waitForElementVisible('div[translate=\"global.messages.error.dontmatch\"]', 5000);
+        browser.waitForElementVisible('div[data-translate=\"global.messages.error.dontmatch\"]', 5000);
 
         browser.clearValue('#password');
         browser.setValue('#password', browser.globals.password);
@@ -417,7 +417,7 @@ module.exports = {
             document.querySelector('button[type="submit"]').click()
         });
 
-        browser.waitForElementVisible('div[translate=\"password.messages.success\"]', 5000);
+        browser.waitForElementVisible('div[data-translate=\"password.messages.success\"]', 5000);
 
         // go to login
         browser.execute(function () {
