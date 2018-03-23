@@ -1,8 +1,13 @@
 {
     "global": {
+        "description_long" : "Linkguardian ist ein kostenloses Tool, mit dem Sie Ihre Lesezeichen organisieren und speichern können.",
+        "contact_us" : "Bei Problemen, Verbesserungen oder Support wenden Sie sich bitte an uns :",
         "title": "Linkguardian",
+        "title_main": "Linkguardian | Online Lesezeichen-Manager",
+        "linkguardian_description" : "Lesezeichen-Manager",
         "browsehappy": "Sie benutzen einen <strong>veralteten</strong> Browser. Bitte <a href=\"http://browsehappy.com/?locale=de/\">aktualisieren Sie Ihren Browser</a>, um die Benutzerfreundlichkeit zu erhöhen.",
         "menu": {
+            "about" : "Über",
             "home": "Startseite",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
@@ -36,7 +41,14 @@
                 "database": "Datenbank",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
-            "language": "Sprache"
+            "language": "Sprache",
+            "tools" : {
+                "main" : "Werkzeuge",
+                "import" : "Lesezeichen importieren"
+            }
+        },
+        "close": {
+            "label" : "Schließen"
         },
         "form": {
             "username": "Benutzername",

@@ -14,6 +14,26 @@
         },
         "password" : {
             "forgot": "Sie haben Ihr Passwort vergessen?"
+        },
+        "register" : {
+            "button": "Registrieren"
+        },
+        "demo" : {
+            "button": "Demonstration"
+        }
+    },
+    "description" : {
+        "main" : "Bookmark Manager",
+        "functionalities" : {
+            "functionality1" : "Organisieren und teilen Sie Lesezeichen",
+            "functionality2" : "Vergessen Sie nicht, Artikel später zu lesen"
+        },
+        "characteristics" : {
+            "characteristic1" : "Frei",
+            "characteristic2" : "Greifen Sie überall auf Ihre Lesezeichen zu",
+            "characteristic3" : "Verwalten Sie Ihre Lesezeichen und organisieren Sie sie",
+            "characteristic4" : "Erleichtern Sie das Teilen auf Twitter",
+            "characteristic5" : "Importieren Sie Ihre Lesezeichen einfach"
         }
     }
 }
