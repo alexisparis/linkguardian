@@ -104,10 +104,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/account").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/profile-info").permitAll()
-            .antMatchers("/api/**").authenticated()
+
+            // special links that should be allowed to every one connected
+            .antMatchers(HttpMethod.GET, "/api/my_links").authenticated()
+            .antMatchers(HttpMethod.POST, "/api/my_links").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/api/my_links").authenticated()
+
+            .antMatchers(HttpMethod.PUT, "/api/my_links/tag").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/api/my_links/tag").authenticated()
+
+            .antMatchers(HttpMethod.PUT, "/api/my_links/note").authenticated()
+
+            .antMatchers(HttpMethod.PUT, "/api/my_links/read").authenticated()
+            .antMatchers(HttpMethod.PUT, "/api/my_links/unread").authenticated()
+
+            .antMatchers(HttpMethod.GET, "/api/my_links/count_per_tags").authenticated()
+
+            // else... only admin
+            .antMatchers("/api/**").hasAuthority(AuthoritiesConstants.ADMIN)
+
             .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/websocket/**").permitAll()
             .antMatchers("/management/health").permitAll()
