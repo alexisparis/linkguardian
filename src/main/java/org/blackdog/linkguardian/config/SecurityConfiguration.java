@@ -108,21 +108,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/profile-info").permitAll()
+//            .antMatchers("/api/**").authenticated()
 
             // special links that should be allowed to every one connected
-            .antMatchers(HttpMethod.GET, "/api/my_links").authenticated()
-            .antMatchers(HttpMethod.POST, "/api/my_links").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/api/my_links").authenticated()
+            .antMatchers("/api/account/change-password").hasAuthority(AuthoritiesConstants.USER)
 
-            .antMatchers(HttpMethod.PUT, "/api/my_links/tag").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/api/my_links/tag").authenticated()
+            .antMatchers(HttpMethod.GET, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.POST, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.DELETE, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
 
-            .antMatchers(HttpMethod.PUT, "/api/my_links/note").authenticated()
+            .antMatchers(HttpMethod.PUT, "/api/my_links/tag").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.DELETE, "/api/my_links/tag").hasAuthority(AuthoritiesConstants.USER)
 
-            .antMatchers(HttpMethod.PUT, "/api/my_links/read").authenticated()
-            .antMatchers(HttpMethod.PUT, "/api/my_links/unread").authenticated()
+            .antMatchers(HttpMethod.PUT, "/api/my_links/note").hasAuthority(AuthoritiesConstants.USER)
 
-            .antMatchers(HttpMethod.GET, "/api/my_links/count_per_tags").authenticated()
+            .antMatchers(HttpMethod.PUT, "/api/my_links/read").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.PUT, "/api/my_links/unread").hasAuthority(AuthoritiesConstants.USER)
+
+            .antMatchers(HttpMethod.GET, "/api/my_links/count_per_tags").hasAuthority(AuthoritiesConstants.USER)
 
             // else... only admin
             .antMatchers("/api/**").hasAuthority(AuthoritiesConstants.ADMIN)

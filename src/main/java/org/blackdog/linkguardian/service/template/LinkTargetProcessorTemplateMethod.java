@@ -32,9 +32,13 @@ public class LinkTargetProcessorTemplateMethod<R> {
             if (context.getTarget().getError() == null) {
                 try {
                     // check that this url does not already exist
+                    log.info("context url : " + context.getUrl());
+                    log.info("context target url : " + context.getTarget().getUrl());
+                    log.info("context target string url : " + context.getTarget().getStringUrl());
+                    log.info("checking if a link already exist with " + context.getTarget().getStringUrl() + "...");
                     Link linksByUserAndUrl =
-                        this.linkService.findLinksByUserAndUrl(context.getUser().getLogin(), context.getUrl());
-                    log.info("link for url " + context.getTarget() + " ? " + linksByUserAndUrl);
+                        this.linkService.findLinksByUserAndUrl(context.getUser().getLogin(), context.getTarget().getStringUrl());
+                    log.info(" => link for url " + context.getTarget() + " ? " + linksByUserAndUrl);
                     if (linksByUserAndUrl != null) {
 
                         log.debug("url " + context.getTarget() + " already exists");

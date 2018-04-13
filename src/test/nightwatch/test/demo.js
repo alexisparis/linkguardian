@@ -4,8 +4,8 @@ module.exports = {
         browser
             .url(browser.launchUrl);
 
-        browser.waitForElementVisible('#explanation', 10000);
-        browser.click("a[href=\"#/demo\"]");
+        browser.waitForElementPresent('#explanation', 10000);
+        browser.click("a[translate=\"login.demo.button\"]");
 
         var steps = [
             "welcome",

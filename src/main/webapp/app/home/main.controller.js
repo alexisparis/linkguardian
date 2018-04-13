@@ -303,7 +303,7 @@ angular.module('linkguardianApp')
                 $scope.refreshLinks = function () {
                     $log.log("call refreshlinks");
                     // TODO : remove when adding a new link seems to force to refresh all links
-                    console.trace();
+                    //console.trace();
 
                     if ($scope.isAuthenticated() == true) {
                         $scope.noMoreLinks = false;
@@ -715,6 +715,10 @@ angular.module('linkguardianApp')
                 $scope.urlCopiedToClipboard = function(link) {
                     $log.log("url " + link.original_url + " copied to clipboard");
                     ToasterService.displaySuccess(translateFilter('link.actions.copyClipboard.done'));
+                };
+                $scope.copyTocClipboardOnError = function(e) {
+                    $log.log("error while trying to copy to clipboard", e);
+                    ToasterService.displayError(translateFilter('link.actions.copyClipboard.error'));
                 };
 
                 $scope.showLinkLifecycleDialog = function (link) {

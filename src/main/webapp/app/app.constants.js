@@ -7,5 +7,6 @@
         .constant('DEBUG_INFO_ENABLED', true)
         .constant('BUILD_TIMESTAMP', "")
         .constant('TEMPLATES_PATH', "app/parts/")
+        .constant('WEBSOCKET_ACTIVATED', true)
 ;
 })();

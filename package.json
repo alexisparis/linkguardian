@@ -77,6 +77,7 @@
     "postinstall": "webdriver-manager update"
   },
   "dependencies": {
+    "clipboardy": "^1.2.3",
     "gulp-print": "^5.0.0"
   }
 }

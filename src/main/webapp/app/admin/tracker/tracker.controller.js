@@ -5,17 +5,20 @@
         .module('linkguardianApp')
         .controller('JhiTrackerController', JhiTrackerController);
 
-    JhiTrackerController.$inject = ['$cookies', '$http', 'JhiTrackerService'];
+    JhiTrackerController.$inject = ['$cookies', '$http', 'JhiTrackerService', 'WEBSOCKET_ACTIVATED'];
 
-    function JhiTrackerController ($cookies, $http, JhiTrackerService) {
+    function JhiTrackerController ($cookies, $http, JhiTrackerService, WEBSOCKET_ACTIVATED) {
         // This controller uses a Websocket connection to receive user activities in real-time.
         var vm = this;
 
         vm.activities = [];
 
-        JhiTrackerService.receive().then(null, null, function(activity) {
-            showActivity(activity);
-        });
+        // XXAP websocket
+        if (WEBSOCKET_ACTIVATED) {
+            JhiTrackerService.receive().then(null, null, function (activity) {
+                showActivity(activity);
+            });
+        }
 
         function showActivity(activity) {
             var existingActivity = false;

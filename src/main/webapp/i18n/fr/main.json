@@ -70,7 +70,8 @@
             },
             "copyClipboard" : {
                 "tooltip": "Copier l'adresse",
-                "done" : "Url copié"
+                "done" : "Url copié",
+                "error" : "Erreur lors de la copie"
             },
             "markAsUnread": {
                 "tooltip": "Marquer comme non lu"

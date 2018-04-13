@@ -5,9 +5,9 @@
         .module('linkguardianApp')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+    stateConfig.$inject = ['$stateProvider', 'WEBSOCKET_ACTIVATED'];
 
-    function stateConfig($stateProvider) {
+    function stateConfig($stateProvider, WEBSOCKET_ACTIVATED) {
         $stateProvider.state('jhi-tracker', {
             parent: 'admin',
             url: '/tracker',
@@ -29,10 +29,16 @@
                 }]
             },
             onEnter: ['JhiTrackerService', function(JhiTrackerService) {
-                JhiTrackerService.subscribe();
+                // XXAP websocket
+                if (WEBSOCKET_ACTIVATED) {
+                    JhiTrackerService.subscribe();
+                }
             }],
             onExit: ['JhiTrackerService', function(JhiTrackerService) {
-                JhiTrackerService.unsubscribe();
+                // XXAP websocket
+                if (WEBSOCKET_ACTIVATED) {
+                    JhiTrackerService.unsubscribe();
+                }
             }]
         });
     }

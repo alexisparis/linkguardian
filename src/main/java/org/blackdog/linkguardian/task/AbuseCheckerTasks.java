@@ -60,11 +60,11 @@ public class AbuseCheckerTasks {
         TemporalAmount duration = null;
         List<CountPerUser> countPerUsers = null;
 
-        // no more than 20 toxic links created over the last minute
+        // no more than 30 toxic links created over the last minute
         duration = Duration.ofSeconds(30);
         countPerUsers = toxicLinkRepository.countByEmailCreationDateIsAfterHavingCount(
             now.minus(duration),
-            20L);
+            30L);
         feedReport(report, countPerUsers, ActivityType.TOXIC_LINK_CREATION, duration);
 
         // no more than 30 links created over the last minute

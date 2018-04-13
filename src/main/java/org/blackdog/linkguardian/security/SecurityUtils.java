@@ -1,5 +1,6 @@
 package org.blackdog.linkguardian.security;
 
+import org.blackdog.linkguardian.config.Constants;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,9 @@ public final class SecurityUtils {
                     UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
                     return springSecurityUser.getUsername();
                 } else if (authentication.getPrincipal() instanceof String) {
+                    if (Constants.ANONYMOUS_USER.equals(authentication.getPrincipal())) {
+                        return null;
+                    }
                     return (String) authentication.getPrincipal();
                 }
                 return null;
@@ -52,10 +56,12 @@ public final class SecurityUtils {
      */
     public static boolean isAuthenticated() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        return Optional.ofNullable(securityContext.getAuthentication())
+        boolean result = Optional.ofNullable(securityContext.getAuthentication())
             .map(authentication -> authentication.getAuthorities().stream()
                 .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)))
             .orElse(false);
+
+        return result;
     }
 
     /**

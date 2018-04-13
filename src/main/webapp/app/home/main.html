@@ -216,12 +216,9 @@
                     md-on-remove="removeTag(card.id, $chip)">
                 </md-chips>
                 <md-fab-speed-dial md-open="card.isOpen" md-direction="up"
-                                   ng-cloaks
                                    md-scale
                                    layout-align="end end"
-                                   class="md-scale md-fab-bottom-right"
-                                   ng-classa="{ 'md-hover-full': card.hover }"
-                                   ng-mouseentera="card.isOpen=true" ng-mouseleavea="card.isOpen=false">
+                                   class="md-scale md-fab-bottom-right">
                     <md-fab-trigger>
                         <md-button aria-label="menu" class="md-fab md-link-action md-mini">
                             <span class="ion-navicon-round" data-pack="default" data-tags="sort"></span>
@@ -246,8 +243,11 @@
                                    title="{{'link.actions.markAsUnread.tooltip' | translate}}">
                             <span class="ion-eye-disabled" data-pack="default" data-tags="sort"></span>
                         </md-button>
-                        <md-button class="md-fab md-raised md-mini" aria-label="Copy to clipboard" ngclipboard data-clipboard-text="{{card.original_url}}"
+                        <md-button class="md-fab md-raised md-mini copy-to-clipboard-button" aria-label="Copy to clipboard"
+                                   ngclipboard
+                                   data-clipboard-text="{{card.original_url}}"
                                    ngclipboard-success="urlCopiedToClipboard(card)"
+                                   ngclipboard-error="copyTocClipboardOnError(e)"
                                    title="{{'link.actions.copyClipboard.tooltip' | translate}}">
                             <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
                         </md-button>

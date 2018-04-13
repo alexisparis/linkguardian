@@ -70,7 +70,8 @@
             },
             "copyClipboard" : {
                 "tooltip": "Copy to clipboard",
-                "done" : "Url copied to clipboard"
+                "done" : "Url copied to clipboard",
+                "error" : "Cannot copy to clipboard"
             },
             "markAsUnread": {
                 "tooltip": "Mark as unread"

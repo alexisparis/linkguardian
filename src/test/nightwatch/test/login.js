@@ -153,13 +153,8 @@ module.exports = {
             document.querySelector('#register-user-button').click()
         });
 
-
-        browser.saveScreenshot("test.png");
-
         // success
         browser.waitForElementVisible('div[translate=\"register.messages.success\"]', 10000);
-
-        var activation_key = "61102073510127508723";
 
         // ok, now the new user is registered, normally, user must wait for the email to get the activation link
         // access the database and get the activation key
@@ -187,42 +182,18 @@ module.exports = {
                     console.log("before pause 2");
                     // browser.pause( 1000 );
                     console.log("after pause 2");
-                    // browser.saveScreenshot("test.png");
 
                     // browser.waitForElementPresent('[translate=\"activate.messages.error\"]', 10000);
                     browser.waitForElementPresent('[data-translate=\"activate.messages.error\"]', 5000);
 
-                    browser.saveScreenshot("test.png");
                     browser.pause( 1000 );
                     // activate user
                     browser.url(browser.launchUrl + '/#/activate?key=' + activation_key);
-                    // browser.saveScreenshot("test.png");
-                    // browser.pause( 1000 );
 
                     done();
                 }
             );
         });
-
-        // XXAP
-
-        //browser.url(browser.launchUrl + '/#/activate?key=' + activation_key + '_bad');
-        // browser.pause( 1000 );
-        // browser.waitForElementPresent('h1[translate=\"activate.title\"]', 10000);
-
-        //console.log("before pause 2");
-        // browser.pause( 1000 );
-        //console.log("after pause 2");
-        // browser.saveScreenshot("test.png");
-
-        //browser.waitForElementPresent('div[data-translate=\"activate.messages.error\"]', 10000);
-        // browser.waitForElementPresent('#activate-message-error', 5000);
-
-        //browser.saveScreenshot("test.png");
-        //browser.pause( 1000 );
-        // activate user
-        //browser.url(browser.launchUrl + '/#/activate?key=' + activation_key);
-        // XXAP
 
         browser.waitForElementPresent('[data-translate=\"activate.messages.success\"]', 5000);
         browser.waitForElementPresent('a[href="#/login"]', 5000);
@@ -461,7 +432,7 @@ module.exports = {
             document.querySelector('#submitUrlButton').click()
         });
 
-        browser.waitForElementVisible('md-card.link', 4000);
+        browser.waitForElementVisible('md-card.link', 10000);
 
         // logout
         browser.execute(function () {
@@ -472,5 +443,261 @@ module.exports = {
         });
 
         browser.end();
+    },
+
+    '6 read link': function (browser) {
+        browser
+            .url(browser.launchUrl);
+
+        browser.waitForElementVisible('#explanation', 4000);
+
+        browser.setValue('#username', browser.globals.mail);
+        browser.setValue('#password', browser.globals.password);
+
+        browser.execute(function () {
+            document.querySelector('button[type="submit"]').click()
+        });
+
+        browser.waitForElementPresent('.panel-add', 5000);
+
+        browser.waitForElementPresent('md-card.link', 8000);
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial md-fab-trigger').click();
+        });
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial button[ng-click=\"markAsRead(card.id)\"]').click();
+        });
+
+        browser.waitForElementNotPresent('md-card.link', 15000);
+        browser.waitForElementPresent('#type', 15000);
+        browser.execute(function () {
+            document.querySelector('#type').click();
+        });
+        browser.waitForElementPresent('md-select-menu md-option[value=\"ALL\"]', 15000);
+        browser.execute(function () {
+            document.querySelector('md-select-menu md-option[value=\"ALL\"]').click();
+        });
+        browser.execute(function () {
+            document.querySelector('#urlInput').click();
+        });
+
+        browser.waitForElementPresent('md-card.link', 15000);
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial md-fab-trigger').click();
+        });
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial button[ng-click=\"markAsUnread(card.id)\"]').click();
+        });
+
+        browser.waitForElementPresent('#type', 15000);
+        browser.execute(function () {
+            document.querySelector('#type').click();
+        });
+        browser.waitForElementPresent('md-select-menu md-option[value=\"READ\"]', 15000);
+        browser.execute(function () {
+            document.querySelector('md-select-menu md-option[value=\"READ\"]').click();
+        });
+        browser.execute(function () {
+            document.querySelector('#urlInput').click();
+        });
+
+        browser.waitForElementNotPresent('md-card.link', 8000);
+
+        browser.waitForElementPresent('#type', 15000);
+        browser.execute(function () {
+            document.querySelector('#type').click();
+        });
+        browser.waitForElementPresent('md-select-menu md-option[value=\"UNREAD\"]', 15000);
+        browser.execute(function () {
+            document.querySelector('md-select-menu md-option[value=\"UNREAD\"]').click();
+        });
+        browser.execute(function () {
+            document.querySelector('#urlInput').click();
+        });
+
+        browser.waitForElementPresent('md-card.link', 8000);
+
+        browser.end();
+    },
+
+    '7 note link': function (browser) {
+        browser
+            .url(browser.launchUrl);
+
+        browser.waitForElementVisible('#explanation', 4000);
+
+        browser.setValue('#username', browser.globals.mail);
+        browser.setValue('#password', browser.globals.password);
+
+        browser.execute(function () {
+            document.querySelector('button[type="submit"]').click()
+        });
+
+        browser.waitForElementPresent('.panel-add', 5000);
+        browser.waitForElementPresent('md-card.link button.note.note-', 8000);
+
+        // set note to 3
+        browser.execute(function () {
+            document.querySelector('md-card.link button[ng-click=\"showStarDialog(card);$event.stopPropagation();\"]').click();
+        });
+        browser.waitForElementVisible('.md-dialog-container', 15000);
+        browser.waitForElementVisible('ul.rating li[ng-class=\"star\"]:nth-child(3)', 15000);
+        browser.execute(function () {
+            document.querySelector('ul.rating li[ng-class=\"star\"]:nth-child(3)').click();
+        });
+        browser.execute(function () {
+            document.querySelector('button[ng-click=\"ok()\"]').click();
+        });
+        browser.waitForElementNotPresent('.md-dialog-container', 15000);
+        browser.waitForElementPresent('md-card.link button.note.note-3', 8000);
+
+        // set note to 5
+        browser.execute(function () {
+            document.querySelector('md-card.link button[ng-click=\"showStarDialog(card);$event.stopPropagation();\"]').click();
+        });
+        browser.waitForElementVisible('.md-dialog-container', 15000);
+        browser.waitForElementVisible('ul.rating li[ng-class=\"star\"]:nth-child(5)', 15000);
+        browser.execute(function () {
+            document.querySelector('ul.rating li[ng-class=\"star\"]:nth-child(5)').click();
+        });
+        browser.execute(function () {
+            document.querySelector('button[ng-click=\"ok()\"]').click();
+        });
+        browser.waitForElementNotPresent('.md-dialog-container', 15000);
+        browser.waitForElementPresent('md-card.link button.note.note-5', 15000);
+
+        // set note to none
+        browser.execute(function () {
+            document.querySelector('md-card.link button[ng-click=\"showStarDialog(card);$event.stopPropagation();\"]').click();
+        });
+        browser.waitForElementVisible('.md-dialog-container', 15000);
+        browser.waitForElementVisible('ul.rating li[ng-class=\"star\"]:nth-child(5)', 15000);
+        browser.execute(function () {
+            document.querySelector('button[ng-click=\"unset()\"]').click();
+        });
+        browser.execute(function () {
+            document.querySelector('button[ng-click=\"ok()\"]').click();
+        });
+        browser.waitForElementNotPresent('.md-dialog-container', 15000);
+        browser.waitForElementPresent('md-card.link button.note.note-0', 8000);
+
+        browser.end();
+    },
+
+    '8 go to': function (browser) {
+        browser
+            .url(browser.launchUrl);
+
+        browser.waitForElementVisible('#explanation', 4000);
+
+        browser.setValue('#username', browser.globals.mail);
+        browser.setValue('#password', browser.globals.password);
+
+        browser.execute(function () {
+            document.querySelector('button[type="submit"]').click()
+        });
+
+        browser.waitForElementPresent('.panel-add', 5000);
+        browser.waitForElementPresent('md-card.link md-fab-speed-dial md-fab-trigger', 8000);
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial md-fab-trigger').click();
+        });
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial button[ng-click=\"redirectToLink(card)\"]').click();
+        });
+
+        browser.windowHandles(function(result) {
+            var firstHandle = result.value[0];
+            var secondHandle = result.value[1];
+            browser.switchWindow(secondHandle);
+            browser.assert.urlEquals("https://www.lequipe.fr/");
+            browser.switchWindow(firstHandle);
+        });
+
+        browser.end();
+    },
+
+    '9 tweet it': function (browser) {
+        browser
+            .url(browser.launchUrl);
+
+        browser.waitForElementVisible('#explanation', 4000);
+
+        browser.setValue('#username', browser.globals.mail);
+        browser.setValue('#password', browser.globals.password);
+
+        browser.execute(function () {
+            document.querySelector('button[type="submit"]').click()
+        });
+
+        browser.waitForElementPresent('.panel-add', 5000);
+        browser.waitForElementPresent('md-card.link md-fab-speed-dial md-fab-trigger', 8000);
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial md-fab-trigger').click();
+        });
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial [ng-click=\"tweet(card.id)\"]').click();
+        });
+
+        browser.windowHandles(function(result) {
+            var firstHandle = result.value[0];
+            var secondHandle = result.value[1];
+            browser.switchWindow(secondHandle);
+            browser.assert.urlEquals("https://twitter.com/intent/tweet?text=L%27%C3%89QUIPE%20-%20L%27actualit%C3%A9%20du%20sport%20en%20continu.%20https%3A%2F%2Fwww.lequipe.fr%2F%20%23sport%20%23live");
+            browser.switchWindow(firstHandle);
+        });
+
+        browser.end();
+    },
+
+    '10 copy to clipboard': function (browser) {
+        browser
+            .url(browser.launchUrl);
+
+        browser.waitForElementVisible('#explanation', 4000);
+
+        browser.setValue('#username', browser.globals.mail);
+        browser.setValue('#password', browser.globals.password);
+
+        browser.execute(function () {
+            document.querySelector('button[type="submit"]').click()
+        });
+
+        browser.waitForElementPresent('.panel-add', 5000);
+        browser.waitForElementPresent('md-card.link md-fab-speed-dial md-fab-trigger', 8000);
+
+        browser.execute(function () {
+            document.querySelector('md-card.link md-fab-speed-dial md-fab-trigger').click();
+        });
+
+        browser.waitForElementVisible('md-card.link .copy-to-clipboard-button', 5000);
+        // browser.pause(2000);
+
+        browser.execute(function () {
+            document.querySelector('md-card.link .copy-to-clipboard-button').click();
+        });
+
+        // does not work with driver => xopy not allowed
+        browser.waitForElementVisible('.md-toast-content', 80000);
+        //browser.waitForElementNotVisible('.md-toast-content', 8000);
+
+        // browser.window.clipboardData.getData('Text');
+        // browser.url(clipboardy.readSync());
+        // browser.keys([browser.Keys.CONTROL, "v"]);
+        //
+        // browser.assert.urlEquals(clipboardy.readSync());
+        // browser.assert.urlEquals("https://www.lequipe.fr/");
+        //
+        // browser.back();
+        //
+        // browser.assert.urlEquals(browser.launchUrl);
+        //
+        // browser.end();
     }
 };

@@ -126,7 +126,8 @@ gulp.task('ngconstant:dev', function () {
             VERSION: util.parseVersion(),
             DEBUG_INFO_ENABLED: true,
             BUILD_TIMESTAMP: '',
-            TEMPLATES_PATH : 'app/parts/'
+            TEMPLATES_PATH : 'app/parts/',
+            WEBSOCKET_ACTIVATED: true,
         },
         template: config.constantTemplate,
         stream: true
@@ -142,7 +143,8 @@ gulp.task('ngconstant:prod', function () {
             VERSION: util.parseVersion(),
             DEBUG_INFO_ENABLED: false,
             BUILD_TIMESTAMP: new Date().getTime(),
-            TEMPLATES_PATH : 'app/parts/'
+            TEMPLATES_PATH : 'app/parts/',
+            WEBSOCKET_ACTIVATED: true,
         },
         template: config.constantTemplate,
         stream: true

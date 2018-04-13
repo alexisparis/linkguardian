@@ -5,9 +5,9 @@
         .module('linkguardianApp')
         .factory('Principal', Principal);
 
-    Principal.$inject = ['$q', 'Account', 'JhiTrackerService'];
+    Principal.$inject = ['$q', 'Account', 'JhiTrackerService', 'WEBSOCKET_ACTIVATED'];
 
-    function Principal ($q, Account, JhiTrackerService) {
+    function Principal ($q, Account, JhiTrackerService, WEBSOCKET_ACTIVATED) {
         var _identity,
             _authenticated = false;
 
@@ -79,7 +79,10 @@
                 _identity = account.data;
                 _authenticated = true;
                 deferred.resolve(_identity);
-                JhiTrackerService.connect();
+                // XXAP websocket
+                if (WEBSOCKET_ACTIVATED) {
+                    JhiTrackerService.connect();
+                }
             }
 
             function getAccountCatch () {

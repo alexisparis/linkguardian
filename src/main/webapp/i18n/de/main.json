@@ -70,7 +70,8 @@
             },
             "copyClipboard" : {
                 "tooltip": "In die Zwischenablage kopieren",
-                "done" : "Url in Zwischenablage kopiert"
+                "done" : "Url in Zwischenablage kopiert",
+                "error" : "Fehler"
             },
             "markAsUnread": {
                 "tooltip": "Als ungelesen markieren"
