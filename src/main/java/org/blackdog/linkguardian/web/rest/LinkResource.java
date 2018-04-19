@@ -262,6 +262,10 @@ public class LinkResource {
         log.info("calling addUrl with url : " + newurl + " tags : " + tag);
         User user = springSecurityUtils.getUser();
 
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         // refuse to process request if too many toxic link submitted
         if (this.userService.isLockedTemporary(user)) {
             return RestUtils.standardTemporaryBlockedResponse();

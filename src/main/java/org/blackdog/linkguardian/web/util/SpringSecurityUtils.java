@@ -24,7 +24,7 @@ public class SpringSecurityUtils {
             String name = auth.getName(); //get logged in username
 
             if (name != null) {
-                user = this.userRepository.findOneByLogin(name).get();
+                user = this.userRepository.findOneByLogin(name).orElse(null);
             }
         }
 
