@@ -135,7 +135,8 @@
                 "tooMuchRedirections": "Zu viele Weiterleitungen",
                 "unknownHost": "Unbekannter Host",
                 "invalidUrlWithCause": "Ungültig url",
-                "temporaryBlockedCozTooManyToxicLinks": "Vorübergehend gesperrt"
+                "temporaryBlockedCozTooManyToxicLinks": "Vorübergehend gesperrt",
+                "sslHandshakeError": "HTTPS Fehler"
             },
             "addTag": {
                 "inProgress": "Etikett hinzufügen...",

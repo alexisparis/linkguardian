@@ -135,7 +135,8 @@
                 "tooMuchRedirections": "Trop de redirections",
                 "unknownHost": "Serveur inconnu",
                 "invalidUrlWithCause": "Url invalide",
-                "temporaryBlockedCozTooManyToxicLinks": "Bloqué temporairement"
+                "temporaryBlockedCozTooManyToxicLinks": "Bloqué temporairement",
+                "sslHandshakeError": "Erreur HTTPS"
             },
             "addTag": {
                 "inProgress": "ajout catégorie...",
