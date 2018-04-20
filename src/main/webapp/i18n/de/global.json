@@ -46,7 +46,8 @@
             "language": "Sprache",
             "tools" : {
                 "main" : "Werkzeuge",
-                "import" : "Lesezeichen importieren"
+                "import" : "Lesezeichen importieren",
+                "demo" : "Demonstration"
             }
         },
         "close": {

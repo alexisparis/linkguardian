@@ -46,7 +46,8 @@
             "language": "Langue",
             "tools" : {
                 "main" : "Outils",
-                "import" : "Importer des favoris"
+                "import" : "Importer des favoris",
+                "demo" : "Démonstration"
             }
         },
         "form": {
