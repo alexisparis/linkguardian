@@ -689,6 +689,13 @@ md-toast.md-error-theme div.md-toast-content{
     background-color: red !important;
 }
 
+.manual-add-url-dialog {
+    label.control-label {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}
+
 md-toast.md-success-theme div.md-toast-content{
     color: white !important;
     background-color: green !important;

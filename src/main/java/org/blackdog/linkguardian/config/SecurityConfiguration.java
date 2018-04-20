@@ -115,6 +115,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             .antMatchers(HttpMethod.GET, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers(HttpMethod.POST, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.POST, "/api/my_links/manual").hasAuthority(AuthoritiesConstants.USER)
+
             .antMatchers(HttpMethod.DELETE, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
 
             .antMatchers(HttpMethod.PUT, "/api/my_links/tag").hasAuthority(AuthoritiesConstants.USER)

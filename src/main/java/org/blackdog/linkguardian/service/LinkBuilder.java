@@ -102,9 +102,9 @@ public class LinkBuilder {
             this.completeDefault(link, target);
         }
 
-        if ( link.getTitle() == null )
+        if ( link.getTitle() == null || link.getTitle().isEmpty() )
         {
-            link.setTitle("");
+            link.setTitle(target.getStringUrl());
         }
         if ( link.getDescription() == null )
         {
@@ -122,7 +122,12 @@ public class LinkBuilder {
         LOGGER.info("target string url : " + target.getStringUrl());
         LOGGER.info("target url : " + target.getUrl());
 
-        link.setDomain(target.getUrl().getHost());
+        if (target.getUrl() != null) {
+            link.setDomain(target.getUrl().getHost());
+        }
+        if (link.getDomain() == null) {
+            link.setDomain("invalid");
+        }
         link.setOriginalUrl(target.getStringUrl());
         LOGGER.info("setting domain to " + link.getDomain());
 

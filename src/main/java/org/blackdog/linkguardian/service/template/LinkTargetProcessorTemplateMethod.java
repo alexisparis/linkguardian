@@ -47,6 +47,11 @@ public class LinkTargetProcessorTemplateMethod<R> {
 
                         Link newLink = this.linkService.createLink(context.getUser(), context.getTarget(), context.getTags());
 
+                        // use alternative description if needed
+                        if (newLink.getDescription() == null || newLink.getDescription().isEmpty()) {
+                            newLink.setDescription(context.getAlternativeDescription());
+                        }
+
                         context.setCreatedLink(newLink);
 
                         return onLinkCreated(context, newLink);
@@ -106,19 +111,26 @@ public class LinkTargetProcessorTemplateMethod<R> {
 
         private String url;
 
+        private String alternativeDescription;
+
         private Iterable<String> tags;
 
         private Link createdLink;
 
         public static CallContext newInstance(LinkTarget target, User user, String url, Iterable<String> tags) {
-            return new CallContext(target, user, url, tags);
+            return newInstance(target, user, url, null, tags);
         }
 
-        private CallContext(LinkTarget target, User user, String url, Iterable<String> tags) {
+        public static CallContext newInstance(LinkTarget target, User user, String url, String alternativeDescription, Iterable<String> tags) {
+            return new CallContext(target, user, url, alternativeDescription, tags);
+        }
+
+        private CallContext(LinkTarget target, User user, String url, String alternativeDescription, Iterable<String> tags) {
             this.target = target;
             this.user = user;
             this.url = url;
             this.tags = tags;
+            this.alternativeDescription = alternativeDescription;
         }
 
         public Link getCreatedLink() {
@@ -143,6 +155,10 @@ public class LinkTargetProcessorTemplateMethod<R> {
 
         public Iterable<String> getTags() {
             return tags;
+        }
+
+        public String getAlternativeDescription() {
+            return alternativeDescription;
         }
     }
 }

@@ -1,5 +1,7 @@
 {
     "global": {
+        "yes": "Oui",
+        "no" : "Non",
         "title" : "Linkguardian",
         "title_main": "Linkguardian | Gestionnaire de favoris",
         "description_long" : "Linkguardian est un outil permettant de sauvegarder et d'organiser ses favoris.",

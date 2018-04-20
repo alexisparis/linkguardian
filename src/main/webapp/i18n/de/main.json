@@ -5,7 +5,11 @@
             "tooltip": "Fügen Sie einen Link hinzu",
             "title": "Fügen Sie einen Link hinzu",
             "url": {
+                "label" : "Url",
                 "placeholder": "url : http://..."
+            },
+            "description" : {
+                "label" : "Beschreibung"
             },
             "tags": {
                 "placeholder": "(wahlweise) nachrichten wirtschaftlichkeit...",
@@ -136,7 +140,17 @@
                 "unknownHost": "Unbekannter Host",
                 "invalidUrlWithCause": "Ungültig url",
                 "temporaryBlockedCozTooManyToxicLinks": "Vorübergehend gesperrt",
-                "sslHandshakeError": "HTTPS Fehler"
+                "sslHandshakeError": "HTTPS Fehler",
+                "add_manually" : {
+                    "confirmation_dialog" : {
+                        "title" : "Fügen Sie den Link manuell hinzu?",
+                        "explanation" : "Bei der Analyse Ihres Links ist ein Fehler aufgetreten.",
+                        "question" : "Möchten Sie es manuell hinzufügen?"
+                    },
+                    "dialog" : {
+                        "title" : "Fügen Sie den Link manuell hinzu"
+                    }
+                }
             },
             "addTag": {
                 "inProgress": "Etikett hinzufügen...",

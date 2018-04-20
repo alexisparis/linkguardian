@@ -32,6 +32,7 @@ import org.blackdog.linkguardian.service.dto.LinkCriteria;
 import org.blackdog.linkguardian.service.exception.TagTooLongException;
 import org.blackdog.linkguardian.service.template.LinkTargetProcessorTemplateMethod;
 import org.blackdog.linkguardian.service.template.impl.HttpLinkTargetProcessorTemplateMethod;
+import org.blackdog.linkguardian.service.template.impl.ManualLinkProcessorTemplateMethod;
 import org.blackdog.linkguardian.service.util.TagsNormalizer;
 import org.blackdog.linkguardian.web.rest.errors.BadRequestAlertException;
 import org.blackdog.linkguardian.web.rest.util.HeaderUtil;
@@ -283,6 +284,45 @@ public class LinkResource {
             return new HttpLinkTargetProcessorTemplateMethod(this.linkService).
                 process(
                     LinkTargetProcessorTemplateMethod.CallContext.newInstance(target, user, newurl, tags));
+        }
+    }
+
+    /**
+     * add a new link manually
+     * @return
+     */
+    @RequestMapping(value = "/my_links/manual",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<LinkResponse> manuallyAddUrl(String newurl, String description, String tag)
+    {
+        log.info("calling manuallyAddUrl with url : " + newurl + " tags : " + tag + " description : " + description);
+        User user = springSecurityUtils.getUser();
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // refuse to process request if too many toxic link submitted
+        if (this.userService.isLockedTemporary(user)) {
+            return RestUtils.standardTemporaryBlockedResponse();
+        }
+
+        if ( newurl == null || newurl.trim().length() == 0 )
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        else
+        {
+            LinkTarget target = new LinkTarget();
+            target.setStringUrl(newurl);
+            target.setResponseCode(200);
+
+            Set<String> tags = this.tagsNormalizer.split(tag, " ", true);
+            return new ManualLinkProcessorTemplateMethod(this.linkService).
+                process(
+                    LinkTargetProcessorTemplateMethod.CallContext.newInstance(target, user, newurl, description, tags));
         }
     }
 

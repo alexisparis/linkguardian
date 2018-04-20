@@ -5,7 +5,11 @@
             "tooltip": "Add a link",
             "title": "Add a link",
             "url": {
+                "label" : "Url",
                 "placeholder": "url : http://..."
+            },
+            "description" : {
+                "label" : "Description"
             },
             "tags": {
                 "placeholder": "(optional) news economy...",
@@ -136,7 +140,17 @@
                 "unknownHost": "Unknown host",
                 "invalidUrlWithCause": "Invalid url",
                 "temporaryBlockedCozTooManyToxicLinks": "Temporary blocked",
-                "sslHandshakeError": "HTTPS error"
+                "sslHandshakeError": "HTTPS error",
+                "add_manually" : {
+                    "confirmation_dialog" : {
+                        "title" : "Add link manually?",
+                        "explanation" : "An error occured while analyzing your link.",
+                        "question" : "Do you want to add it manually?"
+                    },
+                    "dialog" : {
+                        "title" : "Add link manually"
+                    }
+                }
             },
             "addTag": {
                 "inProgress": "adding tag...",

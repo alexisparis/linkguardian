@@ -1,0 +1,38 @@
+<md-dialog aria-label="Manually add link" class="manual-add-url-dialog" ng-cloak style="min-width: 400px;">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'link.messages.add.add_manually.dialog.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="column" layout-aligns="space-between start" layout-margin flexs>
+            <form class="form-horizontal">
+                <div class="control-group form-inlines">
+                    <label class="control-label" for="inputUrl">{{'main.addLink.url.label' | translate}}</label>
+                    <div class="controls">
+                        <input style="width: 100%;" maxlength="255" type="text" id="inputUrl" data-ng-model="url">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputDescription">{{'main.addLink.description.label' | translate}}</label>
+                    <div class="controls">
+                        <textarea ng-focus="" class="form-control" maxlength="255" rows="3" id="inputDescription" data-ng-model="description"/>
+                    </div>
+                </div>
+            </form>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="cancel()">
+                {{'entity.action.cancel' | translate}}
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="save()">
+                {{'entity.action.save' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

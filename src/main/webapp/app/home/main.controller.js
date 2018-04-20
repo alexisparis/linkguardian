@@ -42,6 +42,7 @@ angular.module('linkguardianApp')
             $scope.onboardingIndex = 0;
             $scope.onboardingSteps = [{}];
 
+            $log.log("user authenticated ? " + $scope.isAuthenticated());
             if ($scope.isAuthenticated() === false) {
                 $state.go("login");
             } else {
@@ -208,14 +209,8 @@ angular.module('linkguardianApp')
 
                 $scope.addUrlInProgress = false;
 
-                $scope.addLink = function () {
-                    var toast = ToasterService.displaySpinner(translateFilter('link.messages.add.inProgress'));
-                    $scope.addUrlInProgress = true;
-                    $log.log("adding new link : " + JSON.stringify($scope.newLink));
-                    MyLinks.addLink({
-                        newurl: $scope.newLink.newurl,
-                        tag: $scope.newLink.tag
-                    }).$promise.then(function (link) {
+                var addLinkSuccessCallbackFactory = function(toast) {
+                    return function (link) {
                         if (link && link.status === 208) {
                             ToasterService.displayError(translateFilter('main.addLink.messages.linkExists'));
                             $scope.addUrlInProgress = false;
@@ -226,12 +221,12 @@ angular.module('linkguardianApp')
                                 ToasterService.displaySuccess(translateFilter('link.messages.add.success'));
                                 $scope.addUrlInProgress = false;
 
-                                $log.log("type == ALL or UNREAD ? " + ($scope.search.type === 'ALL' || $scope.search.type === 'UNREAD' ));
+                                $log.log("type == ALL or UNREAD ? " + ($scope.search.type === 'ALL' || $scope.search.type === 'UNREAD'));
                                 $log.log("sort == " + $scope.search.sort);
                                 $log.log("sort direction == " + $scope.search.sort_direction);
                                 $log.log("tag empty ? " + (!$scope.search.tag || $scope.search.tag === ''));
                                 if (link && link.link &&
-                                    ($scope.search.type === 'ALL' || $scope.search.type === 'UNREAD' ) &&
+                                    ($scope.search.type === 'ALL' || $scope.search.type === 'UNREAD') &&
                                     $scope.search.sort === 'CREATION_DATE' &&
                                     $scope.search.sort_direction === 'DESC' &&
                                     (!$scope.search.tag || $scope.search.tag === '')) {
@@ -248,18 +243,37 @@ angular.module('linkguardianApp')
                                 }
                             });
                         }
-                    }, function (error) {
+                    };
+                };
+
+                var addLinkErrorCallbackFactory = function(toast, proposeManualAdd) {
+                    return function (error) {
                         console.log("error : ", error);
                         ToasterService.hide(toast).then(function () {
                             $log.log("error while adding link " + JSON.stringify($scope.newLink) + " : " + error);
-                            if(error && error.status == 423) {
+                            if (error && error.status == 423) {
                                 ToasterService.displayError(translateFilter('error.423'));
                             } else {
                                 ToasterService.displayI18nError('add', error);
+
+                                if (proposeManualAdd) {
+                                    // ask user if he wants to add it manually
+                                    $scope.askAddUrlManuallyQuestion(error.data.link);
+                                }
                             }
                             $scope.addUrlInProgress = false;
                         });
-                    });
+                    };
+                };
+
+                $scope.addLink = function () {
+                    var toast = ToasterService.displaySpinner(translateFilter('link.messages.add.inProgress'));
+                    $scope.addUrlInProgress = true;
+                    $log.log("adding new link : " + JSON.stringify($scope.newLink));
+                    MyLinks.addLink({
+                        newurl: $scope.newLink.newurl,
+                        tag: $scope.newLink.tag
+                    }).$promise.then(addLinkSuccessCallbackFactory(toast), addLinkErrorCallbackFactory(toast, true));
                 };
 
                 // ####################
@@ -561,6 +575,82 @@ angular.module('linkguardianApp')
                             replaceLinkInList(data.link);
                         }
                     );
+                };
+
+                // ask to add manually
+                $scope.askAddUrlManuallyQuestion = function (link) {
+                    $mdDialog.show({
+                        controller: AddUrlManuallyQuestionDialogController,
+                        templateUrl: TEMPLATES_PATH + 'addUrlManuallyQuestion.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            link: link
+                        }
+                    })
+                        .then(function () {
+                            $log.log("opening manually adding link dialog for " + link.original_url + " ...");
+                            $scope.showAddUrlManuallyDialog(link);
+                        }, function () {
+                            $log.log("manually adding link " + link.original_url + " canceled");
+                        });
+                };
+
+                function AddUrlManuallyQuestionDialogController($scope, $mdDialog, link) {
+                    $scope.hide = function () {
+                        $mdDialog.hide();
+                    };
+                    $scope.cancel = function () {
+                        $mdDialog.cancel();
+                    };
+                    $scope.ok = function () {
+                        $mdDialog.hide();
+                    };
+                };
+
+                // add manually
+                $scope.showAddUrlManuallyDialog = function (link) {
+                    $mdDialog.show({
+                        controller: AddUrlManuallyDialogController,
+                        templateUrl: TEMPLATES_PATH + 'addUrlManuallyDialog.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            link: link
+                        }
+                    })
+                        .then(function (link) {
+
+
+
+                        }, function () {
+                        });
+                };
+
+                function AddUrlManuallyDialogController($scope, $mdDialog, link) {
+
+                    $scope.url = link.original_url;
+                    $scope.description = '';
+
+                    $scope.hide = function () {
+                        $mdDialog.hide();
+                    };
+                    $scope.cancel = function () {
+                        $mdDialog.cancel();
+                    };
+                    $scope.save = function () {
+
+                        $mdDialog.hide(link);
+
+                        var toast = ToasterService.displaySpinner(translateFilter('link.messages.add.inProgress'));
+                        $scope.addUrlInProgress = true;
+                        $log.log("adding new link : " + JSON.stringify($scope.newLink));
+                        MyLinks.addLinkManually({
+                            newurl: $scope.url,
+                            tag: '',
+                            description: $scope.description
+                        }).$promise.then(addLinkSuccessCallbackFactory(toast), addLinkErrorCallbackFactory(toast, false));
+                    };
                 };
 
                 // change the note

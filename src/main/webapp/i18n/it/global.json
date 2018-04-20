@@ -1,5 +1,7 @@
 {
     "global": {
+        "yes": "Sí",
+        "no" : "No",
         "title": "Linkguardian",
         "browsehappy": "Stai utilizzando un browser <strong> non aggiornato </ strong> <a href=\"http://browsehappy.com/?locale=it\"> Aggiorna il tuo browser per </a> migliorare la tua esperienza.",
         "menu": {

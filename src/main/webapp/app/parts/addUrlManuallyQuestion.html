@@ -1,0 +1,30 @@
+<md-dialog aria-label="Manually add link" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'link.messages.add.add_manually.confirmation_dialog.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="column" layout-align="center start" layout-margin flex>
+            <strong layout="row" class="text-error">
+                {{'link.messages.add.add_manually.confirmation_dialog.explanation' | translate}}
+            </strong>
+            <strong layout="row">
+                {{'link.messages.add.add_manually.confirmation_dialog.question' | translate}}
+            </strong>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="cancel()">
+                {{'global.no' | translate}}
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="ok()">
+                {{'global.yes' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

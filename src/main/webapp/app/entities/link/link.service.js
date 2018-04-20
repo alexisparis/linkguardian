@@ -23,6 +23,23 @@
                     interceptor: {
                         response: function(response) {
                             var result = response.resource;
+                            console.log("result ", result);
+                            result.status = response.status;
+                            return result;
+                        }
+                    }
+                },
+                'addLinkManually' : {
+                    method : 'POST',
+                    url: 'api/my_links/manual',
+                    params:{
+                        newurl: '@newurl',
+                        tag: '@tag',
+                        description: '@description'
+                    },
+                    interceptor: {
+                        response: function(response) {
+                            var result = response.resource;
                             result.status = response.status;
                             return result;
                         }

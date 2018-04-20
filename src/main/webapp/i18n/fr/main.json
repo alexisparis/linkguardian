@@ -5,7 +5,11 @@
             "tooltip": "Ajouter un lien",
             "title": "Ajouter un lien",
             "url": {
+                "label" : "Url",
                 "placeholder": "url : http://..."
+            },
+            "description" : {
+                "label" : "Description"
             },
             "tags": {
                 "placeholder": "(facultatif) actualité, économie...",
@@ -136,7 +140,17 @@
                 "unknownHost": "Serveur inconnu",
                 "invalidUrlWithCause": "Url invalide",
                 "temporaryBlockedCozTooManyToxicLinks": "Bloqué temporairement",
-                "sslHandshakeError": "Erreur HTTPS"
+                "sslHandshakeError": "Erreur HTTPS",
+                "add_manually" : {
+                    "confirmation_dialog" : {
+                        "title" : "Ajouter manuellement?",
+                        "explanation" : "Une erreur est survenue lors de l'analyse du lien.",
+                        "question" : "Voulez-vous l'ajouter manuellement?"
+                    },
+                    "dialog" : {
+                        "title" : "Ajouter manuellement"
+                    }
+                }
             },
             "addTag": {
                 "inProgress": "ajout catégorie...",

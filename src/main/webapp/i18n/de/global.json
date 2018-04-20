@@ -1,5 +1,7 @@
 {
     "global": {
+        "yes": "Ja",
+        "no" : "Nein",
         "description_long" : "Linkguardian ist ein kostenloses Tool, mit dem Sie Ihre Lesezeichen organisieren und speichern können.",
         "contact_us" : "Bei Problemen, Verbesserungen oder Support wenden Sie sich bitte an uns :",
         "title": "Linkguardian",

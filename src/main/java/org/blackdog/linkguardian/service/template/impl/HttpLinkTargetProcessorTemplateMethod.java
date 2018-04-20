@@ -45,24 +45,28 @@ public class HttpLinkTargetProcessorTemplateMethod extends LinkTargetProcessorTe
     @Override
     protected ResponseEntity onTargetDeterminationError(CallContext context, TargetDeterminationError error) {
 
+        // create a fictive link, just to pass the original url
+        Link fictiveLink = new Link();
+        fictiveLink.setOriginalUrl(context.getUrl());
+
         switch (error)
         {
             case INVALID_CONNECTION_TYPE:
-                return new ResponseEntity<>(LinkResponse.of("invalidConnectionType"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("invalidConnectionType", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             case EXCEPTION :
-                return new ResponseEntity<>(LinkResponse.of("defaultError"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("defaultError", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             case INFINITE_LOOP :
-                return new ResponseEntity<>(LinkResponse.of("redirectionLoop"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("redirectionLoop", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             case TOO_MANY_LOOP :
-                return new ResponseEntity<>(LinkResponse.of("tooMuchRedirections"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("tooMuchRedirections", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             case UNKNOWN_HOST_EXCEPTION :
-                return new ResponseEntity<>(LinkResponse.of("unknownHost"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("unknownHost", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             case MALFORMED_URL :
-                return new ResponseEntity<>(LinkResponse.of("invalidUrlWithCause"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("invalidUrlWithCause", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             case SSL_HANDSHAKE_ERROR:
-                return new ResponseEntity<>(LinkResponse.of("sslHandshakeError"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("sslHandshakeError", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
             default :
-                return new ResponseEntity<>(LinkResponse.of("defaultError"), HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(LinkResponse.of("defaultError", fictiveLink), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

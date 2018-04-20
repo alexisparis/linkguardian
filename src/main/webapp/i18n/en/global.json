@@ -1,5 +1,7 @@
 {
     "global": {
+        "yes": "Yes",
+        "no" : "No",
         "description_long" : "Linkguardian is a free tool allowing to save and keep your bookmarks organized.",
         "contact_us" : "For any bug, improvement or support, feel free to contact us :",
         "title" : "Linkguardian",
