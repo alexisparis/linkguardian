@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="parent">
+<div layout:fragment="content">
+    <p th:text="#{email.greeting(${login})}">
+        Dear
+    </p>
+    <p th:utext="${message}">
+    </p>
+    <p>
+        <span th:text="#{email.regards}">Regards, </span>
+        <br/>
+        <em th:text="#{email.signature}">Linkguardian team.</em>
+    </p>
+</div>
+</html>

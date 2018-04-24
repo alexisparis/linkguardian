@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.annotations.Fetch;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -80,6 +81,7 @@ public class Link implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
     @JoinTable(name = "link_tag",
         joinColumns = @JoinColumn(name="links_id", referencedColumnName="ID"),
         inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="ID"))

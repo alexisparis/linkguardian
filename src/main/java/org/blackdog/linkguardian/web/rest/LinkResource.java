@@ -236,10 +236,6 @@ public class LinkResource {
 
         log.debug("REST request to get my links with " + name);
 
-        //        if ( name.equals("admin") ) {
-        //            name = "paris_alex";
-        //        }
-
         Page<Link> page = linkRepository.customFindLinksOfUser(name, token,
             ReadStatus.valueOf(read_status),
             SortType.valueOf(sortBy),

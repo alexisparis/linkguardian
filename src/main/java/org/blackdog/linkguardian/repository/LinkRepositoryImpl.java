@@ -51,11 +51,7 @@ public class LinkRepositoryImpl implements LinkRepositoryCustom {
 
         StringBuilder query = new StringBuilder();
         query.append("select distinct link from Link link ");
-        query.append("left join link.tags tag ");
-        query.append("where link.user.login =:userLogin");
 
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("userLogin", userLogin);
 
         // ############
         // consider tag
@@ -77,6 +73,18 @@ public class LinkRepositoryImpl implements LinkRepositoryCustom {
                 return result;
             }
         }).collect(Collectors.toSet());
+
+        // only include join if a tag as filter was provided
+        if ( tags != null && ! tags.isEmpty() ) {
+            if ( tags.size() == 1 ) {
+                query.append("left join link.tags tag ");
+            }
+        }
+
+        query.append("where link.user.login =:userLogin");
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("userLogin", userLogin);
 
         if ( tags != null && ! tags.isEmpty() ) {
             if ( tags.size() == 1 ) {

@@ -169,6 +169,12 @@
                             </a>
                         </li>
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                        <li ui-sref-active="active">
+                            <a ui-sref="mail" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;
+                                <span>Mail</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li ui-sref-active="active" class="hide-xs" uib-dropdown ng-controller="ToolsController" ng-if="vm.isAuthenticated() || vm.$state.is('free_tour')">

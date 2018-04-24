@@ -265,4 +265,17 @@ public class MailService {
             subject,
             content, false, true);
     }
+
+    @Async
+    public void sendAnnouncementEmail(String email, String login, String subject, String message) throws MailNotSentException {
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("login", login);
+        String content = templateEngine.process("announcementEmail", context);
+        if ( Objects.equals(adminMail, email) ) {
+            sendEmail(email, (isProdEnvironment() ? "[PROD] " : "") + subject, content, false, true);
+        } else {
+            sendTransactionalEmail(email, (isProdEnvironment() ? "[PROD] " : "") + subject, content, false, true);
+        }
+    }
 }
