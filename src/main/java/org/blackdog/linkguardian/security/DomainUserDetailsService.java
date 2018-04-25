@@ -1,9 +1,12 @@
 package org.blackdog.linkguardian.security;
 
+import javax.servlet.http.HttpServletRequest;
 import org.blackdog.linkguardian.domain.User;
 import org.blackdog.linkguardian.repository.UserRepository;
+import org.blackdog.linkguardian.security.exception.BrutForceLoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.blackdog.linkguardian.service.LoginAttemptService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,14 +28,29 @@ public class DomainUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public DomainUserDetailsService(UserRepository userRepository) {
+    private LoginAttemptService loginAttemptService;
+
+    private HttpServletRequest request;
+
+    public DomainUserDetailsService(UserRepository userRepository, LoginAttemptService loginAttemptService, HttpServletRequest request) {
+
         this.userRepository = userRepository;
+        this.loginAttemptService = loginAttemptService;
+        this.request = request;
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating {}", login);
+
+        String ip = getClientIP();
+        log.debug("using ip : " + ip);
+        if (loginAttemptService.isBlocked(ip)) {
+            log.warn("ip " + ip + " blocked => login " + login + " blocked");
+            throw new BrutForceLoginException();
+        }
+
         String lowercaseLogin = login.toLowerCase(Locale.ENGLISH);
         Optional<User> userByEmailFromDatabase = userRepository.findOneWithAuthoritiesByEmail(lowercaseLogin);
         return userByEmailFromDatabase.map(user -> createSpringSecurityUser(lowercaseLogin, user)).orElseGet(() -> {
@@ -54,5 +72,13 @@ public class DomainUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getLogin(),
             user.getPassword(),
             grantedAuthorities);
+    }
+
+    private String getClientIP() {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null){
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
     }
 }

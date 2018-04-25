@@ -26,7 +26,9 @@ angular.module('linkguardianApp')
                 $scope.signInInProgress = false;
                 $scope.authenticationError = false;
                 $scope.blockedError = false;
-                if (error && error.data && error.data.message == 'blocked') {
+                if (error &&
+                    ((error.data && error.data.message == 'blocked') ||
+                     (error.status == 423))) {
                     $scope.blockedError = true;
                 } else {
                     $scope.authenticationError = true;

@@ -280,11 +280,6 @@ angular.module('linkguardianApp')
                 // links loading
                 // ####################
 
-                $scope.getFaviconLink = function(link) {
-                    // return "https://www.google.com/s2/favicons?domain={{::card.domain}}"
-                    return "https://www.google.com/s2/favicons?domain=" + link.domain;
-                };
-
                 $scope.tagsAjaxRequest = function () {
                     var promise = SearchTags.tags({
                         filter: $scope.search.tag_input

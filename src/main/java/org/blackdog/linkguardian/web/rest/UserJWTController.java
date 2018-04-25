@@ -1,5 +1,6 @@
 package org.blackdog.linkguardian.web.rest;
 
+import org.blackdog.linkguardian.security.exception.BrutForceLoginException;
 import org.blackdog.linkguardian.security.jwt.JWTConfigurer;
 import org.blackdog.linkguardian.security.jwt.TokenProvider;
 import org.blackdog.linkguardian.web.rest.vm.LoginVM;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,13 +43,22 @@ public class UserJWTController {
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword());
 
-        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
-        String jwt = tokenProvider.createToken(authentication, rememberMe);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        try {
+            Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
+            String jwt = tokenProvider.createToken(authentication, rememberMe);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
+            return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        } catch (AuthenticationException e) {
+            if (e.getCause() instanceof BrutForceLoginException) {
+                return RestUtils.standardTemporaryBlockedResponse();
+            }
+            else {
+                throw e;
+            }
+        }
     }
 
     /**

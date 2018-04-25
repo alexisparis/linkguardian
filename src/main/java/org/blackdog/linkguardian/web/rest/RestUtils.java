@@ -8,5 +8,4 @@ public class RestUtils {
     public static <T> ResponseEntity<T> standardTemporaryBlockedResponse() {
         return new ResponseEntity<T>(HttpStatus.LOCKED);
     }
-
 }

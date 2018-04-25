@@ -9,7 +9,8 @@
         },
         "messages": {
             "error": {
-                "authentication": "<strong>Anmeldung fehlgeschlagen!</strong> Überprüfen Sie bitte Ihre Angaben und versuchen Sie es erneut."
+                "authentication": "<strong>Anmeldung fehlgeschlagen!</strong> Überprüfen Sie bitte Ihre Angaben und versuchen Sie es erneut.",
+                "authentication_blocked" : "<strong>Konto gesperrt</strong>"
             }
         },
         "password" : {
