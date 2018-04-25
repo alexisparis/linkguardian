@@ -40,4 +40,7 @@ public interface BookmarkBatchRepository extends JpaRepository<BookmarkBatch, Lo
         + " batch.creationDate > :date group by batch.user.login, batch.user.email having count(batch) >= :havingCountVal")
     List<CountPerUser> countByUserCreationDateIsAfterHavingCount(@Param("date") ZonedDateTime date, @Param("havingCountVal") Long havingCountVal);
 
+    @Query("select count(batch) from BookmarkBatch batch where batch.user.login =:userLogin")
+    Long countByLogin(@Param("userLogin") String userLogin);
+
 }

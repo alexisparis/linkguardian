@@ -113,6 +113,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             // special links that should be allowed to every one connected
             .antMatchers("/api/account/change-password").hasAuthority(AuthoritiesConstants.USER)
 
+            .antMatchers(HttpMethod.GET, "/api/users/initiated").hasAuthority(AuthoritiesConstants.USER)
+
             .antMatchers(HttpMethod.GET, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers(HttpMethod.POST, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers(HttpMethod.POST, "/api/my_links/manual").hasAuthority(AuthoritiesConstants.USER)

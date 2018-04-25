@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.blackdog.linkguardian.domain.BookmarkBatch;
 import org.blackdog.linkguardian.domain.BookmarkBatchItem;
+import org.blackdog.linkguardian.domain.User;
 import org.blackdog.linkguardian.domain.transfer.BookmarkedUrl;
 import org.blackdog.linkguardian.domain.enumeration.BookmarkBatchItemStatus;
 import org.blackdog.linkguardian.repository.BookmarkBatchRepository;
@@ -113,6 +114,11 @@ public class BookmarkBatchService {
                 bookmark.setPath(pathSet.toArray(new String[pathSet.size()]));
             }
         }
+    }
+
+
+    public Long getBatchCreatedByUserCount(User user) {
+        return this.bookmarkBatchRepository.countByLogin(user.getLogin());
     }
 
     /**

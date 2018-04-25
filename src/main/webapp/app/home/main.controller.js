@@ -5,7 +5,7 @@ angular.module('linkguardianApp')
     .controller('MainController', function ($scope, $rootScope, Principal, $mdConstant, $window,
                                             MyLinks, $timeout, $mdDialog, translateFilter,
                                             SearchTags, $state, $log, TEMPLATES_PATH, $document, freeTour,
-                                            DemoService, ToasterService) {
+                                            DemoService, ToasterService, UserInitiation) {
 
         $scope.panelSearchOpened = true;
         $scope.panelAddOpened = true;
@@ -20,6 +20,17 @@ angular.module('linkguardianApp')
             sort: 'CREATION_DATE',
             sort_direction: 'DESC'
         };
+
+        // check if user is initiated (has created some links, imported some bookmarks)
+        // if it is not the case, propose him to onboard
+        UserInitiation.isInitiated().$promise.then(
+            function(data) {
+                if (data.state == true) {
+                    //$state.go('free_tour');
+                }
+            }, function(error) {
+                $log.log("could not determine if user is initiated... quit");
+            });
 
         $scope.isAuthenticated = Principal.isAuthenticated;
 

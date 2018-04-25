@@ -146,6 +146,14 @@ public class LinkService {
         toxicLinkRepository.save(toxicLink);
     }
 
+    public Long getLinkCreatedByUserCount(User user) {
+        return this.linkRepository.countByLogin(user.getLogin());
+    }
+
+    public Long getToxicLinkCreatedByUserCount(User user) {
+        return this.toxicLinkRepository.countByMail(user.getEmail());
+    }
+
     /**
      * create a new link for the given user, target and tag
      * @param user a User

@@ -6,9 +6,12 @@ import org.blackdog.linkguardian.domain.User;
 import org.blackdog.linkguardian.repository.UserRepository;
 import org.blackdog.linkguardian.repository.search.UserSearchRepository;
 import org.blackdog.linkguardian.security.AuthoritiesConstants;
+import org.blackdog.linkguardian.service.BookmarkBatchService;
+import org.blackdog.linkguardian.service.LinkService;
 import org.blackdog.linkguardian.service.MailService;
 import org.blackdog.linkguardian.service.UserService;
 import org.blackdog.linkguardian.service.dto.UserDTO;
+import org.blackdog.linkguardian.service.dto.YesNoResponse;
 import org.blackdog.linkguardian.service.exception.MailNotSentException;
 import org.blackdog.linkguardian.web.rest.errors.BadRequestAlertException;
 import org.blackdog.linkguardian.web.rest.errors.EmailAlreadyUsedException;
@@ -25,6 +28,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -72,14 +77,21 @@ public class UserResource {
 
     private final MailService mailService;
 
+    private final LinkService linkService;
+
+    private final BookmarkBatchService bookmarkBatchService;
+
     private final UserSearchRepository userSearchRepository;
 
-    public UserResource(UserRepository userRepository, UserService userService, MailService mailService, UserSearchRepository userSearchRepository) {
+    public UserResource(UserRepository userRepository, UserService userService, MailService mailService, UserSearchRepository userSearchRepository,
+        LinkService linkService, BookmarkBatchService bookmarkBatchService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
         this.userSearchRepository = userSearchRepository;
+        this.linkService = linkService;
+        this.bookmarkBatchService = bookmarkBatchService;
     }
 
     /**
@@ -215,5 +227,32 @@ public class UserResource {
         return StreamSupport
             .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    /**
+     * GET /users/initiated tells is user is initiated
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
+     */
+    @GetMapping("/users/initiated")
+    @Timed
+    public ResponseEntity<YesNoResponse> isUserInitiated() {
+        log.debug("REST is User initiated");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String login = auth.getName(); //get logged in username
+
+        User user = this.userService.getUserWithLogin(login);
+
+        Long linkCreatedByUserCount = this.linkService.getLinkCreatedByUserCount(user);
+
+        Long toxicLinkCreatedByUserCount = this.linkService.getToxicLinkCreatedByUserCount(user);
+
+        Long batchCreatedByUserCount = this.bookmarkBatchService.getBatchCreatedByUserCount(user);
+        System.out.println("linkCreatedByUserCount : " + linkCreatedByUserCount);
+        System.out.println("toxicLinkCreatedByUserCount : " + toxicLinkCreatedByUserCount);
+        System.out.println("batchCreatedByUserCount : " + batchCreatedByUserCount);
+
+        return ResponseEntity.ok(YesNoResponse.withState(true));
     }
 }

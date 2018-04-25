@@ -21,6 +21,7 @@ public interface LinkRepository extends JpaRepository<Link, Long>, JpaSpecificat
 
     @Query("select link from Link link where link.user.login = ?#{principal.username}")
     List<Link> findByUserIsCurrentUser();
+
     @Query("select distinct link from Link link left join fetch link.tags")
     List<Link> findAllWithEagerRelationships();
 
@@ -45,5 +46,8 @@ public interface LinkRepository extends JpaRepository<Link, Long>, JpaSpecificat
         + " WHERE"
         + " link.creationDate > :date group by link.user.login, link.user.email having count(link) >= :havingCountVal")
     List<CountPerUser> countByUserCreationDateIsAfterHavingCount(@Param("date") ZonedDateTime date, @Param("havingCountVal") Long havingCountVal);
+
+    @Query("select count(link) from Link link where link.user.login =:userLogin")
+    Long countByLogin(@Param("userLogin") String userLogin);
 
 }

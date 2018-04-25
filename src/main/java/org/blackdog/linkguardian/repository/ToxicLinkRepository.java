@@ -32,4 +32,7 @@ public interface ToxicLinkRepository extends JpaRepository<ToxicLink, Long>, Jpa
         + " link.email = user.email AND"
         + " link.creationDate > :date group by link.email, user.login having count(link) >= :havingCountVal")
     List<CountPerUser> countByEmailCreationDateIsAfterHavingCount(@Param("date") ZonedDateTime date, @Param("havingCountVal") Long havingCountVal);
+
+    @Query("select count(link) from ToxicLink link where link.email =:userMail")
+    Long countByMail(@Param("userMail") String userMail);
 }
