@@ -22,7 +22,7 @@
                     params:{
                         title: '@title',
                         message: '@message',
-                        tp: 'ALL'
+                        to: 'ALL'
                     },
                 }
             }

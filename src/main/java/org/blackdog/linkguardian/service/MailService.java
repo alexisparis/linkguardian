@@ -123,6 +123,7 @@ public class MailService {
                     request.getStatus() + " " + request.getBody(),
                 isMultipart, isHtml, to, subject, content);
             if (request.getStatus() < 200 || request.getStatus() >= 400) {
+                log.error("error while trying to send mail to " + to + " with subject '" + subject + "' => status : " + request.getStatus());
                 throw new MailNotSentException();
             }
         } catch (UnirestException e) {
@@ -267,6 +268,10 @@ public class MailService {
     }
 
     @Async
+    public void sendAnnouncementEmailAsync(String email, String login, String subject, String message) throws MailNotSentException {
+        sendAnnouncementEmail(email, login, subject, message);
+    }
+
     public void sendAnnouncementEmail(String email, String login, String subject, String message) throws MailNotSentException {
         Context context = new Context();
         context.setVariable("message", message);

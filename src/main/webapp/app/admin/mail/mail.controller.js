@@ -17,11 +17,13 @@
 
         var mailSendingErrorHandler = function (error) {
             vm.in_progress = false;
-            ToasterService.displayError('Error while sending mail', error);
+            console.log("error", error);
+            ToasterService.displayError('Error while sending mail : ' + error.data.message, error);
         };
-        var mailSendingSuccessHandler = function (error) {
+        var mailSendingSuccessHandler = function (data) {
             vm.in_progress = false;
-            ToasterService.displaySuccess('Mail(s) sent');
+            console.log("data", data);
+            ToasterService.displaySuccess('Mail(s) sent : ' + data.message);
         };
 
         vm.sendToAdmin = function() {
