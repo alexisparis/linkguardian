@@ -57,6 +57,25 @@ angular.module('linkguardianApp')
                 $scope.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
                 // ####################
+                // last search performed application
+                // ####################
+
+                $scope.loadSearchParameters = function() {
+                    if ($window.localStorage) {
+                        var search = $window.localStorage.getItem("lg.lastSearchPerformed");
+                        if (search != null) {
+                            $scope.search = JSON.parse(search);
+                        }
+                    }
+                };
+                $scope.storeSearchParameters = function() {
+                    if ($window.localStorage) {
+                        $window.localStorage.setItem("lg.lastSearchPerformed", JSON.stringify($scope.search));
+                    }
+                };
+                $scope.loadSearchParameters();
+
+                // ####################
                 // openers methods
                 // ####################
 
@@ -313,6 +332,7 @@ angular.module('linkguardianApp')
                     $log.log("call refreshlinks");
                     // TODO : remove when adding a new link seems to force to refresh all links
                     //console.trace();
+                    $scope.storeSearchParameters();
 
                     if ($scope.isAuthenticated() == true) {
                         $scope.noMoreLinks = false;
