@@ -10,6 +10,7 @@
     function UserInitiation ($resource) {
         var service = $resource('api/users/initiated', {}, {
             'isInitiated': {method: 'GET'},
+            'markAsInitiated': {method: 'PUT'},
         });
 
         return service;

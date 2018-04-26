@@ -1,0 +1,36 @@
+<md-dialog aria-label="Open Demonstration?" ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'onboarding.dialog.title' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="column" layout-align="center start" layout-margin flex>
+            <strong layout="row" class="text-">
+                {{'onboarding.dialog.message1' | translate}}
+            </strong>
+            <div layout="row" class="text-info">
+                {{'onboarding.dialog.message2' | translate}}
+            </div>
+            <strong layout="row">
+                <label for="dont_ask_anymore">
+                    <input type="checkbox" id="dont_ask_anymore" ng-model="dont_ask_anymore">
+                    <span data-translate="onboarding.dialog.do_not_ask_anymore">don't ask anymore</span>
+                </label>
+            </strong>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised" ng-click="cancel()">
+                {{'onboarding.dialog.actions.no' | translate}}
+            </md-button>
+            <md-button class="md-raised md-primary" ng-click="ok()">
+                {{'onboarding.dialog.actions.yes' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -40,6 +40,8 @@ public class UserDTO {
 
     private boolean activated = false;
 
+    private boolean initiated = false;
+
     @Size(min = 2, max = 6)
     private String langKey;
 
@@ -64,6 +66,7 @@ public class UserDTO {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.activated = user.getActivated();
+        this.initiated = user.isInitiated();
 //        this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
@@ -131,6 +134,14 @@ public class UserDTO {
         this.activated = activated;
     }
 
+    public boolean isInitiated() {
+        return initiated;
+    }
+
+    public void setInitiated(boolean initiated) {
+        this.initiated = initiated;
+    }
+
     public String getLangKey() {
         return langKey;
     }
@@ -187,7 +198,8 @@ public class UserDTO {
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
-            ", activated=" + activated +
+            ", activated=" + activated + '\'' +
+            ", initiated=" + initiated +
             ", langKey='" + langKey + '\'' +
             ", createdBy=" + createdBy +
             ", createdDate=" + createdDate +

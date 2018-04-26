@@ -244,15 +244,41 @@ public class UserResource {
 
         User user = this.userService.getUserWithLogin(login);
 
-        Long linkCreatedByUserCount = this.linkService.getLinkCreatedByUserCount(user);
+        boolean initiated = user.isInitiated();
 
-        Long toxicLinkCreatedByUserCount = this.linkService.getToxicLinkCreatedByUserCount(user);
+        log.debug("is user marked as initiated ? " + initiated);
 
-        Long batchCreatedByUserCount = this.bookmarkBatchService.getBatchCreatedByUserCount(user);
-        System.out.println("linkCreatedByUserCount : " + linkCreatedByUserCount);
-        System.out.println("toxicLinkCreatedByUserCount : " + toxicLinkCreatedByUserCount);
-        System.out.println("batchCreatedByUserCount : " + batchCreatedByUserCount);
+        if (!initiated) {
+            Long linkCreatedByUserCount = this.linkService.getLinkCreatedByUserCount(user);
+            log.debug("user is not initiated, detected " + linkCreatedByUserCount + " links");
 
-        return ResponseEntity.ok(YesNoResponse.withState(true));
+            if (linkCreatedByUserCount.longValue() > 0) {
+                log.debug("user has links => consider it as initiated");
+                initiated = true;
+            }
+        }
+
+        return ResponseEntity.ok(YesNoResponse.withState(initiated));
+    }
+
+    /**
+     * GET /users/initiated tells is user is initiated
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
+     */
+    @PutMapping("/users/initiated")
+    @Timed
+    public ResponseEntity<Void> markUserAsInitiated() {
+
+        log.debug("REST mark User as initiated");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String login = auth.getName();
+
+        log.debug("REST mark User '" + login + "' as initiated");
+
+        this.userService.markUserAsInitiated(login);
+
+        return ResponseEntity.ok(null);
     }
 }

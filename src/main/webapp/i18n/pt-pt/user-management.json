@@ -25,6 +25,8 @@
         "createdBy": "Criado por",
         "createdDate": "Criado em",
         "lastModifiedBy": "Alterado por",
-        "lastModifiedDate": "Alterado em"
+        "lastModifiedDate": "Alterado em",
+        "initiated" : "Initiated",
+        "not_initiated" : "not initiated"
     }
 }

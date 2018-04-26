@@ -16,7 +16,10 @@
                 <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
-                <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>                <th><span data-translate="userManagement.profiles">Profiles</span></th>                <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th><span data-translate="userManagement.initiated">Initiated</span></th>
+                <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th><span data-translate="userManagement.profiles">Profiles</span></th>
+                <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
@@ -32,6 +35,10 @@
                             data-translate="userManagement.deactivated">Deactivated</button>
                     <button class="btn btn-success btn-xs" ng-click="vm.setActive(user, false)" ng-show="user.activated"
                             ng-disabled="vm.currentAccount.login === user.login" data-translate="userManagement.activated">Activated</button>
+                </td>
+                <td>
+                    <span class="glyphicon glyphicon-ok-sign" ng-show="user.initiated"/>
+                    <span class="glyphicon glyphicon-remove-sign" ng-show="!user.initiated"/>
                 </td>
                 <td>{{user.langKey}}</td>
                 <td>

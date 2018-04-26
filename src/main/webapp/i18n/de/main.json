@@ -184,6 +184,16 @@
         }
     },
     "onboarding": {
+        "dialog" : {
+            "title" : "Tutorial öffnen?",
+            "message1" : "Möchten Sie das Tutorial öffnen?",
+            "message2" : "Sie können das Lernprogramm jederzeit über das Werkzeuge Menü aufrufen.",
+            "do_not_ask_anymore" : "frag nicht mehr",
+            "actions": {
+                "no" : "Nein, Danke",
+                "yes" : "Ja, zeige das Tutorial"
+            }
+        },
         "url": "www.linkguardian.io",
         "tag": "url manager",
         "created_link": "{\"id\":1,\"description\":\"Free bookmark manager\",\"domain\":\"www.linkguardian.io\",\"locked\":null,\"note\":null,\"read\":false,\"title\":\"linkguardian\",\"url\":\"https://www.linkguardian.io/\",\"originalUrl\":\"https://www.linkguardian.io/\",\"user\":{\"id\":1000,\"login\":\"demo\",\"firstName\":null,\"lastName\":null,\"email\":\"demo@linkguardian.io\"},\"tags\":[{\"id\":1,\"label\":\"url\"},{\"id\":2,\"label\":\"manager\"}],\"computedTags\":[\"url\",\"manager\"]}",

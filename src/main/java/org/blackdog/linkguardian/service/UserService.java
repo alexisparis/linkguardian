@@ -218,6 +218,7 @@ public class UserService {
                 user.setEmail(userDTO.getEmail());
 //                user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
+                user.setInitiated(userDTO.isInitiated());
                 user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
@@ -264,6 +265,13 @@ public class UserService {
         }
 
         return result;
+    }
+
+    @Transactional(readOnly = false)
+    public void markUserAsInitiated(String login) {
+        User user = this.getUserWithLogin(login);
+        user.setInitiated(true);
+        this.updateUser(new UserDTO(user));
     }
 
     @Transactional(readOnly = true)

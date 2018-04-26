@@ -184,6 +184,16 @@
         }
     },
     "onboarding": {
+        "dialog" : {
+            "title" : "Lancer la démonstration?",
+            "message1" : "Souhaitez-vous afficher le tutoriel?",
+            "message2" : "Vous pouvez accèder à la démonstration à tout moment via le menu Outils.",
+            "do_not_ask_anymore" : "ne plus me demander",
+            "actions": {
+                "no" : "Non, merci",
+                "yes" : "Oui, lancer la démonstration"
+            }
+        },
         "url": "www.linkguardian.io",
         "tag": "url manager",
         "created_link": "{\"id\":1,\"description\":\"Free bookmark manager\",\"domain\":\"www.linkguardian.io\",\"locked\":null,\"note\":null,\"read\":false,\"title\":\"linkguardian\",\"url\":\"https://www.linkguardian.io/\",\"originalUrl\":\"https://www.linkguardian.io/\",\"user\":{\"id\":1000,\"login\":\"demo\",\"firstName\":null,\"lastName\":null,\"email\":\"demo@linkguardian.io\"},\"tags\":[{\"id\":1,\"label\":\"url\"},{\"id\":2,\"label\":\"manager\"}],\"computedTags\":[\"url\",\"manager\"]}",

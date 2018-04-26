@@ -21,17 +21,6 @@ angular.module('linkguardianApp')
             sort_direction: 'DESC'
         };
 
-        // check if user is initiated (has created some links, imported some bookmarks)
-        // if it is not the case, propose him to onboard
-        UserInitiation.isInitiated().$promise.then(
-            function(data) {
-                if (data.state == true) {
-                    //$state.go('free_tour');
-                }
-            }, function(error) {
-                $log.log("could not determine if user is initiated... quit");
-            });
-
         $scope.isAuthenticated = Principal.isAuthenticated;
 
         if (freeTour === true) {
@@ -49,6 +38,60 @@ angular.module('linkguardianApp')
                 }, 100
             );
         } else {
+            // ask to add manually
+            $scope.askForDemo = function () {
+                $mdDialog.show({
+                    controller: AskForDemoDialogController,
+                    templateUrl: TEMPLATES_PATH + 'askForDemoDialog.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose: true
+                })
+                    .then(function (dont_ask_anymore) {
+                        console.log("show demo with dont_ask_anymore=" + dont_ask_anymore);
+                        UserInitiation.markAsInitiated().$promise.then(
+                            function(data) {
+                                $state.go('free_tour');
+                            }, function(error) {
+                                $log.log("could not mark as initiated... quit");
+                            });
+                        }
+                    , function (dont_ask_anymore) {
+                        console.log("cancel with dont_ask_anymore=" + dont_ask_anymore);
+                        if (dont_ask_anymore) {
+                            UserInitiation.markAsInitiated().$promise.then(
+                                function (data) {
+                                }, function (error) {
+                                    $log.log("could not mark as initiated... quit");
+                                });
+                        }
+                    });
+            };
+
+            function AskForDemoDialogController($scope, $mdDialog) {
+                $scope.dont_ask_anymore = false;
+                $scope.hide = function () {
+                    $mdDialog.hide($scope.dont_ask_anymore);
+                };
+                $scope.cancel = function () {
+                    $mdDialog.cancel($scope.dont_ask_anymore);
+                };
+                $scope.ok = function () {
+                    $mdDialog.hide($scope.dont_ask_anymore);
+                };
+            };
+
+            // check if user is initiated (has created some links, imported some bookmarks)
+            // if it is not the case, propose him to onboard
+            UserInitiation.isInitiated().$promise.then(
+                function(data) {
+                    $log.log("user is initiated ? " + data.state);
+                    if (!data.state) {
+                        $log.log("ask for demo...");
+                        $scope.askForDemo();
+                    }
+                }, function(error) {
+                    $log.log("could not determine if user is initiated... quit");
+                });
 
             $scope.onboardingIndex = 0;
             $scope.onboardingSteps = [{}];

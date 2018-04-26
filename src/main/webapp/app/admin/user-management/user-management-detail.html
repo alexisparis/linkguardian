@@ -10,6 +10,11 @@
                   data-translate="userManagement.deactivated">Deactivated</span>
             <span class="label label-success" ng-show="vm.user.activated"
                   data-translate="userManagement.activated">Activated</span>
+
+            <span class="label label-danger" ng-show="!vm.user.initiated"
+                  data-translate="userManagement.not_initiated">Not initiated</span>
+            <span class="label label-success" ng-show="vm.user.initiated"
+                  data-translate="userManagement.initiated">Initiated</span>
         </dd>
         <dt><span data-translate="userManagement.firstName">First Name</span></dt>
         <dd>{{vm.user.firstName}}</dd>
