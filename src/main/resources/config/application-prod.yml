@@ -19,14 +19,9 @@ logging:
         org.blackdog.linkguardian: INFO
         io.github.jhipster: INFO
 
-eureka:
-    instance:
-        prefer-ip-address: true
-    client:
-        service-url:
-            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
 spring:
+    jmx:
+       default-domain: linkguardian-production
     batch:
         job:
             enabled: true
@@ -64,7 +59,7 @@ spring:
         enabled: false
         locator:
             discovery:
-                enabled: true
+                enabled: false
 
 liquibase:
     contexts: prod
