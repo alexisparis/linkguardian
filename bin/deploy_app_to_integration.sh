@@ -7,7 +7,10 @@ ssh $SSH_HOST "rm -Rf /root/integration.linkguardian.war"
 scp build/linkguardian-*.war $SSH_HOST:/root/integration.linkguardian.war
 
 echo "removing old integration distribution"
-ssh $SSH_HOST "rm -Rf /opt/tomcat/webapps/integration*"
+ssh $SSH_HOST "rm -Rf /opt/tomcat/webapps/integration.war"
+
+# wait some seconds in order to let tomcat unload application
+sleep 10
 
 echo "installing new integration distribution"
 ssh $SSH_HOST "mv /root/integration.linkguardian.war /opt/tomcat/webapps/integration.war"
