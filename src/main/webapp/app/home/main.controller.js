@@ -875,7 +875,7 @@ angular.module('linkguardianApp')
                     $log.log("url " + link.original_url + " copied to clipboard");
                     ToasterService.displaySuccess(translateFilter('link.actions.copyClipboard.done'));
                 };
-                $scope.copyTocClipboardOnError = function(e) {
+                $scope.copyToClipboardOnError = function(e) {
                     $log.log("error while trying to copy to clipboard", e);
                     ToasterService.displayError(translateFilter('link.actions.copyClipboard.error'));
                 };
