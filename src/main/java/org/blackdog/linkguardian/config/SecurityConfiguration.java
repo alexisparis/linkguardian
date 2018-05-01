@@ -108,7 +108,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/profile-info").permitAll()
-//            .antMatchers("/api/**").authenticated()
+//            .antMatchers(HttpMethod.GET, "/api/favicon").permitAll()
 
             // special links that should be allowed to every one connected
             .antMatchers("/api/account/change-password").hasAuthority(AuthoritiesConstants.USER)
