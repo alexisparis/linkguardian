@@ -3,37 +3,8 @@
 <configuration scan="true">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${CATALINA_BASE}/logs/linkguardian.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <charset>utf-8</charset>
-            <Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
-        </encoder>
-    </appender>
-
-    <appender name="MAILER" class="ch.qos.logback.classic.net.SMTPAppender">
-        <smtpHost>ns0.ovh.net</smtpHost>
-        <smtpPort>587</smtpPort>
-        <STARTTLS>true</STARTTLS>
-        <username>linkguardian@blackdog-project.org</username>
-        <password>2U6GDpf24iqDWtWw7Ayi</password>
-        <from>linkguardian@blackdog-project.org</from>
-        <to>alexis.rt.paris@gmail.com</to>
-        <subject>ERROR: %logger{20} - %m</subject>
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <!--<pattern>%date %-5level %logger - %message%n</pattern>-->
-            <pattern>%date %-5level %logger - %msg%n</pattern>
-        </layout>
-    </appender>
-
     <logger name="org.hibernate.SQL" level="WARN"/>
     <logger name="org.hibernate.type.descriptor.sql" level="WARN"/>
-    <!--<logger name="org.hibernate.SQL" level="DEBUG"/>-->
-    <!--<logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>-->
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
@@ -55,9 +26,9 @@
     <logger name="org.hibernate.validator" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
     <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
-    <logger name="org.springframework" level="WARN"/>
-    <logger name="org.springframework.web" level="WARN"/>
-    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.security" level="INFO"/>
     <logger name="org.springframework.cache" level="WARN"/>
     <logger name="org.thymeleaf" level="WARN"/>
     <logger name="org.xnio" level="WARN"/>
@@ -73,5 +44,71 @@
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
+
+    <springProfile name="!prod">
+        <logger name="org.hibernate.SQL" level="DEBUG"/>
+        <logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="FILE-PROD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${CATALINA_BASE}/logs/linkguardian.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>90</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <charset>utf-8</charset>
+                <Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
+            </encoder>
+        </appender>
+        <appender name="MAILER-PROD" class="ch.qos.logback.classic.net.SMTPAppender">
+            <smtpHost>ns0.ovh.net</smtpHost>
+            <smtpPort>587</smtpPort>
+            <STARTTLS>true</STARTTLS>
+            <username>linkguardian@blackdog-project.org</username>
+            <password>2U6GDpf24iqDWtWw7Ayi</password>
+            <from>linkguardian@blackdog-project.org</from>
+            <to>alexis.rt.paris@gmail.com</to>
+            <subject>[PROD] ERROR: %logger{20} - %m</subject>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <!--<pattern>%date %-5level %logger - %message%n</pattern>-->
+                <pattern>%date %-5level %logger - %msg%n</pattern>
+            </layout>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="FILE-PROD" />
+            <appender-ref ref="MAILER-PROD" />
+        </root>
+    </springProfile>
+    <springProfile name="inte">
+        <appender name="FILE-INT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${CATALINA_BASE}/logs/linkguardian-integration.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>1</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <charset>utf-8</charset>
+                <Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
+            </encoder>
+        </appender>
+        <appender name="MAILER-INT" class="ch.qos.logback.classic.net.SMTPAppender">
+            <smtpHost>ns0.ovh.net</smtpHost>
+            <smtpPort>587</smtpPort>
+            <STARTTLS>true</STARTTLS>
+            <username>linkguardian@blackdog-project.org</username>
+            <password>2U6GDpf24iqDWtWw7Ayi</password>
+            <from>linkguardian@blackdog-project.org</from>
+            <to>alexis.rt.paris@gmail.com</to>
+            <subject>[INTE] ERROR: %logger{20} - %m</subject>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <!--<pattern>%date %-5level %logger - %message%n</pattern>-->
+                <pattern>%date %-5level %logger - %msg%n</pattern>
+            </layout>
+        </appender>
+        <root level="DEBUG">
+            <appender-ref ref="FILE-INT" />
+            <appender-ref ref="MAILER-INT" />
+        </root>
+    </springProfile>
 
 </configuration>
