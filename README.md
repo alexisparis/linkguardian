@@ -298,6 +298,9 @@ sudo certbot-auto certonly --webroot -w /opt/tomcat8/webapps/ -d linkguardian.io
 ## restore
     psql -f infile postgres
     
+    locally : 
+        psql -U postgres -f backup_linkguardian_2018-04-26_02_00_01_daily.sql prod2
+    
     for gcp
     
     psql -h host -p port -d database -U user -W -f backup_linkguardian_2018-02-15_02_00_01_daily.sql
