@@ -36,7 +36,8 @@ spring:
         livereload:
             enabled: false
     datasource:
-        data-source-jndi: jdbc/linkguardian
+#        jndi-name: jdbc/linkguardian
+        jndi-name: jdbc/linkguardian-integration
     jpa:
         database-platform: org.blackdog.linkguardian.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
@@ -49,8 +50,8 @@ spring:
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     data:
         elasticsearch:
-            cluster-name:
-            cluster-nodes: localhost:9300
+            repositories:
+                enabled: false
     mail:
         host: localhost
         port: 25

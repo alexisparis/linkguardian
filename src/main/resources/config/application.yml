@@ -48,16 +48,13 @@ management:
         mail:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
 spring:
+    batch:
+        job:
+            enabled: false
     application:
         name: linkguardian
     jackson:
         serialization.write_dates_as_timestamps: false
-    datasource:
-        driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/prod
-        name:
-        username: postgres
-        password: postgres
     jpa:
         database-platform: org.blackdog.linkguardian.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
