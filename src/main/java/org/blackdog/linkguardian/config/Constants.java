@@ -12,6 +12,7 @@ public final class Constants {
     public static final String ANONYMOUS_USER = "anonymousUser";
     public static final String DEFAULT_LANGUAGE = "en";
     public static final String SPRING_PROFILE_PRODUCTION = "prod";
+    public static final String SPRING_PROFILE_INTEGRATION = "inte";
 
     private Constants() {
     }

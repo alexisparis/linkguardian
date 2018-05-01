@@ -8,7 +8,6 @@ import io.github.jhipster.config.JHipsterProperties;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAmount;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +17,7 @@ import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.blackdog.linkguardian.config.Constants;
+import org.blackdog.linkguardian.config.DefaultProfileUtil;
 import org.blackdog.linkguardian.domain.ToxicLink;
 import org.blackdog.linkguardian.domain.User;
 import org.blackdog.linkguardian.domain.transfer.CountPerUser;
@@ -27,9 +26,7 @@ import org.blackdog.linkguardian.service.exception.MailNotSentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -73,14 +70,6 @@ public class MailService {
         this.javaMailSender = javaMailSender;
         this.messageSource = emailMessageSource;
         this.templateEngine = templateEngine;
-    }
-
-    /**
-     * return true if it is running production environment
-     * @return
-     */
-    private boolean isProdEnvironment() {
-        return env.acceptsProfiles(Constants.SPRING_PROFILE_PRODUCTION);
     }
 
     @Async
@@ -202,7 +191,7 @@ public class MailService {
         Context context = new Context();
         context.setVariable("message", message);
         String content = templateEngine.process("genericAdmin", context);
-        sendEmail(adminMail, (isProdEnvironment() ? "[PROD] " : "") + "[ADMIN] " + subject, content, false, true);
+        sendEmail(adminMail, getSubjectPrefix() + "[ADMIN] " + subject, content, false, true);
     }
 
     @Async
@@ -244,7 +233,7 @@ public class MailService {
         context.setVariable("batchItemNotCompletedCount", batchItemNotCompletedCount);
 
         String content = templateEngine.process("statisticsEmail", context);
-        String subject = (isProdEnvironment() ? "[PROD] " : "") + "[ADMIN] Statistics at " + LocalDateTime
+        String subject = getSubjectPrefix() + "[ADMIN] Statistics at " + LocalDateTime
             .now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         sendEmail(adminMail,
             subject,
@@ -261,7 +250,7 @@ public class MailService {
         context.setVariable("blockDurationPerUser", blockDurationPerUser);
 
         String content = templateEngine.process("blockReportEmail", context);
-        String subject = (isProdEnvironment() ? "[PROD] " : "") + "[ADMIN] Block Report at " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String subject = getSubjectPrefix() + "[ADMIN] Block Report at " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         sendEmail(adminMail,
             subject,
             content, false, true);
@@ -278,9 +267,24 @@ public class MailService {
         context.setVariable("login", login);
         String content = templateEngine.process("announcementEmail", context);
         if ( Objects.equals(adminMail, email) ) {
-            sendEmail(email, (isProdEnvironment() ? "[PROD] " : "") + subject, content, false, true);
+            sendEmail(email, getSubjectPrefix() + subject, content, false, true);
         } else {
-            sendTransactionalEmail(email, (isProdEnvironment() ? "[PROD] " : "") + subject, content, false, true);
+            sendTransactionalEmail(email, getSubjectPrefix() + subject, content, false, true);
         }
+    }
+
+    private String getSubjectPrefix() {
+        String prefix = null;
+        if (DefaultProfileUtil.isProdEnvironment(env)) {
+            prefix = "[PROD] ";
+        }
+        if (prefix == null && DefaultProfileUtil.isIntegrationEnvironment(env)) {
+            prefix = "[INTEGRATION] ";
+        }
+        if (prefix == null) {
+            prefix = "";
+        }
+
+        return prefix;
     }
 }

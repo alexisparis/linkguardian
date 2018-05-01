@@ -48,4 +48,12 @@ public final class DefaultProfileUtil {
         }
         return profiles;
     }
+
+    public static boolean isProdEnvironment(Environment env) {
+        return env.acceptsProfiles(Constants.SPRING_PROFILE_PRODUCTION);
+    }
+
+    public static boolean isIntegrationEnvironment(Environment env) {
+        return env.acceptsProfiles(Constants.SPRING_PROFILE_INTEGRATION);
+    }
 }
