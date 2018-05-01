@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  *
  * used to perform rendering test for favicon.
  */
-@RestController
+//@RestController
 @RequestMapping("/api")
 public class FavIconResource {
 
