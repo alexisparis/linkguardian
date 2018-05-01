@@ -70,8 +70,14 @@ public class AdministrativeTasks {
             bookmarkBatchItemRepository.findNotImportedBatchItemCountPerUser();
         LOGGER.info("after bookmarkBatchItemRepository.findNotImportedBatchItemCountPerUser");
 
-        this.mailService.sendStatisticsEmail(linkPerUserYesterday, toxicLinksPerMail,
-            notImportedBatchCountPerUser, notImportedBatchItemCountPerUser);
+        if (!linkPerUserYesterday.isEmpty() ||
+            !toxicLinksPerMail.isEmpty() ||
+            !notImportedBatchCountPerUser.isEmpty() ||
+            !notImportedBatchItemCountPerUser.isEmpty()) {
+            this.mailService.sendStatisticsEmail(linkPerUserYesterday, toxicLinksPerMail, notImportedBatchCountPerUser, notImportedBatchItemCountPerUser);
+        } else {
+            LOGGER.info("no activities found for the last checking period => do not send email");
+        }
     }
 
 //    @org.springframework.context.event.EventListener(org.springframework.context.event.ContextRefreshedEvent.class)
