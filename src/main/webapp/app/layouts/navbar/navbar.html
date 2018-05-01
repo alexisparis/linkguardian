@@ -11,7 +11,7 @@
                  width="48px"
                  ng-click="vm.reload();"/>
             <a class="navbar-brand logo" href="#/" ng-click="vm.reload();">
-                <h1 translate="global.title">Linkguardian</h1>
+                <h1 translate_ddsdsd="global.title">Linkguardian<span data-ng-show="vm.env !== 'prod'">&nbsp;{{vm.env | uppercase}}</span></h1>
                 <span class="navbar-version hide-xs">{{'global.linkguardian_description' | translate}}</span>
             </a>
         </div>

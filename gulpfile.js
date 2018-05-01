@@ -128,6 +128,7 @@ gulp.task('ngconstant:dev', function () {
             BUILD_TIMESTAMP: '',
             TEMPLATES_PATH : 'app/parts/',
             WEBSOCKET_ACTIVATED: true,
+            ENV: 'dev'
         },
         template: config.constantTemplate,
         stream: true
@@ -144,13 +145,32 @@ gulp.task('ngconstant:prod', function () {
             DEBUG_INFO_ENABLED: false,
             BUILD_TIMESTAMP: new Date().getTime(),
             TEMPLATES_PATH : 'app/parts/',
-            WEBSOCKET_ACTIVATED: true,
+            WEBSOCKET_ACTIVATED: false,
+            ENV: 'prod'
         },
         template: config.constantTemplate,
         stream: true
     })
     .pipe(rename('app.constants.js'))
     .pipe(gulp.dest(config.app + 'app/'));
+});
+
+gulp.task('ngconstant:inte', function () {
+    return ngConstant({
+        name: 'linkguardianApp',
+        constants: {
+            VERSION: util.parseVersion(),
+            DEBUG_INFO_ENABLED: false,
+            BUILD_TIMESTAMP: new Date().getTime(),
+            TEMPLATES_PATH : 'app/parts/',
+            WEBSOCKET_ACTIVATED: false,
+            ENV: 'inte'
+        },
+        template: config.constantTemplate,
+        stream: true
+    })
+        .pipe(rename('app.constants.js'))
+        .pipe(gulp.dest(config.app + 'app/'));
 });
 
 // check app for eslint errors
@@ -216,6 +236,10 @@ gulp.task('serve', ['install'], serve);
 
 gulp.task('build', ['clean'], function (cb) {
     runSequence(['copy', /*'inject:vendor', */'ngconstant:prod', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', 'bundle-sw');
+});
+
+gulp.task('build-inte', ['clean'], function (cb) {
+    runSequence(['copy', /*'inject:vendor', */'ngconstant:inte', 'copy:languages'], 'inject:app', 'inject:troubleshoot', 'assets:prod', 'bundle-sw');
 });
 
 gulp.task('default', ['serve']);

@@ -120,7 +120,9 @@ apply from: 'gradle/gatling.gradle'
 apply from: 'gradle/mapstruct.gradle'
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
-if (project.hasProperty('prod')) {
+if (project.hasProperty('inte')) {
+    apply from: 'gradle/profile_inte.gradle'
+} else if (project.hasProperty('prod')) {
     apply from: 'gradle/profile_prod.gradle'
 } else {
     apply from: 'gradle/profile_dev.gradle'

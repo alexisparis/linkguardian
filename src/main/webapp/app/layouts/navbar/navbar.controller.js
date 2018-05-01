@@ -5,9 +5,9 @@
         .module('linkguardianApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$window', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$mdDialog', 'TEMPLATES_PATH'];
+    NavbarController.$inject = ['$window', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$mdDialog', 'TEMPLATES_PATH', 'ENV'];
 
-    function NavbarController ($window, $state, Auth, Principal, ProfileService, LoginService, $mdDialog, TEMPLATES_PATH) {
+    function NavbarController ($window, $state, Auth, Principal, ProfileService, LoginService, $mdDialog, TEMPLATES_PATH, ENV) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -18,6 +18,7 @@
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
+        vm.env = ENV;
         vm.login = login;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
