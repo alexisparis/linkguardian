@@ -47,6 +47,9 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     @Value("${secure.cookie}")
     private boolean cookiesSecured = true;
 
+    @Value("${spring.batch.job.enabled}")
+    private boolean springBatchEnabled;
+
     public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties) {
 
         this.env = env;
@@ -71,6 +74,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         servletContext.addFilter("requestContextFilter", new RequestContextFilter() );
 
         log.info("Web application fully configured");
+        log.info("spring batch enabled ? " + this.springBatchEnabled);
     }
 
     /**
