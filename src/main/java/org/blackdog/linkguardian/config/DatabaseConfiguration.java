@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("org.blackdog.linkguardian.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
-@EnableElasticsearchRepositories("org.blackdog.linkguardian.repository.search")
+//@EnableElasticsearchRepositories("org.blackdog.linkguardian.repository.search")
 public class DatabaseConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
