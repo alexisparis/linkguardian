@@ -3,17 +3,21 @@
 SSH_HOST=root@149.56.109.148
 
 echo "copying integration war to remote MTL"
-ssh $SSH_HOST "rm -Rf /root/integration.linkguardian.war"
-scp build/linkguardian-*.war $SSH_HOST:/root/integration.linkguardian.war
+ssh $SSH_HOST "rm -Rf /root/linkguardian-INTE.war"
+scp build/linkguardian-*.war $SSH_HOST:/root/linkguardian-INTE.war
+
+echo "stop service"
+ssh $SSH_HOST "sudo systemctl stop linkguardian-inte"
 
 echo "removing old integration distribution"
-ssh $SSH_HOST "rm -Rf /opt/tomcat/webapps/integration.war"
-
-# wait some seconds in order to let tomcat unload application
-sleep 10
+ssh $SSH_HOST "rm -Rf /home/linkguardian/apps/linkguardian-INTE.war"
 
 echo "installing new integration distribution"
-ssh $SSH_HOST "mv /root/integration.linkguardian.war /opt/tomcat/webapps/integration.war"
-ssh $SSH_HOST "rm -Rf /root/integration.linkguardian.war"
+ssh $SSH_HOST "mv /root/linkguardian-INTE.war /home/linkguardian/apps/linkguardian-INTE.war"
+ssh $SSH_HOST "rm -Rf /root/linkguardian-INTE.war"
+ssh $SSH_HOST "chown linkguardian /home/linkguardian/apps/linkguardian-INTE.war"
+
+echo "start service"
+ssh $SSH_HOST "sudo systemctl start linkguardian-inte"
 
 echo "FINISHED!!!"

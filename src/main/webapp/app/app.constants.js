@@ -5,7 +5,7 @@
         .module('linkguardianApp')
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1525178877019)
+        .constant('BUILD_TIMESTAMP', 1525748461795)
         .constant('TEMPLATES_PATH', "app/parts/")
         .constant('WEBSOCKET_ACTIVATED', false)
         .constant('ENV', "inte")

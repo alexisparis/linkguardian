@@ -51,6 +51,7 @@ spring:
         name:
         username: postgres
         password: postgres
+
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -61,6 +62,10 @@ spring:
         locator:
             discovery:
                 enabled: true
+    security:
+        authentication:
+            jwt:
+                secret: d16c8fffdb6c5ab8aea365d4f96ea2ed994fae6f
 
 liquibase:
     contexts: dev

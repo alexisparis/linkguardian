@@ -1,0 +1,16 @@
+[Unit]
+Description=Linkguardian integration
+[Service]
+User=linkguardian
+# The configuration file application.properties should be here:
+#change this to your workspace
+WorkingDirectory=/home/linkguardian/apps
+#path to executable.
+#executable is a bash script which calls jar
+fileExecStart=/home/linkguardian/apps/start-linkguardian-integration
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target

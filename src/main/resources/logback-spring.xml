@@ -45,15 +45,15 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <springProfile name="!prod">
-        <logger name="org.hibernate.SQL" level="DEBUG"/>
-        <logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
-    </springProfile>
+     <!--<springProfile name="!prod">-->
+    <!--<logger name="org.hibernate.SQL" level="DEBUG"/>-->
+    <!--<logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>-->
+     <!--</springProfile>-->
 
     <springProfile name="prod">
         <appender name="FILE-PROD" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>${CATALINA_BASE}/logs/linkguardian.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>logs/prod/linkguardian.%d{yyyy-MM-dd}.log</fileNamePattern>
                 <maxHistory>90</maxHistory>
             </rollingPolicy>
             <encoder>
@@ -83,7 +83,7 @@
     <springProfile name="inte">
         <appender name="FILE-INT" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>${CATALINA_BASE}/logs/linkguardian-integration.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>logs/inte/linkguardian-integration.%d{yyyy-MM-dd}.log</fileNamePattern>
                 <maxHistory>1</maxHistory>
             </rollingPolicy>
             <encoder>

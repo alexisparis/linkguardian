@@ -6792,6 +6792,12 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "http://nexus3-devops.ose.sddc.bngf.local/repository/npm-public/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
+properties-reader@0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/properties-reader/-/properties-reader-0.0.16.tgz#a2cc0db9cdd7b81d977d0a59c1dc10c6d1d6ab98"
+  dependencies:
+    mkdirp "~0.5.1"
+
 protractor-jasmine2-screenshot-reporter@0.4.1:
   version "0.4.1"
   resolved "http://nexus3-devops.ose.sddc.bngf.local/repository/npm-public/protractor-jasmine2-screenshot-reporter/-/protractor-jasmine2-screenshot-reporter-0.4.1.tgz#82bee694e3a067ccff02b8ab9aa95f7a3d99d5a7"

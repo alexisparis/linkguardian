@@ -5,7 +5,7 @@ echo "compiling"
 ./gradlew -Pinte clean bootRepackage
 
 rm build/linkguardian-temp.war
-cp build/libs/linkguardian-*.war.original build/linkguardian-temp.war
+cp build/libs/linkguardian-*.war build/linkguardian-temp.war
 
 echo ""
 echo "archive built!!!"
