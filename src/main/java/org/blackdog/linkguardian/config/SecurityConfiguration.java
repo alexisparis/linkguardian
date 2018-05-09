@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
@@ -91,8 +92,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .accessDeniedHandler(problemSupport)
         .and()
             .headers()
-            .defaultsDisabled()
-            .cacheControl()
+            .addHeaderWriter(new StaticHeadersWriter("X-UA-Compatible","IE=edge"))
+            .addHeaderWriter(new StaticHeadersWriter("X-XSS-Protection", "1; mode=block"))
+
+//            .defaultsDisabled()
+            .contentSecurityPolicy("script-src 'self' 'unsafe-inline' www.google-analytics.com; object-src 'self'")
+//            .cacheControl()
         .and()
             .frameOptions()
             .deny()
@@ -104,7 +109,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()
+
+            .antMatchers(HttpMethod.GET, "/api/account").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers("/api/account").permitAll()
+
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/profile-info").permitAll()

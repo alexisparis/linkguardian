@@ -7,6 +7,8 @@ import org.blackdog.linkguardian.domain.User;
 import org.blackdog.linkguardian.repository.UserRepository;
 import org.blackdog.linkguardian.repository.search.UserSearchRepository;
 import org.blackdog.linkguardian.security.AuthoritiesConstants;
+import org.blackdog.linkguardian.service.BookmarkBatchService;
+import org.blackdog.linkguardian.service.LinkService;
 import org.blackdog.linkguardian.service.MailService;
 import org.blackdog.linkguardian.service.UserService;
 import org.blackdog.linkguardian.service.dto.UserDTO;
@@ -99,6 +101,12 @@ public class UserResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
+    private BookmarkBatchService bookmarkBatchService;
+
+    @Autowired
+    private LinkService linkService;
+
+    @Autowired
     private EntityManager em;
 
     @Autowired
@@ -113,7 +121,8 @@ public class UserResourceIntTest {
         MockitoAnnotations.initMocks(this);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).clear();
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).clear();
-        UserResource userResource = new UserResource(userRepository, userService, mailService, userSearchRepository);
+        UserResource userResource = new UserResource(userRepository, userService, mailService, userSearchRepository,
+            linkService, bookmarkBatchService);
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
