@@ -57,6 +57,10 @@ Refer to [Using JHipster in production][] for more details.
 To launch your application's tests, run:
 
     ./gradlew test
+    
+## Releasing
+
+    ./gradlew release 
 
 ### Client tests
 
