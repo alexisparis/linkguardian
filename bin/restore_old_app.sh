@@ -4,16 +4,16 @@ SSH_HOST=root@149.56.109.148
 
 ssh $SSH_HOST "sudo -H -u linkguardian bash -c 'source ~/bin/maintenance_on.sh'"
 
-echo "stopping tomcat"
-ssh $SSH_HOST "sudo systemctl stop tomcat"
+echo "stop service"
+ssh $SSH_HOST "sudo systemctl stop linkguardian-prod"
 
 echo "installing old distribution"
-ssh $SSH_HOST "rm -Rf /opt/tomcat/webapps/ROOT*"
-ssh $SSH_HOST "mv /root/old.linkguardian.war /opt/tomcat/webapps/ROOT.war"
-ssh $SSH_HOST "rm -Rf /root/old.linkguardian.war"
+ssh $SSH_HOST "rm -Rf /home/linkguardian/apps/linkguardian-PROD.war"
+ssh $SSH_HOST "cp /home/linkguardian/apps/linkguardian-PROD.war.old /home/linkguardian/apps/linkguardian-PROD.war"
+ssh $SSH_HOST "rm -Rf /home/linkguardian/apps/linkguardian-PROD.war.old"
 
-echo "starting tomcat"
-ssh $SSH_HOST "sudo systemctl start tomcat"
+echo "start service"
+ssh $SSH_HOST "sudo systemctl start linkguardian-prod"
 
 ssh $SSH_HOST "sudo -H -u linkguardian bash -c 'source ~/bin/maintenance_off.sh'"
 

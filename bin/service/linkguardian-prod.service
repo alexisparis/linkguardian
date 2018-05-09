@@ -1,5 +1,5 @@
 [Unit]
-Description=Linkguardian integration
+Description=Linkguardian production
 [Service]
 User=linkguardian
 # The configuration file application.properties should be here:
@@ -7,7 +7,7 @@ User=linkguardian
 WorkingDirectory=/home/linkguardian/apps
 #path to executable.
 #executable is a bash script which calls jar
-ExecStart=/home/linkguardian/apps/start-linkguardian-integration.sh
+ExecStart=/home/linkguardian/apps/start-linkguardian-production.sh
 SuccessExitStatus=143
 TimeoutStopSec=10
 Restart=on-failure

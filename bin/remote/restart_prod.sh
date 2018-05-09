@@ -2,8 +2,8 @@
 
 source /home/linkguardian/bin/maintenance_on.sh
 
-sudo service tomcat restart
+sudo systemctl stop linkguardian-prod
 
-sleep 40
+sleep 30
 
 source /home/linkguardian/bin/maintenance_off.sh
