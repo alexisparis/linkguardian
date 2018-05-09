@@ -71,7 +71,6 @@
             <to>alexis.rt.paris@gmail.com</to>
             <subject>[PROD] ERROR: %logger{20} - %m</subject>
             <layout class="ch.qos.logback.classic.PatternLayout">
-                <!--<pattern>%date %-5level %logger - %message%n</pattern>-->
                 <pattern>%date %-5level %logger - %msg%n</pattern>
             </layout>
         </appender>
@@ -101,7 +100,6 @@
             <to>alexis.rt.paris@gmail.com</to>
             <subject>[INTE] ERROR: %logger{20} - %m</subject>
             <layout class="ch.qos.logback.classic.PatternLayout">
-                <!--<pattern>%date %-5level %logger - %message%n</pattern>-->
                 <pattern>%date %-5level %logger - %msg%n</pattern>
             </layout>
         </appender>
