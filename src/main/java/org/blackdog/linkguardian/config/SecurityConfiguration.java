@@ -114,6 +114,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/change-password").hasAuthority(AuthoritiesConstants.USER)
 
             .antMatchers(HttpMethod.GET, "/api/users/initiated").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.PUT, "/api/users/initiated").hasAuthority(AuthoritiesConstants.USER)
+
+            .antMatchers(HttpMethod.POST, "/api/bookmarks/batch").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.POST, "/api/bookmarks/parse").hasAuthority(AuthoritiesConstants.USER)
 
             .antMatchers(HttpMethod.GET, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers(HttpMethod.POST, "/api/my_links").hasAuthority(AuthoritiesConstants.USER)

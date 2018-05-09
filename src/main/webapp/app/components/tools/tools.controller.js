@@ -3,7 +3,7 @@
 angular.module('linkguardianApp')
     .controller('ToolsController', function ($scope, $translate, tmhDynamicLocale,
                                              $cookies, $mdDialog, TEMPLATES_PATH, Bookmark, $log,
-                                             translateFilter, ToasterService) {
+                                             translateFilter, ToasterService, AuthServerProvider) {
 
         function BookmarkImportDialogController($scope, $mdDialog,
                                                 FileUploader, $timeout, csrf_token) {
@@ -34,7 +34,8 @@ angular.module('linkguardianApp')
             $scope.uploader = new FileUploader({
                 url: '/api/bookmarks/parse',
                 headers : {
-                    'X-CSRF-TOKEN': csrf_token
+                    //'X-CSRF-TOKEN': csrf_token,
+                    'Authorization': 'Bearer ' + AuthServerProvider.getToken()
                 },
                 alias: 'file',
                 autoUpload : true
