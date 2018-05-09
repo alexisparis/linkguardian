@@ -2,7 +2,7 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Linkguardian</h2>
+                <h2>Linkguardian <span class="version" style="font-size: small;">{{version}}</span></h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="content/images/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -16,7 +16,7 @@
             <strong layout="row">
                 {{'global.contact_us' | translate}}
             </strong>
-            <div class="margin-auto">
+            <div class="margin-auto" style="margin-top: 15px;">
                 <b><a href="mailto:linkguardian@blackdog-project.org">linkguardian@blackdog-project.org</a></b>
             </div>
         </md-dialog-content>

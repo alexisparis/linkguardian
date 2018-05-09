@@ -5,9 +5,9 @@
         .module('linkguardianApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$window', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$mdDialog', 'TEMPLATES_PATH', 'ENV'];
+    NavbarController.$inject = ['$window', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$mdDialog', 'TEMPLATES_PATH', 'ENV', 'VERSION'];
 
-    function NavbarController ($window, $state, Auth, Principal, ProfileService, LoginService, $mdDialog, TEMPLATES_PATH, ENV) {
+    function NavbarController ($window, $state, Auth, Principal, ProfileService, LoginService, $mdDialog, TEMPLATES_PATH, ENV, VERSION) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -48,8 +48,9 @@
             $window.location.reload();
         }
 
-        function AboutDialogController($scope, $mdDialog) {
+        function AboutDialogController($scope, $mdDialog, VERSION) {
 
+            $scope.version = VERSION;
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };

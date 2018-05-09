@@ -1,4 +1,4 @@
-<md-dialog aria-label="About Linkguardian" class="import-dialog">
+<md-dialog aria-label="About Linkguardian" class="import-dialog" style="max-width: 600px;">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -60,7 +60,8 @@
                 {{'bookmarks.import.failed.label2' | translate}} <a href="mailto:linkguardian@blackdog-project.org">linkguardian@blackdog-project.org</a>
             </div>
 
-            <div layout="column" ng-show="step == 'links-customization'" class="bookmark-containers" >
+            <div layout="column" ng-show="step == 'links-customization'" class="bookmark-containers"
+                 style="height: 360px;">
                 <div ng-repeat="bookmark in bookmarks" class="bookmark-container"
                      style="margin-bottom: 4px;">
                     <md-button class="md-icon-button" ng-click="removeBookmark(bookmark)"

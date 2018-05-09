@@ -18,8 +18,9 @@
                 }
             },
             resolve: {
-                authorize: ['Auth',
-                    function (Auth) {
+                authorize: ['Auth', 'Principal', '$log',
+                    function (Auth, Principal, $log) {
+                        $log.log("state config : is authenticated ? " + Principal.isAuthenticated());
                         return Auth.authorize();
                     }
                 ],
