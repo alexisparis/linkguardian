@@ -176,10 +176,6 @@ md-chips.md-default-theme md-chip.md-focused, md-chips md-chip.md-focused {
     font-weight: 400;
 }
 
-.dropdown-menu {
-    z-index: 21;
-}
-
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
@@ -196,9 +192,6 @@ md-chips.md-default-theme md-chip.md-focused, md-chips md-chip.md-focused {
     .navbar-default .navbar-nav > .open > a:focus {
         background-color: $navbar-color !important;
         color: white;
-    }
-    .dropdown-menu {
-        z-index: 21;
     }
 }
 .navbar .navbar-nav > li > a {

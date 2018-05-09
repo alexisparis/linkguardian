@@ -34,7 +34,7 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
+                    <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 1000;">
                         <li ui-sref-active="active">
                                 <a ui-sref="tag" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
@@ -78,7 +78,7 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
+                    <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 1000;">
                         <li ui-sref-active="active" ng-switch-when="true">
                             <a ui-sref="settings" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-wrench"></span>&nbsp;
@@ -119,7 +119,7 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
+                    <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 1000;">
                         <li ui-sref-active="active">
                             <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-user"></span>&nbsp;
@@ -185,7 +185,7 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="z-index: 1000;">
                         <li ui-sref-active="active">
                             <a ng-click="showBookmarkImportDialog()">
                                 <span class="glyphicon glyphicon-circle-arrow-up"></span>
@@ -208,7 +208,7 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
+                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1" style="z-index: 1000;">
                         <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
                             <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
                         </li>
