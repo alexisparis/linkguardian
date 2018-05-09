@@ -2,7 +2,7 @@
 
 source /home/linkguardian/bin/maintenance_on.sh
 
-sudo systemctl stop linkguardian-prod
+sudo systemctl restart linkguardian-prod
 
 sleep 30
 

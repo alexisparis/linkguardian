@@ -24,7 +24,7 @@ spring:
        default-domain: linkguardian-production
     batch:
         job:
-            enabled: false
+            enabled: true
     devtools:
         restart:
             enabled: false

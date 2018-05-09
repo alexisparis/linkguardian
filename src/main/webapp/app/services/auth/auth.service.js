@@ -120,7 +120,7 @@
                 Principal.identity(true).then(function(account) {
                     // After the login the language will be changed to
                     // the language selected by the user during his registration
-                    if (account!== null) {
+                    if (account!== null && account.langKey) {
                         $translate.use(account.langKey).then(function () {
                             $translate.refresh();
                         });

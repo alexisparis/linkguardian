@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo systemctl stop linkguardian-inte
+sudo systemctl restart linkguardian-inte
