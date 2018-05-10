@@ -11,7 +11,7 @@
 # first argument should be on to manage maintenance file flag
 # second argument should be a suffix for the backup file
 rm -Rf /home/linkguardian/Dropbox/logs/*
-cp /home/linkguardian/apps/logs* /home/linkguardian/Dropbox/logs
+cp -R /home/linkguardian/apps/logs/* /home/linkguardian/Dropbox/logs
 chown linkguardian /home/linkguardian/Dropbox/logs
 chmod ugo+r /home/linkguardian/Dropbox/logs -R
 

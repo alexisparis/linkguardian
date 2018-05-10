@@ -18,6 +18,10 @@ You will only need to run this command when dependencies change in [package.json
 to build :
 
     ./gradlew build
+    
+without test :
+ 
+    ./gradlew build -x test 
 
 We use [Gulp][] as our build system. Install the Gulp command-line tool globally with:
 
