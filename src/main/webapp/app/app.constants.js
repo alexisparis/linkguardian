@@ -4,10 +4,10 @@
     angular
         .module('linkguardianApp')
         .constant('VERSION', "1.2.0-SNAPSHOT")
-        .constant('DEBUG_INFO_ENABLED', true)
-        .constant('BUILD_TIMESTAMP', "")
+        .constant('DEBUG_INFO_ENABLED', false)
+        .constant('BUILD_TIMESTAMP', 1525916651737)
         .constant('TEMPLATES_PATH', "app/parts/")
-        .constant('WEBSOCKET_ACTIVATED', true)
-        .constant('ENV', "dev")
+        .constant('WEBSOCKET_ACTIVATED', false)
+        .constant('ENV', "prod")
 ;
 })();

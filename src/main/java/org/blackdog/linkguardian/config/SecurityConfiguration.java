@@ -93,10 +93,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .headers()
             .addHeaderWriter(new StaticHeadersWriter("X-UA-Compatible","IE=edge"))
-            .addHeaderWriter(new StaticHeadersWriter("X-XSS-Protection", "1; mode=block"))
+//            .addHeaderWriter(new StaticHeadersWriter("X-XSS-Protection", "1")) // ; mode=block;
 
 //            .defaultsDisabled()
-            .contentSecurityPolicy("script-src 'self' 'unsafe-inline' www.google-analytics.com; object-src 'self'")
+            .contentSecurityPolicy("script-src 'self' 'unsafe-inline' www.google-analytics.com; object-src 'self'; base-uri 'self'")
 //            .cacheControl()
         .and()
             .frameOptions()
@@ -150,6 +150,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/websocket/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/mail").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/database/table/statistics").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/v2/api-docs/**").permitAll()
             .antMatchers("/swagger-resources/configuration/ui").permitAll()

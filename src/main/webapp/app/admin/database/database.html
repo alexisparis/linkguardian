@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Table statistics</h2>
+    <table class="row table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>table</th>
+                <th>sequence</th>
+                <th style="text-align: right;">max pk</th>
+                <th style="text-align: right;">sequence value</th>
+                <th style="text-align: right;">count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="stat in vm.stats"
+                ng-class="{danger : stat.greatestPkValue > stat.pkSequenceNextValue || (stat.pkSequenceName && !stat.pkSequenceNextValue),
+                           info : stat.greatestPkValue = stat.pkSequenceNextValue}">
+                <td>{{stat.tablename}}</td>
+                <td>{{stat.pkSequenceName}}</td>
+                <td style="text-align: right;">{{stat.greatestPkValue}}</td>
+                <td style="text-align: right;">{{stat.pkSequenceNextValue}}</td>
+                <td style="text-align: right;">{{stat.itemCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row pull-right">
+        <md-button ng-disabled="vm.in_progress" class="md-raised" ng-click="vm.refresh()">Refresh</md-button>
+    </div>
+</div>

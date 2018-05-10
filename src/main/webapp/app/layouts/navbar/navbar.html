@@ -175,6 +175,12 @@
                                 <span>Mail</span>
                             </a>
                         </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="database" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-hdd"></span>&nbsp;
+                                <span>Database</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li ui-sref-active="active" class="hide-xs" uib-dropdown ng-controller="ToolsController" ng-if="vm.isAuthenticated() || vm.$state.is('free_tour')">

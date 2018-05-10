@@ -20,8 +20,8 @@ public class SocialUserConnection implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @SequenceGenerator(name="jhi_social_user_connection_id_seq", sequenceName="jhi_social_user_connection_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="jhi_social_user_connection_id_seq")
     private Long id;
 
     @NotNull
