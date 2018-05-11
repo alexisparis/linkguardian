@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var propertiesReader = require('properties-reader');
 
 module.exports = {
     endsWith : endsWith,
@@ -14,9 +15,11 @@ function endsWith(str, suffix) {
 
 // Returns the second occurrence of the version number from `build.gradle` file
 function parseVersion() {
-    var versionRegex = /^version\s*=\s*[',"]([^',"]*)[',"]/gm; // Match and group the version number
-    var buildGradle = fs.readFileSync('build.gradle', 'utf8');
-    return versionRegex.exec(buildGradle)[1];
+    // var versionRegex = /^version\s*=\s*[',"]([^',"]*)[',"]/gm; // Match and group the version number
+    // var buildGradle = fs.readFileSync('build.gradle', 'utf8');
+    // return versionRegex.exec(buildGradle)[1];
+    return propertiesReader('gradle.properties').get('version');
+
 }
 
 function isLintFixed(file) {
