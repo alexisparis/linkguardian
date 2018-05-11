@@ -96,7 +96,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //            .addHeaderWriter(new StaticHeadersWriter("X-XSS-Protection", "1")) // ; mode=block;
 
 //            .defaultsDisabled()
-            .contentSecurityPolicy("script-src 'self' 'unsafe-inline' www.google-analytics.com pagead2.googlesyndication.com; object-src 'self'; base-uri 'self'")
+            .contentSecurityPolicy("script-src 'self' 'unsafe-inline' www.google-analytics.com; object-src 'self'; base-uri 'self'")
 //            .cacheControl()
         .and()
             .frameOptions()
