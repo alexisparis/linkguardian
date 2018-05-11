@@ -9,8 +9,7 @@ server {
   listen      80;
   server_name linkguardian.io;
 
-  return 301 https://www.$server_name$request_uri;
-  #return 301 https://www.$host:443$request_uri;
+  return 301 http://www.$server_name$request_uri;
 }
 server {
   listen      [::]:80;
@@ -23,6 +22,7 @@ server {
   listen      [::]:443 ssl;
   listen      443 ssl http2;  # managed by Certbot
   server_name www.linkguardian.io;
+  root /var/www/linkguardian/maintenance/;
 
   ssl_certificate /etc/letsencrypt/live/linkguardian.io/fullchain.pem; # managed by Certbot
   ssl_certificate_key /etc/letsencrypt/live/linkguardian.io/privkey.pem; # managed by Certbot
