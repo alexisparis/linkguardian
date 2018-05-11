@@ -323,3 +323,13 @@ sudo certbot-auto certonly --webroot -w /opt/tomcat8/webapps/ -d linkguardian.io
     node_modules/nightwatch/bin/nightwatch src/test/nightwatch/test/demo.js --env local
     node_modules/nightwatch/bin/nightwatch src/test/nightwatch/test/login.js --env local
 
+## release process :
+
+    commit everything
+    merge develop to master 
+    switch to master
+    ./gradle release -x test
+    switch to the tag generated
+    ./bin/build-app-for-prod.sh 
+    ./bin/deploy_app_to_prod.sh
+    merge master to develop

@@ -29,6 +29,9 @@ ssh $SSH_HOST "sudo -H -u linkguardian bash -c '~/bin/backup_database.sh off pre
 echo "start service"
 ssh $SSH_HOST "sudo systemctl start linkguardian-prod"
 
+echo "wait 30 seconds for the app to start"
+sleep 30
+
 ssh $SSH_HOST "sudo -H -u linkguardian bash -c 'source ~/bin/maintenance_off.sh'"
 
 echo "FINISHED!!!"
