@@ -326,10 +326,12 @@ sudo certbot-auto certonly --webroot -w /opt/tomcat8/webapps/ -d linkguardian.io
 ## release process :
 
     commit everything
-    merge develop to master 
     switch to master
-    ./gradle release -x test
+    merge develop to master 
+    push all branches to remote
+    ./gradlew release -x test
     switch to the tag generated
     ./bin/build-app-for-prod.sh 
     ./bin/deploy_app_to_prod.sh
+    switch to develop
     merge master to develop
