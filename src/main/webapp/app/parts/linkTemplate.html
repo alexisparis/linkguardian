@@ -1,0 +1,93 @@
+<md-card class="link" ng-class="$ctrl.link.read == true ? 'link-read' : 'link-unread'" md-theme="default" md-theme-watch>
+    <md-card-title ng-click="$ctrl.redirectToLink($ctrl.link)">
+        <md-card-title-text>
+            <div class="md-headline">
+                    <span class="pull-right star-button-container">
+                        <md-button ng-click="$ctrl.showStarDialog($ctrl.link);$event.stopPropagation();" aria-label="Twitter"
+                                   class="md-fab md-raised md-mini note note-{{$ctrl.link.note}}"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{'link.actions.change_note.label' | translate}} : {{$ctrl.link.note}}/5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 -5 51 48">
+                                <!--<title>Five Pointed Star</title>-->
+                                <path fill="{{$ctrl.noteBgColor($ctrl.link)}}"
+                                      stroke="{{$ctrl.noteColor($ctrl.link)}}"
+                                      d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                            </svg>
+                        </md-button>
+                    </span>
+                <span class="title-container">
+                        <img class="favicon"
+                             src="/content/images/unknown_favicon.png"
+                             ng-src="https://www.google.com/s2/favicons?domain={{::$ctrl.link.domain}}"/>
+                        {{::$ctrl.link.title}}
+                    </span>
+            </div>
+            <span class="md-subhead">{{::$ctrl.link.description}}</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row">
+        <md-content layout="row" flex>
+            <md-chips
+                flex
+                ng-model="$ctrl.link.computedTags"
+                md-separator-keys="keys"
+                md-add-on-blur="true"
+                placeholder="{{'link.tags.tagInput.placeholder' | translate}}"
+                secondary-placeholder="{{'link.tags.tagInput.placeholder' | translate}}"
+                md-on-add="$ctrl.addTag($ctrl.link.id, $chip)"
+                md-on-remove="$ctrl.removeTag($ctrl.link.id, $chip)">
+            </md-chips>
+            <md-fab-speed-dial md-open="$ctrl.link.isOpen" md-direction="up"
+                               md-scale
+                               layout-align="end end"
+                               class="md-scale md-fab-bottom-right">
+                <md-fab-trigger>
+                    <md-button aria-label="menu" class="md-fab md-link-action md-mini">
+                        <span class="ion-navicon-round" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                    <md-button aria-label="Delete" class="md-fab md-raised md-mini"
+                               ng-click="$ctrl.deleteLink($ctrl.link.id)"
+                               data-toggle="tooltip" data-placement="right"
+                               title="{{'link.actions.delete.tooltip' | translate}}">
+                        <span class="ion-trash-a" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                    <md-button ng-show="$ctrl.link.read != true" aria-label="Mark as read" class="md-fab md-raised md-mini"
+                               ng-click="$ctrl.markAsRead($ctrl.link.id)"
+                               data-toggle="tooltip" data-placement="right"
+                               title="{{'link.actions.markAsRead.tooltip' | translate}}">
+                        <span class="ion-eye" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                    <md-button ng-show="$ctrl.link.read == true" aria-label="Mark as unread" class="md-fab md-raised md-mini"
+                               ng-click="$ctrl.markAsUnread($ctrl.link.id)"
+                               data-toggle="tooltip" data-placement="right"
+                               title="{{'link.actions.markAsUnread.tooltip' | translate}}">
+                        <span class="ion-eye-disabled" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                    <md-button class="md-fab md-raised md-mini copy-to-clipboard-button" aria-label="Copy to clipboard"
+                               ngclipboard
+                               data-clipboard-text="{{$ctrl.link.original_url}}"
+                               ngclipboard-success="$ctrl.urlCopiedToClipboard($ctrl.link)"
+                               ngclipboard-error="$ctrl.copyToClipboardOnError(e)"
+                               title="{{'link.actions.copyClipboard.tooltip' | translate}}">
+                        <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                    <md-button aria-label="Tweet" class="md-fab md-raised md-mini"
+                               ng-click="$ctrl.tweet($ctrl.link)"
+                               data-toggle="tooltip" data-placement="right"
+                               title="{{'link.actions.tweetIt.tooltip' | translate}}">
+                        <span class="ion-social-twitter" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                    <md-button aria-label="Go to" class="md-fab md-raised md-mini"
+                               ng-click="$ctrl.redirectToLink($ctrl.link)"
+                               data-toggle="tooltip" data-placement="right"
+                               title="{{'link.actions.goTo.tooltip' | translate}}">
+                        <span class="ion-forward" data-pack="default" data-tags="sort"></span>
+                    </md-button>
+                </md-fab-actions>
+            </md-fab-speed-dial>
+        </md-content>
+        </md-content>
+    </md-card-actions>
+</md-card>
