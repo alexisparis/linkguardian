@@ -4,33 +4,33 @@
     angular.module('linkguardianApp')
     .component('linkView',
         {
-            // restrict : 'E',
             bindings : {
-                link : '='
+                link : '=ref',
+                linkDeletedCallback : '&',
+                linkModifiedCallback : '&',
             },
             templateUrl: 'app/parts/linkTemplate.html',
-            // templates: '<div>toto</div>',
-            // controllerAs: 'vm',
+            controllerAs: 'vm',
             controller: ['$scope', 'ToasterService', 'MyLinks', 'translateFilter', '$mdDialog',
-                'TEMPLATES_PATH', '$log', '$window',
+                'TEMPLATES_PATH', '$log', '$window', '$mdConstant',
                 function($scope, ToasterService, MyLinks, translateFilter, $mdDialog,
-                         TEMPLATES_PATH, $log, $window) {
-                var vm = $scope;
-                // console.log("ref : ", $ctrl);
-                // this.link = this.ref;
+                         TEMPLATES_PATH, $log, $window, $mdConstant) {
+                var vm = this;
+
+                vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
 
                 // delete a link
-                vm.deleteLink = function (linkId) {
+                vm.deleteLink = function () {
                     var toast = ToasterService.displaySpinner(translateFilter('link.messages.delete.inProgress'));
-                    $log.log("deleting link " + linkId);
+                    $log.log("deleting link " + vm.link.id);
                     MyLinks.deleteLink({
-                        id: linkId
+                        id: vm.link.id
                     }).$promise.then(
                         function () {
                             ToasterService.hide(toast).then(function () {
-                                $log.log("link " + linkId + " deleted");
+                                $log.log("link " + vm.link.id + " deleted");
                                 ToasterService.displaySuccess(translateFilter('link.messages.delete.success'));
-                                removeLinkFromList(linkId);
+                                vm.linkDeletedCallback();
                             });
                         },
                         function (error) {
@@ -42,27 +42,21 @@
                 };
 
                 // mark as read
-                vm.markAsRead = function (linkId) {
+                vm.markAsRead = function () {
                     var toast = ToasterService.displaySpinner(translateFilter('link.messages.markAsRead.inProgress'));
                     MyLinks.markAsRead({
-                        id: linkId
+                        id: vm.link.id
                     }).$promise.then(
                         function (data) {
                             ToasterService.hide(toast).then(function () {
-                                $log.log("link " + linkId + " mark as read");
+                                $log.log("link " + vm.link.id + " mark as read");
                                 ToasterService.displaySuccess(translateFilter('link.messages.markAsRead.success'));
-
-                                // link is now read, if we filter read, then remove it
-                                if ($scope.search.type == 'UNREAD') {
-                                    removeLinkFromList(data.link.id);
-                                } else {
-                                    replaceLinkInList(data.link);
-                                }
+                                vm.linkModifiedCallback();
                             });
                         },
                         function (error) {
                             ToasterService.hide(toast).then(function () {
-                                $log.log("error marking as read link " + linkId);
+                                $log.log("error marking as read link " + vm.link.id);
                                 ToasterService.displayI18nError('markAsRead', error);
                             });
                         }
@@ -70,44 +64,47 @@
                 };
 
                 // mark as unread
-                vm.markAsUnread = function (linkId) {
+                vm.markAsUnread = function () {
                     var toast = ToasterService.displaySpinner(translateFilter('link.messages.markAsUnread.inProgress'));
 
                     MyLinks.markAsUnread({
-                        id: linkId
+                        id: vm.link.id
                     }).$promise.then(
                         function (data) {
                             ToasterService.hide(toast).then(function () {
-                                $log.log("link " + linkId + " mark as unread");
+                                $log.log("link " + vm.link.id + " mark as unread");
                                 ToasterService.displaySuccess(translateFilter('link.messages.markAsUnread.success'));
-
-                                // link is now unread, if we filter unread, then remove it
-                                if ($scope.search.type == 'READ') {
-                                    removeLinkFromList(data.link.id);
-                                } else {
-                                    replaceLinkInList(data.link);
-                                }
+                                vm.linkModifiedCallback();
                             });
                         },
                         function (error) {
                             ToasterService.hide(toast).then(function () {
-                                $log.log("error marking as unread link " + linkId);
+                                $log.log("error marking as unread link " + vm.link.id);
                                 ToasterService.displayI18nError('markAsUnread', error);
                             });
                         }
                     );
                 };
 
-                // tweet
-                vm.tweet = function (link) {
-                    $log.log("ask to tweet " + link);
+                vm.urlCopiedToClipboard = function() {
+                    $log.log("url " + vm.link.original_url + " copied to clipboard");
+                    ToasterService.displaySuccess(translateFilter('link.actions.copyClipboard.done'));
+                };
+                vm.copyToClipboardOnError = function(e) {
+                    $log.log("error while trying to copy to clipboard", e);
+                    ToasterService.displayError(translateFilter('link.actions.copyClipboard.error'));
+                };
 
-                    if (link) {
+                // tweet
+                vm.tweet = function () {
+                    $log.log("ask to tweet " + vm.link);
+
+                    if (vm.link) {
                         // var tweet = "";
-                        var tweet = link.title + ' ' + link.url;
-                        if (link.tags) {
-                            for (var i = 0; i < link.tags.length; i++) {
-                                var currentTag = link.tags[i];
+                        var tweet = vm.link.title + ' ' + vm.link.url;
+                        if (vm.link.tags) {
+                            for (var i = 0; i < vm.link.tags.length; i++) {
+                                var currentTag = vm.link.tags[i];
                                 tweet = tweet + ' #' + currentTag.label;
                             }
                         }
@@ -118,18 +115,9 @@
                     }
                 };
 
-                vm.redirectToLink = function (link) {
-                    scope.showLinkLifecycleDialog(link);
+                vm.redirectToLink = function () {
+                    scope.showLinkLifecycleDialog(vm.link);
                     $window.open(link.original_url, '_blank');
-                };
-
-                vm.urlCopiedToClipboard = function(link) {
-                    $log.log("url " + link.original_url + " copied to clipboard");
-                    ToasterService.displaySuccess(translateFilter('link.actions.copyClipboard.done'));
-                };
-                vm.copyToClipboardOnError = function(e) {
-                    $log.log("error while trying to copy to clipboard", e);
-                    ToasterService.displayError(translateFilter('link.actions.copyClipboard.error'));
                 };
 
                 var LinkLifecycleDialogController = function($scope, $mdDialog, link) {
@@ -168,20 +156,19 @@
                 };
 
                 // add a tag to a link
-                vm.addTag = function (linkId, tag) {
+                vm.addTag = function (tag) {
                     var focus = $document[0].activeElement;
                     console.log("focused : " + focus);
                     var toast = ToasterService.displaySpinner(translateFilter('link.messages.addTag.inProgress'));
-                    $log.log("adding tag " + tag + " for link " + linkId);
+                    $log.log("adding tag " + tag + " for link " + vm.link.id);
                     MyLinks.addTag({
-                        id: linkId,
+                        id: vm.link.id,
                         tag: tag
                     }).$promise.then(
                         function (data) {
-                            $log.log("tag '" + tag + "' added to link " + linkId);
+                            $log.log("tag '" + tag + "' added to link " + vm.link.id);
                             ToasterService.displayI18nSuccess('addTag', data);
-                            // ToasterService.displaySuccess(translateFilter('link.messages.addTag.success'));
-                            replaceLinkInList(data.link);
+                            vm.linkModifiedCallback();
 
                             // force input
                             setTimeout(function () {
@@ -190,74 +177,65 @@
                         },
                         function (error) {
                             ToasterService.hide(toast).then(function () {
-                                $log.log("error adding tag '" + tag + "' to link " + linkId);
+                                $log.log("error adding tag '" + tag + "' to link " + vm.link.id);
                                 ToasterService.displayI18nError('addTag', error);
-                                replaceLinkInList(error.data.link);
+                                vm.linkModifiedCallback();
                             });
                         }
                     );
                 };
 
                 // remove a tag to a link
-                vm.removeTag = function (linkId, tag) {
+                vm.removeTag = function (tag) {
                     var toast = ToasterService.displaySpinner(translateFilter('link.messages.removeTag.inProgress'));
-                    $log.log("removing tag " + tag + " for link " + linkId);
+                    $log.log("removing tag " + tag + " for link " + vm.link.id);
                     MyLinks.removeTag({
-                        id: linkId,
+                        id: vm.link.id,
                         tag: tag
                     }).$promise.then(
                         function (data) {
-                            $log.log("tag '" + tag + "' removed to link " + linkId);
+                            $log.log("tag '" + tag + "' removed to link " + vm.link.id);
                             ToasterService.displayI18nSuccess('removeTag', data);
                             // ToasterService.displaySuccess(translateFilter('link.messages.removeTag.success'));
-                            if (tag === $scope.search.tag_input) {
-                                removeLinkFromList(linkId);
-                            } else {
-                                replaceLinkInList(data.link);
-                            }
+                            vm.linkModifiedCallback();
                         },
                         function (error) {
-                            $log.log("error removing tag '" + tag + "' to link " + linkId);
+                            $log.log("error removing tag '" + tag + "' to link " + vm.link.id);
                             ToasterService.displayI18nError('removeTag', error);
-                            replaceLinkInList(data.link);
+                            vm.linkModifiedCallback();
                         }
                     );
                 };
 
                 // change the note
-                vm.showStarDialog = function (link) {
+                vm.showStarDialog = function () {
                     $mdDialog.show({
                         controller: StarDialogController,
                         templateUrl: TEMPLATES_PATH + 'starDialog.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
                         locals: {
-                            link: link
+                            link: vm.link
                         }
                     })
                         .then(function (rating) {
 
                             var toast = ToasterService.displaySpinner(translateFilter('link.messages.updateNote.inProgress'));
                             MyLinks.updateNote({
-                                id: link.id,
+                                id: vm.link.id,
                                 score: rating
                             }).$promise.then(
                                 function (data) {
                                     ToasterService.hide(toast).then(function () {
-                                        $log.log("link " + link.id + " note updated");
+                                        $log.log("link " + vm.link.id + " note updated");
                                         ToasterService.displaySuccess(translateFilter('link.messages.updateNote.success'));
                                         // if we sort by note, then, refresh everything
-                                        if ($scope.search.sort == 'NOTE') {
-                                            $scope.refreshLinks();
-                                        } else {
-                                            // else replace the link
-                                            replaceLinkInList(data.link);
-                                        }
+                                        vm.linkModifiedCallback();
                                     });
                                 },
                                 function (error) {
                                     ToasterService.hide(toast).then(function () {
-                                        $log.log("error updating note for link " + link.id);
+                                        $log.log("error updating note for link " + vm.link.id);
                                         ToasterService.displayI18nError('updateNote', error);
                                     });
                                 }
@@ -285,22 +263,22 @@
                     };
                 };
 
-                vm.noteBgColor = function (link) {
+                vm.noteBgColor = function () {
                     var rBase = 37;
                     var gBase = 52;
                     var bBase = 72;
 
                     var note = 0;
-                    if (link && link.note) {
-                        note = link.note;
+                    if (vm.link && vm.link.note) {
+                        note = vm.link.note;
                     }
 
                     return "rgb(" + Math.trunc(((255 - rBase) / 5) * (5 - note) + rBase) +
                         "," + Math.trunc(((255 - gBase) / 5) * (5 - note) + gBase) +
                         "," + Math.trunc(((255 - bBase) / 5) * (5 - note) + bBase) + ")";
                 };
-                vm.noteColor = function (link) {
-                    if (link && link.note && link.note > 0) {
+                vm.noteColor = function () {
+                    if (vm.link && vm.link.note && vm.link.note > 0) {
                         return "#000";
                     } else {
                         return "#bdbdbd";

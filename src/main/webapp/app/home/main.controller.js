@@ -110,8 +110,6 @@ angular.module('linkguardianApp')
                     $scope.isAuthenticated = Principal.isAuthenticated;
                 });
 
-                $scope.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
-
                 // ####################
                 // last search performed application
                 // ####################
@@ -231,17 +229,6 @@ angular.module('linkguardianApp')
 
                     return result;
                 };
-
-                /**
-                 * remove the link from the list
-                 * @param linkId the id of the link
-                 */
-                function removeLinkFromList(linkId) {
-                    var position = findIndexOfLinkWithId(linkId);
-                    if (angular.isDefined(position)) {
-                        $scope.links.splice(position, 1);
-                    }
-                }
 
                 /**
                  * method called when a modification on a link has been detected
@@ -408,7 +395,7 @@ angular.module('linkguardianApp')
                     $scope.refreshLinks();
                 };
 
-                var linkPageSize = 50;
+                var linkPageSize = 20;
                 // if mobile
                 if ($window.innerWidth <= 800 && $window.innerHeight <= 600) {
                     linkPageSize = 5;
@@ -482,6 +469,49 @@ angular.module('linkguardianApp')
                         if ($scope.noMoreLinks == true) {
                             $log.log("no more links to load => ignored");
                         }
+                    }
+                };
+
+                $scope.linkDeleted = function(link) {
+                    $log.log("link deleted ", link);
+                    var position = findIndexOfLinkWithId(link.id);
+                    if (angular.isDefined(position)) {
+                        $scope.links.splice(position, 1);
+                    }
+                };
+                $scope.linkModified = function(link) {
+                    $log.log("link modified ", link);
+
+                    var removeIt = false;
+
+                    // unread
+                    if ($scope.search.type == 'UNREAD') {
+                        removeIt = !link.read;
+                    } else {
+                        // read
+                        removeIt = link.read;
+                    }
+
+
+                    //XXAP
+
+                    // if (tag === $scope.search.tag_input) {
+                    //     removeLinkFromList(vm.link.id);
+                    // } else {
+                    //     replaceLinkInList(data.link);
+                    // }
+
+                    // if ($scope.search.sort == 'NOTE') {
+                    //     $scope.refreshLinks();
+                    // } else {
+                    //     // else replace the link
+                    //     replaceLinkInList(data.link);
+                    // }
+
+                    if (removeIt) {
+                        removeLinkFromList(link.id);
+                    } else {
+                        replaceLinkInList(link);
                     }
                 };
 

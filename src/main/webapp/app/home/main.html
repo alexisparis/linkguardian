@@ -176,8 +176,8 @@
    class="container overflow-y-visible links-container">
   <div class="dynamic-grid"
        angular-grid="links" ag-grid-width="250" ag-gutter-size="5" ag-id="gallery" ag-grid-no="auto">
-    <div ng-repeat="card in links" class="link-container">
-        <link-view link="card"/>
+    <div ng-repeat="currentLink in links" class="link-container">
+        <link-view ref="currentLink" link-deleted-callback="linkDeleted(currentLink)" link-modified-callback="linkModified(currentLink)"/>
     </div>
   </div>
 </div>
