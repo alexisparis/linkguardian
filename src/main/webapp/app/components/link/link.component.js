@@ -116,8 +116,13 @@
                 };
 
                 vm.redirectToLink = function () {
-                    scope.showLinkLifecycleDialog(vm.link);
-                    $window.open(link.original_url, '_blank');
+                    try {
+                        $window.open(vm.link.original_url, '_blank');
+                        $scope.showLinkLifecycleDialog(vm.link);
+                    } catch(err) {
+                        ToasterService.displayError(translateFilter('link.actions.redirect.opening.error'));
+                        console.log("error");
+                    }
                 };
 
                 var LinkLifecycleDialogController = function($scope, $mdDialog, link) {

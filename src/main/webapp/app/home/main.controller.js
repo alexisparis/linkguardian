@@ -655,6 +655,7 @@ angular.module('linkguardianApp')
 
                         });
                 };
+                
                 var mainScope = $scope;
 
                 // // force to load links, especially for mobile

@@ -1,14 +1,22 @@
 package org.blackdog.linkguardian.service;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import net.htmlparser.jericho.*;
+import net.htmlparser.jericho.CharacterReference;
+import net.htmlparser.jericho.Element;
+import net.htmlparser.jericho.HTMLElementName;
+import net.htmlparser.jericho.MasonTagTypes;
+import net.htmlparser.jericho.MicrosoftTagTypes;
+import net.htmlparser.jericho.PHPTagTypes;
+import net.htmlparser.jericho.Source;
+import net.htmlparser.jericho.StartTag;
 import org.blackdog.linkguardian.domain.Link;
 import org.blackdog.linkguardian.domain.Tag;
-import org.blackdog.linkguardian.repository.LinkRepository;
 import org.blackdog.linkguardian.repository.TagRepository;
-import org.blackdog.linkguardian.repository.ToxicLinkRepository;
 import org.blackdog.linkguardian.service.exception.DomainTooLongException;
 import org.blackdog.linkguardian.service.exception.LinkException;
 import org.blackdog.linkguardian.service.exception.TagTooLongException;
@@ -17,14 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.*;
-import java.util.function.Consumer;
 
 /**
  * Created by alexisparis on 16/03/16.
@@ -168,21 +168,26 @@ public class LinkBuilder {
         if ( tags != null && tags.length > 0 ) {
             for(int i = 0; i < tags.length; i++) {
                 String s = tags[i];
-                Tag byLabel = tagRepository.findByLabel(s);
-                if (byLabel == null) {
+                if (s != null) {
+                    s = s.trim();
+                    if (!s.isEmpty()) {
+                        Tag byLabel = tagRepository.findByLabel(s);
+                        if (byLabel == null) {
 
-                    LOGGER.info("creating new tag");
-                    if (s.length() > LABEL_MAX_LENGTH) {
-                        throw new TagTooLongException(s, link);
+                            LOGGER.info("creating new tag");
+                            if (s.length() > LABEL_MAX_LENGTH) {
+                                throw new TagTooLongException(s, link);
+                            }
+
+                            byLabel = new Tag();
+                            byLabel.setLabel(s);
+
+                            tagRepository.save(byLabel);
+                        }
+
+                        link.getTags().add(byLabel);
                     }
-
-                    byLabel = new Tag();
-                    byLabel.setLabel(s);
-
-                    tagRepository.save(byLabel);
                 }
-
-                link.getTags().add(byLabel);
             }
         }
     }
