@@ -869,8 +869,13 @@ angular.module('linkguardianApp')
                 };
 
                 $scope.redirectToLink = function (link) {
-                    $scope.showLinkLifecycleDialog(link);
-                    $window.open(link.original_url, '_blank');
+                    try {
+                        $window.open(link.original_url, '_blank');
+                        $scope.showLinkLifecycleDialog(link);
+                    } catch(err) {
+                        ToasterService.displayError(translateFilter('link.actions.redirect.opening.error'));
+                        console.log("error");
+                    }
                 };
 
                 $scope.urlCopiedToClipboard = function(link) {

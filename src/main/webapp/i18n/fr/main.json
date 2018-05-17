@@ -66,6 +66,11 @@
             }
         },
         "actions": {
+            "redirect" : {
+                "opening" : {
+                    "error" : "Impossible d'ouvrir le lien"
+                }
+            },
             "tweetIt": {
                 "tooltip": "Tweeter"
             },
