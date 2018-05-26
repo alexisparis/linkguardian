@@ -1,4 +1,4 @@
-angular.module("linkguardianApp").directive("dragCircularMenu",function(){
+angular.module("linkguardianApp").directive("circularMenu",function(){
     return {
         restrict: 'EA',
         replace:true,
@@ -25,12 +25,15 @@ angular.module("linkguardianApp").directive("dragCircularMenu",function(){
             '</button>'+
             '<div class="menu-list1 {{positionClass}}" style="pointer-events:none;position:relative;width:{{width}}px;height:{{height}}px;' +
                                                              'left:{{button.buttonWidth/2}}px;top: -{{height/2 - button.buttonWidth/2}}px;">'+
+                '{{wing.show}}' +
                 '<div ng-repeat="wing in wings" ' +
+                    'ng-hides="wing.show == 0" ' +
                     'data-toggle="tooltip" data-placement="top" title="{{wing.tooltip | translate}}" ' +
                     'class="{{positionClass}} {{open}} {{rotate}}" ' +
                     'style="pointer-events:none;width:{{width}}px;height:{{height}}px;' +
                            'position:absolute;transition: all .3s cubic-bezier(0.680, -0.550, 0.265, 1.550);transform-origin: 0px {{height/2}}px;' +
                            'transform:rotate({{wing.rotate}}) scale({{wing.show}});cursor:pointer;">'+
+                    //'{{wing.rotate}}' +
                     '<svg ng-attr-width="{{width}}px" ng-attr-height="{{height}}px" >'+
                         '<path ' +
                             'ng-attr-d="{{path}}" style="fill:{{wing.color}};pointer-events:auto;" ' +
@@ -84,51 +87,10 @@ angular.module("linkguardianApp").directive("dragCircularMenu",function(){
             var windowElement = angular.element(window)[0];
             var centreX = windowElement.innerWidth/2 - scope.button.buttonWidth/2;
             var centreY = windowElement.innerHeight/2 - scope.button.buttonWidth/2;
+            console.log("scope.positionClass : " + scope.positionClass);
             windowElement.onresize = function(){
                 centreX = windowElement.innerWidth/2 - scope.button.buttonWidth/2;
                 centreY = windowElement.innerHeight/2 - scope.button.buttonWidth/2;
-                if(scope.positionClass == "bottomRight"){
-                    elem.css({
-                        width: scope.button.buttonWidth+'px',
-                        height: scope.button.buttonWidth+'px',
-                        top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom)+'px',
-                        left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right)+'px'
-                    });
-                }
-                else if(scope.positionClass == "bottomLeft"){
-                    elem.css({
-                        width: scope.button.buttonWidth+'px',
-                        height: scope.button.buttonWidth+'px',
-                        top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom)+'px',
-                        left: scope.button.gutter.left+'px'
-                    });
-                }
-                else if(scope.positionClass == "topRight"){
-                    elem.css({
-                        width: scope.button.buttonWidth+'px',
-                        height: scope.button.buttonWidth+'px',
-                        top: scope.button.gutter.top+'px',
-                        left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right)+'px'
-                    });
-                }
-            }
-            if(scope.positionClass == "topLeft"){
-                elem.css({
-                    width: scope.button.buttonWidth+'px',
-                    height: scope.button.buttonWidth+'px',
-                    top: scope.button.gutter.top+'px',
-                    left:scope.button.gutter.left+'px'
-                });
-            }
-            else if(scope.positionClass == "topRight"){
-                elem.css({
-                    width: scope.button.buttonWidth+'px',
-                    height: scope.button.buttonWidth+'px',
-                    top: scope.button.gutter.top+'px',
-                    left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right)+'px'
-                });
-            }
-            else if(scope.positionClass == "bottomRight"){
                 elem.css({
                     width: scope.button.buttonWidth+'px',
                     height: scope.button.buttonWidth+'px',
@@ -136,14 +98,13 @@ angular.module("linkguardianApp").directive("dragCircularMenu",function(){
                     left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right)+'px'
                 });
             }
-            else if(scope.positionClass == "bottomLeft"){
-                elem.css({
-                    width: scope.button.buttonWidth+'px',
-                    height: scope.button.buttonWidth+'px',
-                    top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom)+'px',
-                    left: scope.button.gutter.left+'px'
-                });
-            }
+            elem.css({
+                width: scope.button.buttonWidth+'px',
+                height: scope.button.buttonWidth+'px',
+                top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom)+'px',
+                left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right)+'px'
+            });
+
             var startX = 0, startY = 0, x = 20, y =  20;
             var drag = false;
             var dragStart = false;
@@ -153,9 +114,143 @@ angular.module("linkguardianApp").directive("dragCircularMenu",function(){
             elem[0].addEventListener('touchmove',touchmove, false);
             elem[0].addEventListener('mouseup', mouseup, false);
             elem[0].addEventListener("touchend", touchend, false);
+            scope.toggleMenu = function(){
+                var textElem = angular.element(elem).find('.wing-text');
+                if(drag == true){
+                    scope.jumpAnim = "jumpAnim";
+                    elem.css({"transition":"all 900ms cubic-bezier(0.680, -0.550, 0.265, 1.550)"});
+                    setTimeout(function(){
+                        scope.jumpAnim = "";
+                        elem.css({"transition":"none"});
+                        scope.$apply();
+                    },900);
+
+                    elem.css({
+                        top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom) + 'px',
+                        left:  scope.button.gutter.left+'px'
+                    });
+                    y = windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom;
+                    x = scope.button.gutter.left;
+                    scope.positionClass = "bottomLeft";
+                    scope.adjustMenu();
+                    textElem.attr('transform','rotate(0,'+scope.width/2+','+scope.height/2+')');
+                    textElem.attr('text-anchor','left');
+                    drag = false;
+                }
+                else if(drag == false){
+                    if(scope.open == "menuclose"){
+                        scope.openWings(scope.wings);
+                        elem[0].children[0].children[0].style.transform = "scale(0)";
+                        elem[0].children[0].children[1].style.transform = "scale(1)";
+
+                        //angular.element(elem[0]).find("span").css({"transform":"scale(0)"});
+                        //angular.element(elem[0]).find("img").css({"transform":"scale(1)"});
+                        if(scope.positionClass == "topRight" || scope.positionClass == "bottomRight"){
+                            textElem.attr('transform','rotate(180,'+scope.width/2+','+scope.height/2+')');
+                            textElem.attr('text-anchor','middle');
+                        }
+                        setTimeout(function(){
+                            scope.rotateWings(scope.wings);
+                            //scope.open = "menuopen";
+                            scope.$apply();
+                        },400);
+                        setTimeout(function(){
+                            scope.open = "menuopen";
+                            scope.$apply();
+                        },600);
+                    }
+                    else{
+                        scope.rotateWings(scope.wings);
+                        elem[0].children[0].children[0].style.transform = "scale(1)";
+                        elem[0].children[0].children[1].style.transform = "scale(0)";
+                        //angular.element(elem[0]).find("span").css({"transform":"scale(1)"});
+                        //angular.element(elem[0]).find("img").css({"transform":"scale(0)"});
+                        setTimeout(function(){
+                            scope.closeWings(scope.wings);
+                            scope.open = "menuclose";
+                            scope.$apply();
+                        },400);
+                    }
+                }
+            };
+            scope.initMenu = function(){
+                angular.forEach(scope.wings,function(item,index){
+                    item.rotate = scope.button.angles.bottomRight+"deg";
+                    console.log("initMenu :: for " + item.title + " rotate => " + item.rotate);
+                });
+            }
+            scope.adjustMenu = function(){
+                var index = 0;
+                angular.forEach(scope.wings,function(item,idx){
+
+                    console.log("" + item.label + " => " + item.isVisible);
+                    if (!item.isVisible || item.isVisible()) {
+
+                        if (scope.open == "menuopen") {
+                            item.rotate = (scope.button.angles.bottomRight + index * angle) + "deg";
+                        }
+                        else if (scope.open == "menuclose") {
+                            item.rotate = scope.button.angles.bottomRight + "deg";
+                        }
+                        index = index+1;
+                        console.log("adjustMenu :: for " + item.title + " rotate => " + item.rotate);
+                    }
+                });
+            };
+            scope.rotateWings = function(wings){
+
+                var index = 0;
+                angular.forEach(wings,function(item,idx){
+
+                    if (!item.isVisible || item.isVisible()) {
+
+                        if (scope.open == "menuclose") {
+                            item.rotate = (scope.button.angles.bottomRight + index * angle) + "deg";
+                        }
+                        else {
+                            item.rotate = scope.button.angles.bottomRight + "deg";
+                        }
+                        index = index + 1;
+                        console.log("rotatewings :: for " + item.title + " rotate => " + item.rotate);
+                    }
+                });
+            };
+            scope.openWings = function(wings){
+                angular.forEach(wings,function(item){
+
+                    // item.show = 0;
+                    if (!item.isVisible || item.isVisible()) {
+                        item.show = 1;
+                    }
+                });
+            };
+            scope.closeWings = function(wings){
+                angular.forEach(wings,function(item){
+                    item.show = 0;
+                });
+            };
+            scope.initMenu();
+
+            /////////// XXAP
+
+            scope.hoverIn = function(wing,event){
+                if(scope.open == "menuopen"){
+                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+") scale(1.08)");
+                }
+            };
+            scope.hoverOut = function(wing,event){
+                if(scope.open == "menuopen"){
+                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+") scale(1)");
+                }
+            };
+
+            scope.wingClick = function(wing){
+                scope.onwingClick({"wing":wing});
+                scope.toggleMenu();
+            }
+
             function mousedown(event) {
                 if(event.target.tagName == "BUTTON"){
-
                     scope.jumpAnim = "";
                     event.preventDefault();
                     startX = event.offsetX;
@@ -197,213 +292,6 @@ angular.module("linkguardianApp").directive("dragCircularMenu",function(){
                     scope.toggleMenu();
                     drag = false;
                 }
-
-
-            }
-            scope.toggleMenu = function(){
-                var textElem = angular.element(elem).find('.wing-text');
-                if(drag == true){
-                    scope.jumpAnim = "jumpAnim";
-                    elem.css({"transition":"all 900ms cubic-bezier(0.680, -0.550, 0.265, 1.550)"});
-                    setTimeout(function(){
-                        scope.jumpAnim = "";
-                        elem.css({"transition":"none"});
-                        scope.$apply();
-                    },900);
-
-                    // if(y > centreY && x < centreX){
-                        elem.css({
-                            top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom) + 'px',
-                            left:  scope.button.gutter.left+'px'
-                        });
-                        y = windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom;
-                        x = scope.button.gutter.left;
-                        scope.positionClass = "bottomLeft";
-                        scope.adjustMenu("bottomLeft");
-                        textElem.attr('transform','rotate(0,'+scope.width/2+','+scope.height/2+')');
-                        textElem.attr('text-anchor','left');
-                    // }
-                    // else if(y < centreY && x < centreX){
-                    //     elem.css({
-                    //         top: scope.button.gutter.top+'px',
-                    //         left: scope.button.gutter.left+'px'
-                    //     });
-                    //     y  = scope.button.gutter.top;
-                    //     x = scope.button.gutter.left;
-                    //     scope.positionClass = "topLeft";
-                    //     scope.adjustMenu("topLeft");
-                    //     textElem.attr('transform','rotate(0,'+scope.width/2+','+scope.height/2+')');
-                    //     textElem.attr('text-anchor','left');
-                    // }
-                    // else if(y < centreY && x > centreX){
-                    //     elem.css({
-                    //         top: scope.button.gutter.top+'px',
-                    //         left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right) + 'px'
-                    //     });
-                    //     y  = scope.button.gutter.top;
-                    //     x = windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right ;
-                    //     scope.positionClass = "topRight";
-                    //     scope.adjustMenu("topRight");
-                    //     textElem.attr('transform','rotate(180,'+scope.width/2+','+scope.height/2+')');
-                    //     textElem.attr('text-anchor','middle');
-                    // }
-                    // else if(y > centreY && x > centreX){
-                    //     elem.css({
-                    //         top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom) + 'px',
-                    //         left: (windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right) + 'px'
-                    //     });
-                    //     y  = windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom;
-                    //     x = windowElement.innerWidth-scope.button.buttonWidth - scope.button.gutter.right ;
-                    //     scope.positionClass = "bottomRight";
-                    //     scope.adjustMenu("bottomRight");
-                    //     textElem.attr('transform','rotate(180,'+scope.width/2+','+scope.height/2+')');
-                    //     textElem.attr('text-anchor','middle');
-                    // }
-                    drag = false;
-                }
-                else if(drag == false){
-                    if(scope.open == "menuclose"){
-                        scope.openWings(scope.wings);
-                        elem[0].children[0].children[0].style.transform = "scale(0)";
-                        elem[0].children[0].children[1].style.transform = "scale(1)";
-
-                        //angular.element(elem[0]).find("span").css({"transform":"scale(0)"});
-                        //angular.element(elem[0]).find("img").css({"transform":"scale(1)"});
-                        if(scope.positionClass == "topRight" || scope.positionClass == "bottomRight"){
-                            textElem.attr('transform','rotate(180,'+scope.width/2+','+scope.height/2+')');
-                            textElem.attr('text-anchor','middle');
-                        }
-                        setTimeout(function(){
-                            scope.rotateWings(scope.wings);
-                            //scope.open = "menuopen";
-                            scope.$apply();
-                        },400);
-                        setTimeout(function(){
-                            scope.open = "menuopen";
-                            scope.$apply();
-                        },600);
-                    }
-                    else{
-                        scope.rotateWings(scope.wings);
-                        elem[0].children[0].children[0].style.transform = "scale(1)";
-                        elem[0].children[0].children[1].style.transform = "scale(0)";
-                        //angular.element(elem[0]).find("span").css({"transform":"scale(1)"});
-                        //angular.element(elem[0]).find("img").css({"transform":"scale(0)"});
-                        setTimeout(function(){
-                            scope.closeWings(scope.wings);
-                            scope.open = "menuclose";
-                            scope.$apply();
-                        },400);
-
-
-                    }
-                }
-            };
-            scope.initMenu = function(position){
-                angular.forEach(scope.wings,function(item,index){
-                    if(position == "topLeft"){
-                        item.rotate = scope.button.angles.topLeft+"deg";
-                    }
-                    else if(position == "topRight"){
-                        item.rotate = scope.button.angles.topRight+"deg";
-                    }
-                    else if(position == "bottomRight"){
-                        item.rotate = scope.button.angles.bottomRight+"deg";
-                    }
-                    else if(position == "bottomLeft"){
-                        item.rotate = scope.button.angles.bottomLeft+"deg";
-                    }
-                });
-                if(scope.defaultOpen == "true"){
-                    scope.toggleMenu();
-                }
-            }
-            scope.adjustMenu = function(position){
-                var positions = "bottomRight";
-                angular.forEach(scope.wings,function(item,index){
-                    if(position == "topLeft" && scope.open == "menuopen"){
-                        item.rotate = (scope.button.angles.topLeft + index*angle)+"deg";
-                    }
-                    else if(position == "topLeft" && scope.open == "menuclose"){
-                        item.rotate = scope.button.angles.topLeft+"deg";
-                    }
-                    else if(position == "topRight" && scope.open == "menuopen"){
-                        item.rotate = (scope.button.angles.topRight + index*angle)+"deg";
-                    }
-                    else if(position == "topRight" && scope.open == "menuclose"){
-                        item.rotate = scope.button.angles.topRight+"deg";
-                    }
-                    else if(position == "bottomRight" && scope.open == "menuopen"){
-                        item.rotate = (scope.button.angles.bottomRight + index*angle)+"deg";
-                    }
-                    else if(position == "bottomRight" && scope.open == "menuclose"){
-                        item.rotate = scope.button.angles.bottomRight+"deg";
-                    }
-                    else if(position == "bottomLeft" && scope.open == "menuopen"){
-                        item.rotate = (scope.button.angles.bottomLeft + index*angle)+"deg";
-                    }
-                    else if(position == "bottomLeft" && scope.open == "menuclose"){
-                        item.rotate = scope.button.angles.bottomLeft+"deg";
-                    }
-                });
-            };
-            scope.hoverIn = function(wing,event){
-                if(scope.open == "menuopen"){
-                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+") scale(1.08)");
-                }
-            };
-            scope.hoverOut = function(wing,event){
-                if(scope.open == "menuopen"){
-                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+") scale(1)");
-                }
-            }
-            scope.openWings = function(wings){
-                angular.forEach(wings,function(item){
-                    item.show = 1;
-                });
-            }
-            scope.closeWings = function(wings){
-                angular.forEach(wings,function(item){
-                    item.show = 0;
-                });
-            }
-            scope.rotateWings = function(wings){
-                angular.forEach(wings,function(item,index){
-                    if(scope.open == "menuclose"){
-                        if(scope.positionClass == "topLeft"){
-                            item.rotate = (scope.button.angles.topLeft + index*angle)+"deg";
-                        }
-                        else if(scope.positionClass == "topRight"){
-                            item.rotate = (scope.button.angles.topRight + index*angle)+"deg";
-                        }
-                        else if(scope.positionClass == "bottomRight"){
-                            item.rotate = (scope.button.angles.bottomRight + index*angle)+"deg";
-                        }
-                        else if(scope.positionClass == "bottomLeft"){
-                            item.rotate = (scope.button.angles.bottomLeft + index*angle)+"deg";
-                        }
-
-                    }
-                    else{
-                        if(scope.positionClass == "topLeft"){
-                            item.rotate = scope.button.angles.topLeft+"deg";
-                        }
-                        else if(scope.positionClass == "topRight"){
-                            item.rotate = scope.button.angles.topRight+"deg";
-                        }
-                        else if(scope.positionClass == "bottomRight"){
-                            item.rotate = scope.button.angles.bottomRight+"deg";
-                        }
-                        else if(scope.positionClass == "bottomLeft"){
-                            item.rotate = scope.button.angles.bottomLeft+"deg";
-                        }
-                    }
-                });
-            }
-            scope.initMenu(scope.positionClass);
-            scope.wingClick = function(wing){
-                scope.onwingClick({"wing":wing});
-                scope.toggleMenu();
             }
         }
     }
