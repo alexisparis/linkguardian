@@ -130,67 +130,79 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
             var drag = false;
             var dragStart = false;
 
+            scope.inToggle = false;
+
             elem[0].addEventListener('mousedown',mousedown,false );
             document.addEventListener('mousemove', mousemove, false);
             elem[0].addEventListener('touchmove',touchmove, false);
             elem[0].addEventListener('mouseup', mouseup, false);
             elem[0].addEventListener("touchend", touchend, false);
             scope.toggleMenu = function(){
-                var textElem = angular.element(elem).find('.wing-text');
-                if(drag == true){
-                    scope.jumpAnim = "jumpAnim";
-                    elem.css({"transition":"all 900ms cubic-bezier(0.680, -0.550, 0.265, 1.550)"});
-                    setTimeout(function(){
-                        scope.jumpAnim = "";
-                        elem.css({"transition":"none"});
-                        scope.$apply();
-                    },900);
+                if (!scope.inToggle) {
+                    scope.inToggle = true;
+                    try {
+                        var textElem = angular.element(elem).find('.wing-text');
+                        if (drag == true) {
+                            scope.jumpAnim = "jumpAnim";
+                            elem.css({"transition": "all 900ms cubic-bezier(0.680, -0.550, 0.265, 1.550)"});
+                            setTimeout(function () {
+                                scope.jumpAnim = "";
+                                elem.css({"transition": "none"});
+                                scope.$apply();
+                                scope.inToggle = false;
+                            }, 900);
 
-                    elem.css({
-                        top: (windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom) + 'px',
-                        left:  scope.button.gutter.left+'px'
-                    });
-                    y = windowElement.innerHeight- scope.button.buttonWidth - scope.button.gutter.bottom;
-                    x = scope.button.gutter.left;
-                    scope.positionClass = "bottomLeft";
-                    scope.adjustMenu();
-                    textElem.attr('transform','rotate(0,'+scope.width/2+','+scope.height/2+')');
-                    textElem.attr('text-anchor','left');
-                    drag = false;
-                }
-                else if(drag == false){
-                    if(scope.open == "menuclose"){
-                        scope.openWings(scope.wings);
-                        elem[0].children[0].children[0].style.transform = "scale(0)";
-                        elem[0].children[0].children[1].style.transform = "scale(1)";
-
-                        //angular.element(elem[0]).find("span").css({"transform":"scale(0)"});
-                        //angular.element(elem[0]).find("img").css({"transform":"scale(1)"});
-                        if(scope.positionClass == "topRight" || scope.positionClass == "bottomRight"){
-                            textElem.attr('transform','rotate(180,'+scope.width/2+','+scope.height/2+')');
-                            textElem.attr('text-anchor','middle');
+                            elem.css({
+                                top: (windowElement.innerHeight - scope.button.buttonWidth - scope.button.gutter.bottom) + 'px',
+                                left: scope.button.gutter.left + 'px'
+                            });
+                            y = windowElement.innerHeight - scope.button.buttonWidth - scope.button.gutter.bottom;
+                            x = scope.button.gutter.left;
+                            scope.positionClass = "bottomLeft";
+                            scope.adjustMenu();
+                            textElem.attr('transform', 'rotate(0,' + scope.width / 2 + ',' + scope.height / 2 + ')');
+                            textElem.attr('text-anchor', 'left');
+                            drag = false;
                         }
-                        setTimeout(function(){
-                            scope.rotateWings(scope.wings);
-                            //scope.open = "menuopen";
-                            scope.$apply();
-                        },400);
-                        setTimeout(function(){
-                            scope.open = "menuopen";
-                            scope.$apply();
-                        },600);
-                    }
-                    else{
-                        scope.rotateWings(scope.wings);
-                        elem[0].children[0].children[0].style.transform = "scale(1)";
-                        elem[0].children[0].children[1].style.transform = "scale(0)";
-                        //angular.element(elem[0]).find("span").css({"transform":"scale(1)"});
-                        //angular.element(elem[0]).find("img").css({"transform":"scale(0)"});
-                        setTimeout(function(){
-                            scope.closeWings(scope.wings);
-                            scope.open = "menuclose";
-                            scope.$apply();
-                        },400);
+                        else if (drag == false) {
+                            if (scope.open == "menuclose") {
+                                scope.openWings(scope.wings);
+                                elem[0].children[0].children[0].style.transform = "scale(0)";
+                                elem[0].children[0].children[1].style.transform = "scale(1)";
+
+                                //angular.element(elem[0]).find("span").css({"transform":"scale(0)"});
+                                //angular.element(elem[0]).find("img").css({"transform":"scale(1)"});
+                                if (scope.positionClass == "topRight" || scope.positionClass == "bottomRight") {
+                                    textElem.attr('transform', 'rotate(180,' + scope.width / 2 + ',' + scope.height / 2 + ')');
+                                    textElem.attr('text-anchor', 'middle');
+                                }
+                                setTimeout(function () {
+                                    scope.rotateWings(scope.wings);
+                                    //scope.open = "menuopen";
+                                    scope.$apply();
+                                }, 400);
+                                setTimeout(function () {
+                                    scope.open = "menuopen";
+                                    scope.$apply();
+                                    scope.inToggle = false;
+                                }, 600);
+                            }
+                            else {
+                                scope.rotateWings(scope.wings);
+                                elem[0].children[0].children[0].style.transform = "scale(1)";
+                                elem[0].children[0].children[1].style.transform = "scale(0)";
+                                //angular.element(elem[0]).find("span").css({"transform":"scale(1)"});
+                                //angular.element(elem[0]).find("img").css({"transform":"scale(0)"});
+                                setTimeout(function () {
+                                    scope.closeWings(scope.wings);
+                                    scope.open = "menuclose";
+                                    scope.$apply();
+                                    scope.inToggle = false;
+                                }, 400);
+                            }
+                        }
+                    } catch(error) {
+                        scope.inToggle = false;
                     }
                 }
             };
