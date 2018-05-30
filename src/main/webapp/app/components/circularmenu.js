@@ -3,6 +3,7 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
         restrict: 'EA',
         replace:true,
         scope:{
+            menuId:"=",
             angle:"=",
             placement:"@",
             buttonConfig:"=",
@@ -27,7 +28,6 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
                                                              'left:{{button.buttonWidth/2}}px;top: -{{height/2 - button.buttonWidth/2}}px;">'+
                 '{{wing.show}}' +
                 '<div ng-repeat="wing in wings" ' +
-                    'ng-hides="wing.show == 0" ' +
                     'data-toggle="tooltip" data-placement="top" title="{{wing.tooltip | translate}}" ' +
                     'class="{{positionClass}} {{open}} {{rotate}}" ' +
                     'style="pointer-events:none;width:{{width}}px;height:{{height}}px;' +
@@ -53,7 +53,6 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
             '</div>'+
         '</div>',
         link:function(scope,elem,attr){
-
 
             // scope.icon_rotation = function(rotation){
             //     //console.log("call icon_rotation(" + rotation + ")");
@@ -238,7 +237,17 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
                     }
                 });
             };
+
+            scope.$root.$on('link-circular-menu-opening', function (event, data) {
+                if ( scope.open == "menuopen" && data.menuId != scope.menuId ) {
+                    scope.toggleMenu();
+                }
+            });
+
             scope.openWings = function(wings){
+                scope.$root.$broadcast('link-circular-menu-opening', {
+                    menuId : scope.menuId
+                });
                 angular.forEach(wings,function(item){
 
                     // item.show = 0;
