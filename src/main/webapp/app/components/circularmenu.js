@@ -32,9 +32,9 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
                     'class="{{positionClass}} {{open}} {{rotate}}" ' +
                     'style="pointer-events:none;width:{{width}}px;height:{{height}}px;' +
                            'position:absolute;transition: all .3s cubic-bezier(0.680, -0.550, 0.265, 1.550);transform-origin: 0px {{height/2}}px;' +
-                           'transform:rotate({{wing.rotate}}) scale({{wing.show}});cursor:pointer;">'+
+                           'transform:rotate({{wing.rotate}}deg) scale({{wing.show}});cursor:pointer;">'+
                     //'{{wing.rotate}}' +
-                    '<svg ng-attr-width="{{width}}px" ng-attr-height="{{height}}px" >'+
+                    '<svg ng-attr-width="{{width}}px" ng-attr-height="{{height}}px">'+
                         '<path ' +
                             'ng-attr-d="{{path}}" style="fill:{{wing.color}};pointer-events:auto;" ' +
                             'ng-click="wingClick(wing)" ng-mouseover="hoverIn(wing,$event)" ' +
@@ -45,13 +45,36 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
                             'ng-attr-transform="rotate({{initialTextAngle}},{{width/2}},{{height/2}})">{{wing.title}}</text>'+
                     '</svg>'+
                     '<i ng-if="button.showIcons" ' +
+                        'data-fa-transform="rotate-180" ' +
                         'style="color:{{wing.icon.color}};text-align:center;font-size:{{wing.icon.size}}px;width:{{wing.icon.size}}px;' +
-                            'height: {{wing.icon.size}}px;transform-origin: 80% 50%;transform: translate({{iconX}}px, -{{iconY}}px) rotate(-{{wing.rotate}})" ' +
-                        'class="{{wing.icon.name}}"></i>'+
+                            'height: {{wing.icon.size}}px;transform-origin: 80% 50%;transform: translate({{iconX+15}}px, -{{iconY}}px)" ' + //  rotate(-{{wing.rotate}}deg)
+                        'class="{{wing.icon.name}}" classa="fas fa-trash"></i>'+
                 '</div>'+
             '</div>'+
         '</div>',
         link:function(scope,elem,attr){
+
+
+            // scope.icon_rotation = function(rotation){
+            //     //console.log("call icon_rotation(" + rotation + ")");
+            //     return 180 - rotation;
+            //     // var x = 0;
+            //     // if (rotation == 180) {
+            //     //     x = 1;
+            //     // } else if (rotation == 204) {
+            //     //     x = -24;
+            //     // } else if (rotation == 228) {
+            //     //     return -54;
+            //     // }
+            //     // return x + 180;
+            //
+            //     // rotatewings :: for delete rotate => 180
+            //     // circularmenu.js:221 rotatewings :: for tweet rotate => 204
+            //     // circularmenu.js:221 rotatewings :: for copyToClipboard rotate => 228
+            //     // circularmenu.js:221 rotatewings :: for markAsRead rotate => 252
+            //     // circularmenu.js:221 rotatewings :: for goTo rotate => 276
+            // }
+
             scope.wings = scope.menuItems || [];
             scope.button = scope.buttonConfig || {};
             scope.positionClass = scope.placement || "bottomLeft";
@@ -87,7 +110,6 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
             var windowElement = angular.element(window)[0];
             var centreX = windowElement.innerWidth/2 - scope.button.buttonWidth/2;
             var centreY = windowElement.innerHeight/2 - scope.button.buttonWidth/2;
-            console.log("scope.positionClass : " + scope.positionClass);
             windowElement.onresize = function(){
                 centreX = windowElement.innerWidth/2 - scope.button.buttonWidth/2;
                 centreY = windowElement.innerHeight/2 - scope.button.buttonWidth/2;
@@ -175,25 +197,24 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
             };
             scope.initMenu = function(){
                 angular.forEach(scope.wings,function(item,index){
-                    item.rotate = scope.button.angles.bottomRight+"deg";
-                    console.log("initMenu :: for " + item.title + " rotate => " + item.rotate);
+                    item.rotate = scope.button.angles.bottomRight;//+"deg";
+                    // console.log("initMenu :: for " + item.title + " rotate => " + item.rotate);
                 });
             }
             scope.adjustMenu = function(){
                 var index = 0;
                 angular.forEach(scope.wings,function(item,idx){
 
-                    console.log("" + item.label + " => " + item.isVisible);
-                    if (!item.isVisible || item.isVisible()) {
+                    if ((!item.isVisible || item.isVisible() == true) || scope.open != "menuclose") {
 
                         if (scope.open == "menuopen") {
-                            item.rotate = (scope.button.angles.bottomRight + index * angle) + "deg";
+                            item.rotate = (scope.button.angles.bottomRight + index * angle);// + "deg";
                         }
                         else if (scope.open == "menuclose") {
-                            item.rotate = scope.button.angles.bottomRight + "deg";
+                            item.rotate = scope.button.angles.bottomRight;// + "deg";
                         }
                         index = index+1;
-                        console.log("adjustMenu :: for " + item.title + " rotate => " + item.rotate);
+                        //console.log("adjustMenu :: for " + item.title + " rotate => " + item.rotate);
                     }
                 });
             };
@@ -202,16 +223,18 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
                 var index = 0;
                 angular.forEach(wings,function(item,idx){
 
-                    if (!item.isVisible || item.isVisible()) {
+                    if ((!item.isVisible || item.isVisible() == true) || scope.open != "menuclose") {
 
                         if (scope.open == "menuclose") {
-                            item.rotate = (scope.button.angles.bottomRight + index * angle) + "deg";
+                            item.rotate = (scope.button.angles.bottomRight + index * angle);// + "deg";
+                            // item.icon.rotate = scope.icon_rotation(item.rotate);
                         }
                         else {
-                            item.rotate = scope.button.angles.bottomRight + "deg";
+                            item.rotate = scope.button.angles.bottomRight;// + "deg";
+                            // item.icon.rotate = scope.icon_rotation(item.rotate);
                         }
                         index = index + 1;
-                        console.log("rotatewings :: for " + item.title + " rotate => " + item.rotate);
+                        // console.log("rotatewings :: for " + item.title + " rotate => " + item.rotate);
                     }
                 });
             };
@@ -235,12 +258,12 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
 
             scope.hoverIn = function(wing,event){
                 if(scope.open == "menuopen"){
-                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+") scale(1.08)");
+                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+"deg) scale(1.08)");
                 }
             };
             scope.hoverOut = function(wing,event){
                 if(scope.open == "menuopen"){
-                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+") scale(1)");
+                    angular.element(event.target).parent().parent().css("transform","rotate("+wing.rotate+"deg) scale(1)");
                 }
             };
 
