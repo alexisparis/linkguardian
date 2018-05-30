@@ -36,7 +36,8 @@ md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
     }
 }
 
-.audit-item-action-container .btn:not(.btn-raised) > .glyphicon, .audit-item-action-container .input-group-btn .btn:not(.btn-raised) > .glyphicon {
+.audit-item-action-container .btn:not(.btn-raised) > .glyphicon, .audit-item-action-container .input-group-btn .btn:not(.btn-raised) > .glyphicon,
+.audit-item-action-container .btn:not(.btn-raised) > .fas, .audit-item-action-container .input-group-btn .btn:not(.btn-raised) > .fas{
     color: #fff !important;
 }
 

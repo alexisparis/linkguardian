@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="link.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="fas fa-plus-square"></span>
                     <span class="hidden-xs-down"  data-translate="linkguardianApp.link.home.createLabel">
                         Create new Link
                     </span>
@@ -17,12 +17,12 @@
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'linkguardianApp.link.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
-                                <span class="glyphicon glyphicon-search"></span>
+                                <span class="fas fa-search"></span>
                             </button>
                         </span>
                         <span class="input-group-btn width-min" ng-if="vm.currentSearch">
                             <button class="btn btn-info" ng-click="vm.clear()">
-                                <span class="glyphicon glyphicon-trash"></span>
+                                <span class="fas fa-trash"></span>
                             </button>
                         </span>
                     </div>
@@ -39,17 +39,17 @@
         <table class="jh-table table table-striped table-hover table-condensed">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.link.creation_date">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span data-translate="linkguardianApp.link.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="domain"><span data-translate="linkguardianApp.link.domain">Domain</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="locked"><span data-translate="linkguardianApp.link.locked">Locked</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="note"><span data-translate="linkguardianApp.link.note">Note</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="read"><span data-translate="linkguardianApp.link.read">Read</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="title"><span data-translate="linkguardianApp.link.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="url"><span data-translate="linkguardianApp.link.url">Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="originalUrl"><span data-translate="linkguardianApp.link.original_url">Original Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.login"><span data-translate="linkguardianApp.link.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.link.creation_date">Creation Date</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="description"><span data-translate="linkguardianApp.link.description">Description</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="domain"><span data-translate="linkguardianApp.link.domain">Domain</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="locked"><span data-translate="linkguardianApp.link.locked">Locked</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="note"><span data-translate="linkguardianApp.link.note">Note</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="read"><span data-translate="linkguardianApp.link.read">Read</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="title"><span data-translate="linkguardianApp.link.title">Title</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="url"><span data-translate="linkguardianApp.link.url">Url</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="originalUrl"><span data-translate="linkguardianApp.link.original_url">Original Url</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="user.login"><span data-translate="linkguardianApp.link.user">User</span> <span class="fas fa-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -83,17 +83,17 @@
                             <button type="submit"
                                     ui-sref="link-detail({id:link.id})"
                                     class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="fas fa-eye"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="link.edit({id:link.id})"
                                     class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="fas fa-edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="link.delete({id:link.id})"
                                     class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="fas fa-trash"></span>
                             </button>
                         </div>
                     </td>

@@ -7,10 +7,10 @@
         <div class="panel panel-primary lg-panel panel-add" flex>
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="icon ion-pin"></i>
+                    <i class="fas fa-thumbtack"></i>
                     &nbsp;&nbsp;<span translate="main.addLink.title"></span>
-                    <span class="pull-right glyphicon "
-                          ng-class="{'glyphicon-chevron-down': !panelAddOpened, 'glyphicon-chevron-up' : panelAddOpened}"
+                    <span class="pull-right fas "
+                          ng-class="{'fa-chevron-down': !panelAddOpened, 'fa-chevron-up' : panelAddOpened}"
                           ng-click="panelAddOpenerClicked()">
                     </span>
                 </h3>
@@ -52,10 +52,10 @@
         <div class="panel panel-primary lg-panel panel-search" flex>
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="icon ion-search"></i>
+                    <i class="fas fa-search"></i>
                     &nbsp;&nbsp;<span translate="main.searchLinks.title"></span>
-                    <span class="pull-right glyphicon "
-                          ng-class="{'glyphicon-chevron-down': !panelSearchOpened, 'glyphicon-chevron-up' : panelSearchOpened}"
+                    <span class="pull-right fas "
+                          ng-class="{'fa-chevron-down': !panelSearchOpened, 'fa-chevron-up' : panelSearchOpened}"
                     ng-click="panelSearchOpenerClicked()">
                     </span>
                 </h3>
@@ -71,11 +71,11 @@
                             ng-change="searchCriteriaChanged()"
                             tabindex="4">
                             <md-option value="CREATION_DATE">
-                                &nbsp;<i class="icon ion-ios-calendar-outline"></i>
+                                &nbsp;<i class="fas fa-calendar-alt"></i>
                                 &nbsp;<span translate="main.searchLinks.sort.types.creation_date"></span>
                             </md-option>
                             <md-option value="NOTE">
-                                &nbsp;<i class="icon ion-android-star"></i>
+                                &nbsp;<i class="fas fa-star"></i>
                                 &nbsp;<span translate="main.searchLinks.sort.types.note"></span>
                             </md-option>
                         </md-select>
@@ -87,10 +87,10 @@
                                    ng-change="searchCriteriaChanged()"
                                    tabindex="5">
                             <md-option value="ASC">
-                                &nbsp;<i class="icon ion-ios-arrow-thin-up"></i>&nbsp;<span translate="main.searchLinks.sort.direction.asc"></span>
+                                &nbsp;<i class="fas fa-arrow-up"></i>&nbsp;<span translate="main.searchLinks.sort.direction.asc"></span>
                             </md-option>
                             <md-option value="DESC">
-                                &nbsp;<i class="icon ion-ios-arrow-thin-down"></i>&nbsp;<span translate="main.searchLinks.sort.direction.desc"></span>
+                                &nbsp;<i class="fas fa-arrow-down"></i>&nbsp;<span translate="main.searchLinks.sort.direction.desc"></span>
                             </md-option>
                         </md-select>
                     </md-input-container>
@@ -105,15 +105,15 @@
                                    ng-change="searchCriteriaChanged()"
                                    tabindex="6">
                             <md-option value="ALL">
-                                &nbsp;<i class="icon ion-earth"></i>
+                                &nbsp;<i class="fas fa-globe"></i>
                                 &nbsp;<span translate="main.searchLinks.filter.types.all"></span>
                             </md-option>
                             <md-option value="READ">
-                                &nbsp;<i class="icon ion-eye"></i>
+                                &nbsp;<i class="fas fa-eye"></i>
                                 &nbsp;<span translate="main.searchLinks.filter.types.read"></span>
                             </md-option>
                             <md-option value="UNREAD">
-                                &nbsp;<i class="icon ion-eye-disabled"></i>
+                                &nbsp;<i class="fas fa-eye-slash"></i>
                                 &nbsp;<span translate="main.searchLinks.filter.types.unread"></span>
                             </md-option>
                         </md-select>

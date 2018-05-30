@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="bookmark-batch.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="fas fa-plus-square"></span>
                     <span class="hidden-xs-down"  data-translate="linkguardianApp.bookmarkBatch.home.createLabel">
                         Create new Bookmark Batch
                     </span>
@@ -17,12 +17,12 @@
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'linkguardianApp.bookmarkBatch.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
-                                <span class="glyphicon glyphicon-search"></span>
+                                <span class="fas fa-search"></span>
                             </button>
                         </span>
                         <span class="input-group-btn width-min" ng-if="vm.currentSearch">
                             <button class="btn btn-info" ng-click="vm.clear()">
-                                <span class="glyphicon glyphicon-trash"></span>
+                                <span class="fas fa-trash"></span>
                             </button>
                         </span>
                     </div>
@@ -35,11 +35,11 @@
         <table class="jh-table table table-striped table-hover table-condensed">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.bookmarkBatch.creation_date">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="statusDate"><span data-translate="linkguardianApp.bookmarkBatch.status_date">Status Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="status"><span data-translate="linkguardianApp.bookmarkBatch.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.login"><span data-translate="linkguardianApp.bookmarkBatch.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.bookmarkBatch.creation_date">Creation Date</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="statusDate"><span data-translate="linkguardianApp.bookmarkBatch.status_date">Status Date</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="status"><span data-translate="linkguardianApp.bookmarkBatch.status">Status</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="user.login"><span data-translate="linkguardianApp.bookmarkBatch.user">User</span> <span class="fas fa-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -57,17 +57,17 @@
                             <button type="submit"
                                     ui-sref="bookmark-batch-detail({id:bookmarkBatch.id})"
                                     class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="fas fa-eye"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="bookmark-batch.edit({id:bookmarkBatch.id})"
                                     class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="fas fa-edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="bookmark-batch.delete({id:bookmarkBatch.id})"
                                     class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="fas fa-trash"></span>
                             </button>
                         </div>
                     </td>

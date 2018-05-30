@@ -47,7 +47,7 @@
                     <input id="field_link_creation_date" type="text" class="form-control" name="linkCreationDate" datetime-picker="{{dateformat}}" ng-model="vm.bookmarkBatchItem.link_creation_date" is-open="vm.datePickerOpenStatus.linkCreationDate"
                     />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('linkCreationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('linkCreationDate')"><i class="fas fa-calendar-alt"></i></button>
                     </span>
                 </div>
         </div>
@@ -81,10 +81,10 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            <span class="fas fa-ban"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+            <span class="fas fa-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

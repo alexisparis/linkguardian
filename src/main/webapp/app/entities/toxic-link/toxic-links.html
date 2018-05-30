@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="toxic-link.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="fas fa-plus-square"></span>
                     <span class="hidden-xs-down"  data-translate="linkguardianApp.toxicLink.home.createLabel">
                         Create new Toxic Link
                     </span>
@@ -17,12 +17,12 @@
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'linkguardianApp.toxicLink.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
-                                <span class="glyphicon glyphicon-search"></span>
+                                <span class="fas fa-search"></span>
                             </button>
                         </span>
                         <span class="input-group-btn width-min" ng-if="vm.currentSearch">
                             <button class="btn btn-info" ng-click="vm.clear()">
-                                <span class="glyphicon glyphicon-trash"></span>
+                                <span class="fas fa-trash"></span>
                             </button>
                         </span>
                     </div>
@@ -35,11 +35,11 @@
         <table class="jh-table table table-striped table-hover table-condensed">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="email"><span data-translate="linkguardianApp.toxicLink.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="url"><span data-translate="linkguardianApp.toxicLink.url">Url</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.toxicLink.creation_date">Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="error"><span data-translate="linkguardianApp.toxicLink.error">Error</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="email"><span data-translate="linkguardianApp.toxicLink.email">Email</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="url"><span data-translate="linkguardianApp.toxicLink.url">Url</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span data-translate="linkguardianApp.toxicLink.creation_date">Creation Date</span> <span class="fas fa-sort"></span></th>
+                    <th jh-sort-by="error"><span data-translate="linkguardianApp.toxicLink.error">Error</span> <span class="fas fa-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -60,17 +60,17 @@
                             <button type="submit"
                                     ui-sref="toxic-link-detail({id:toxicLink.id})"
                                     class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="fas fa-eye"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="toxic-link.edit({id:toxicLink.id})"
                                     class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="fas fa-edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="toxic-link.delete({id:toxicLink.id})"
                                     class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="fas fa-trash"></span>
                             </button>
                         </div>
                     </td>

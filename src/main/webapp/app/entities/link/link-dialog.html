@@ -19,7 +19,7 @@
                     <input id="field_creation_date" type="text" class="form-control" name="creationDate" datetime-picker="{{dateformat}}" ng-model="vm.link.creation_date" is-open="vm.datePickerOpenStatus.creationDate"
                     required/>
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('creationDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('creationDate')"><i class="fas fa-calendar-alt"></i></button>
                     </span>
                 </div>
             <div ng-show="editForm.creationDate.$invalid">
@@ -140,10 +140,10 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            <span class="fas fa-ban"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+            <span class="fas fa-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

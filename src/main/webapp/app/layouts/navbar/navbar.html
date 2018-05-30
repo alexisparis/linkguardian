@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ui-sref-active="active">
                     <a ui-sref="home" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon glyphicon-home"></span>
+                        <span class="fas fa-home"></span>
                         <span class="hidden-sm" data-translate="global.menu.home">Home</span>
                     </a>
                 </li>
@@ -27,7 +27,7 @@
                 <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
+                            <span class="fas fa-list-ul"></span>
                             <span class="hidden-sm" data-translate="global.menu.entities.main">
                                 Entities
                             </span>
@@ -37,31 +37,31 @@
                     <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 1000;">
                         <li ui-sref-active="active">
                                 <a ui-sref="tag" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span class="fas fa-stream"></span>&nbsp;
                                     <span data-translate="global.menu.entities.tag">Tag</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
                                 <a ui-sref="link" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span class="fas fa-stream"></span>&nbsp;
                                     <span data-translate="global.menu.entities.link">Link</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
                                 <a ui-sref="toxic-link" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span class="fas fa-stream"></span>&nbsp;
                                     <span data-translate="global.menu.entities.toxicLink">Toxic Link</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
                                 <a ui-sref="bookmark-batch-item" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span class="fas fa-stream"></span>&nbsp;
                                     <span data-translate="global.menu.entities.bookmarkBatchItem">Bookmark Batch Item</span>
                                 </a>
                             </li>
                         <li ui-sref-active="active">
                                 <a ui-sref="bookmark-batch" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span class="fas fa-stream"></span>&nbsp;
                                     <span data-translate="global.menu.entities.bookmarkBatch">Bookmark Batch</span>
                                 </a>
                             </li>
@@ -71,7 +71,7 @@
                 <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>
-                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="fas fa-user"></span>
                             <span class="hidden-sm" data-translate="global.menu.account.main">
                                 Account
                             </span>
@@ -81,31 +81,31 @@
                     <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 1000;">
                         <li ui-sref-active="active" ng-switch-when="true">
                             <a ui-sref="settings" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                <span class="fas fa-wrench"></span>&nbsp;
                                 <span data-translate="global.menu.account.settings">Settings</span>
                             </a>
                         </li>
                         <li ui-sref-active="active" ng-switch-when="true">
                             <a ui-sref="password" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-lock"></span>&nbsp;
+                                <span class="fas fa-lock"></span>&nbsp;
                                 <span data-translate="global.menu.account.password">Password</span>
                             </a>
                         </li>
                         <li ui-sref-active="active" ng-switch-when="true">
                             <a href="" ng-click="vm.logout()" id="logout">
-                                <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                                <span class="fas fa-sign-out-alt"></span>&nbsp;
                                 <span data-translate="global.menu.account.logout">Sign out</span>
                             </a>
                         </li>
                         <li ui-sref-active="active" ng-switch-when="false">
                             <a href="" ng-click="vm.login()" id="login">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                                <span class="fas fa-sign-in-alt"></span>&nbsp;
                                 <span data-translate="global.menu.account.login">Sign in</span>
                             </a>
                         </li>
                         <li ui-sref-active="active" ng-switch-when="false">
                             <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+                                <span class="fas fa-plus-square"></span>&nbsp;
                                 <span data-translate="global.menu.account.register">Register</span>
                             </a>
                         </li>
@@ -114,7 +114,7 @@
                 <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
                         <span>
-                            <span class="glyphicon glyphicon-tower"></span>
+                            <span class="fas fa-chess-king"></span>
                             <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
                             <b class="caret"></b>
                         </span>
@@ -122,62 +122,62 @@
                     <ul class="dropdown-menu" uib-dropdown-menu style="z-index: 1000;">
                         <li ui-sref-active="active">
                             <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp;
+                                <span class="fas fa-user"></span>&nbsp;
                                 <span data-translate="global.menu.admin.userManagement">User management</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="jhi-tracker" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;
+                                <span class="fas fa-eye"></span>&nbsp;
                                 <span data-translate="global.menu.admin.tracker">User tracker</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
+                                <span class="fas fa-chart-area"></span>&nbsp;
                                 <span data-translate="global.menu.admin.metrics">Metrics</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-heart"></span>&nbsp;
+                                <span class="fas fa-heartbeat"></span>&nbsp;
                                 <span data-translate="global.menu.admin.health">Health</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                                <span class="fas fa-wrench"></span>&nbsp;
                                 <span data-translate="global.menu.admin.configuration">Configuration</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="audits" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-bell"></span>&nbsp;
+                                <span class="fas fa-book"></span>&nbsp;
                                 <span data-translate="global.menu.admin.audits">Audits</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="logs" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;
+                                <span class="fas fa-file"></span>&nbsp;
                                 <span data-translate="global.menu.admin.logs">Logs</span>
                             </a>
                         </li>
                         <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
                             <a ui-sref="docs" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-book"></span>&nbsp;
+                                <span class="fas fa-plug"></span>&nbsp;
                                 <span data-translate="global.menu.admin.apidocs">API</span>
                             </a>
                         </li>
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                         <li ui-sref-active="active">
                             <a ui-sref="mail" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;
+                                <span class="fas fa-envelope"></span>&nbsp;
                                 <span>Mail</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a ui-sref="database" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-hdd"></span>&nbsp;
+                                <span class="fas fa-database"></span>&nbsp;
                                 <span>Database</span>
                             </a>
                         </li>
@@ -186,7 +186,7 @@
                 <li ui-sref-active="active" class="hide-xs" uib-dropdown ng-controller="ToolsController" ng-if="vm.isAuthenticated() || vm.$state.is('free_tour')">
                     <a uib-dropdown-toggle href="" id="menu-tools">
                         <span>
-                            <span class="glyphicon glyphicon-cog"></span>
+                            <span class="fas fa-toolbox"></span>
                             <span class="hidden-sm" translate="global.menu.tools.main">Tools</span>
                             <b class="caret"></b>
                         </span>
@@ -194,13 +194,13 @@
                     <ul class="dropdown-menu" style="z-index: 1000;">
                         <li ui-sref-active="active">
                             <a ng-click="showBookmarkImportDialog()">
-                                <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                                <span class="fas fa-cloud-upload-alt"></span>
                                 &#xA0;<span translate="global.menu.tools.import">Import bookmarks</span>
                             </a>
                         </li>
                         <li ui-sref-active="active">
                             <a href="#/demo">
-                                <span class="glyphicon glyphicon-blackboard"></span>
+                                <span class="fas fa-chalkboard-teacher"></span>
                                 &#xA0;<span translate="global.menu.tools.demo">Demo</span>
                             </a>
                         </li>
@@ -209,7 +209,7 @@
                 <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
                         <span>
-                            <span class="glyphicon glyphicon-flag"></span>
+                            <span class="fas fa-flag"></span>
                             <span class="hidden-sm" data-translate="global.menu.language">Language</span>
                             <b class="caret"></b>
                         </span>
@@ -223,7 +223,7 @@
                 <li ui-sref-active="active">
                     <a data-toggle="collapse" data-target=".navbar-collapse.in"
                        ng-click="vm.showAboutDialog()">
-                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <span class="fas fa-info-circle"></span>
                         <span class="hidden-sm" translate="global.menu.about">A propos</span>
                     </a>
                 </li>
