@@ -126,14 +126,24 @@
                 "not_found": "Link does not exist"
             },
             "markAsRead": {
-                "inProgress": "marking as read...",
+                "inProgress": "Marking as read...",
                 "forbidden": "Not allowed",
                 "success": "Link marked as read"
             },
             "markAsUnread": {
-                "inProgress": "marking as unread...",
+                "inProgress": "Marking as unread...",
                 "forbidden": "Not allowed",
                 "success": "Link marked as unread"
+            },
+            "markAsLocked": {
+                "inProgress": "Locking link...",
+                "forbidden": "Not allowed",
+                "success": "Link locked"
+            },
+            "markAsUnlocked": {
+                "inProgress": "Unlocking link...",
+                "forbidden": "Not allowed",
+                "success": "Link locked"
             },
             "add": {
                 "inProgress": "adding url...",

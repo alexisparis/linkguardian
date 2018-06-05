@@ -2,19 +2,29 @@
     <md-card-title ng-click="vm.redirectToLink(vm.link)">
         <md-card-title-text>
             <div class="md-headline">
-                    <span class="pull-right star-button-container">
-                        <md-button ng-click="vm.showStarDialog();$event.stopPropagation();" aria-label="Twitter"
-                                   class="md-fab md-raised md-mini note note-{{vm.link.note}}"
-                                   data-toggle="tooltip" data-placement="left"
-                                   title="{{'link.actions.change_note.label' | translate}} : {{vm.link.note}}/5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 -5 51 48">
-                                <!--<title>Five Pointed Star</title>-->
-                                <path fill="{{vm.noteBgColor()}}"
-                                      stroke="{{vm.noteColor()}}"
-                                      d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
-                            </svg>
-                        </md-button>
-                    </span>
+
+                <span class="pull-right star-button-container">
+                    <md-button ng-click="vm.showStarDialog();$event.stopPropagation();" aria-label="Twitter"
+                               class="md-fab md-raised md-mini note note-{{vm.link.note}}"
+                               data-toggle="tooltip" data-placement="left"
+                               title="{{'link.actions.change_note.label' | translate}} : {{vm.link.note}}/5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 -5 51 48">
+                            <path fill="{{vm.noteBgColor()}}"
+                                  stroke="{{vm.noteColor()}}"
+                                  d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+                        </svg>
+                    </md-button>
+                </span>
+                <span class="pull-right">
+                    <md-button ng-if="vm.link.locked" ng-click="$event.stopPropagation();vm.unlock();"
+                               class="md-fab md-ultra-mini md-raised md-warn" style="margin-right: 0px;">
+                        <i class="fas fa-lock" data-fa-transform="shrink-2"/>
+                    </md-button>
+                    <md-button ng-if="!vm.link.locked" ng-click="$event.stopPropagation();vm.lock();"
+                               class="md-fab md-ultra-mini md-raised" style="margin-right: 0px;">
+                        <i class="fas fas fa-unlock" data-fa-transform="shrink-2"/>
+                    </md-button>
+                </span>
                 <span class="title-container">
                         <img class="favicon"
                              src="/content/images/unknown_favicon.png"
@@ -37,57 +47,108 @@
                 md-on-add="vm.addTag($chip)"
                 md-on-remove="vm.removeTag($chip)">
             </md-chips>
-            <md-fab-speed-dial md-open="vm.link.isOpen" md-direction="up"
-                               md-scale
-                               layout-align="end end"
-                               class="md-scale md-fab-bottom-right">
-                <md-fab-trigger>
-                    <md-button aria-label="menu" class="md-fab md-link-action md-mini">
-                        <span class="ion-navicon-round" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                </md-fab-trigger>
-                <md-fab-actions>
-                    <md-button aria-label="Delete" class="md-fab md-raised md-mini"
-                               ng-click="vm.deleteLink()"
-                               data-toggle="tooltip" data-placement="right"
-                               title="{{'link.actions.delete.tooltip' | translate}}">
-                        <span class="ion-trash-a" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                    <md-button ng-show="vm.link.read != true" aria-label="Mark as read" class="md-fab md-raised md-mini"
-                               ng-click="vm.markAsRead()"
-                               data-toggle="tooltip" data-placement="right"
-                               title="{{'link.actions.markAsRead.tooltip' | translate}}">
-                        <span class="ion-eye" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                    <md-button ng-show="vm.link.read == true" aria-label="Mark as unread" class="md-fab md-raised md-mini"
-                               ng-click="vm.markAsUnread()"
-                               data-toggle="tooltip" data-placement="right"
-                               title="{{'link.actions.markAsUnread.tooltip' | translate}}">
-                        <span class="ion-eye-disabled" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                    <md-button class="md-fab md-raised md-mini copy-to-clipboard-button" aria-label="Copy to clipboard"
-                               ngclipboard
-                               data-clipboard-text="{{vm.link.original_url}}"
-                               ngclipboard-success="vm.urlCopiedToClipboard()"
-                               ngclipboard-error="vm.copyToClipboardOnError(e)"
-                               title="{{'link.actions.copyClipboard.tooltip' | translate}}">
-                        <span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                    <md-button aria-label="Tweet" class="md-fab md-raised md-mini"
-                               ng-click="vm.tweet()"
-                               data-toggle="tooltip" data-placement="right"
-                               title="{{'link.actions.tweetIt.tooltip' | translate}}">
-                        <span class="ion-social-twitter" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                    <md-button aria-label="Go to" class="md-fab md-raised md-mini"
-                               ng-click="vm.redirectToLink()"
-                               data-toggle="tooltip" data-placement="right"
-                               title="{{'link.actions.goTo.tooltip' | translate}}">
-                        <span class="ion-forward" data-pack="default" data-tags="sort"></span>
-                    </md-button>
-                </md-fab-actions>
-            </md-fab-speed-dial>
+
+            <!--<ul id="menu">-->
+                <!--<li><a href="#"><i class="material-icons">mode_edit</i>Edit</a></li>-->
+                <!--<li><a href="#"><i class="material-icons">format_color_fill</i>Colors</a></li>-->
+                <!--<li><a href="#"><i class="material-icons">insert_emoticons</i>Emoticons</a></li>-->
+                <!--<li><a href="#"><i class="material-icons">insert_comment</i>Comments</a></li>-->
+            <!--</ul>-->
+
+            <div circular-menu
+                 menu-id="vm.link.id"
+                 angle="vm.angle"
+                 button-config="vm.menuConfig"
+                 menu-items="vm.menuItems"
+                 default-open="false"
+                 onwing-click="vm.onMenuClick(wing)">
+            </div>
+
+            <!--<div class="pull-right">-->
+                <!--<circular class="pull-right"-->
+                    <!--options="vm.options">-->
+                <!--</circular>-->
+            <!--</div>-->
+
+            <!--<ul id="menu" class="mfb-component&#45;&#45;br mfb-zoomin" data-mfb-toggle="hover">-->
+                <!--<li class="mfb-component__wrap">-->
+                    <!--<a href="#" class="mfb-component__button&#45;&#45;main">-->
+                        <!--<i class="mfb-component__main-icon&#45;&#45;resting ion-plus-round"></i>-->
+                        <!--<i class="mfb-component__main-icon&#45;&#45;active ion-close-round"></i>-->
+                    <!--</a>-->
+                    <!--<ul class="mfb-component__list">-->
+                        <!--<li>-->
+                            <!--<a href="https://github.com/nobitagit/material-floating-button/" data-mfb-label="View on Github" class="mfb-component__button&#45;&#45;child">-->
+                                <!--<i class="mfb-component__child-icon ion-social-github"></i>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="https://github.com/nobitagit" data-mfb-label="Follow me on Github" class="mfb-component__button&#45;&#45;child">-->
+                                <!--<i class="mfb-component__child-icon ion-social-octocat"></i>-->
+                            <!--</a>-->
+                        <!--</li>-->
+
+                        <!--<li>-->
+                            <!--<a href="http://twitter.com/share?text=Check this material floating button component!&url=http://nobitagit.github.io/material-floating-button/&hashtags=material,design,button,css"-->
+                               <!--data-mfb-label="Share on Twitter" class="mfb-component__button&#45;&#45;child">-->
+                                <!--<i class="mfb-component__child-icon ion-social-twitter"></i>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+
+            <!--<md-fab-speed-dial md-open="vm.link.isOpen" md-direction="up"-->
+                               <!--md-scale-->
+                               <!--layout-align="end end"-->
+                               <!--class="md-scale md-fab-bottom-right">-->
+                <!--<md-fab-trigger>-->
+                    <!--<md-button aria-label="menu" class="md-fab md-link-action md-mini">-->
+                        <!--<span class="ion-navicon-round" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                <!--</md-fab-trigger>-->
+                <!--<md-fab-actions ng-repeatss="i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,]">-->
+                    <!--<md-button aria-label="Delete" class="md-fab md-raised md-mini"-->
+                               <!--ng-click="vm.deleteLink()"-->
+                               <!--data-toggle="tooltip" data-placement="right"-->
+                               <!--title="{{'link.actions.delete.tooltip' | translate}}">-->
+                        <!--<span class="ion-trash-a" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                    <!--<md-button ng-show="vm.link.read != true" aria-label="Mark as read" class="md-fab md-raised md-mini"-->
+                               <!--ng-click="vm.markAsRead()"-->
+                               <!--data-toggle="tooltip" data-placement="right"-->
+                               <!--title="{{'link.actions.markAsRead.tooltip' | translate}}">-->
+                        <!--<span class="ion-eye" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                    <!--<md-button ng-show="vm.link.read == true" aria-label="Mark as unread" class="md-fab md-raised md-mini"-->
+                               <!--ng-click="vm.markAsUnread()"-->
+                               <!--data-toggle="tooltip" data-placement="right"-->
+                               <!--title="{{'link.actions.markAsUnread.tooltip' | translate}}">-->
+                        <!--<span class="ion-eye-disabled" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                    <!--<md-button class="md-fab md-raised md-mini copy-to-clipboard-button" aria-label="Copy to clipboard"-->
+                               <!--ngclipboard-->
+                               <!--data-clipboard-text="{{vm.link.original_url}}"-->
+                               <!--ngclipboard-success="vm.urlCopiedToClipboard()"-->
+                               <!--ngclipboard-error="vm.copyToClipboardOnError(e)"-->
+                               <!--title="{{'link.actions.copyClipboard.tooltip' | translate}}">-->
+                        <!--<span class="ion-ios-copy" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                    <!--<md-button aria-label="Tweet" class="md-fab md-raised md-mini"-->
+                               <!--ng-click="vm.tweet()"-->
+                               <!--data-toggle="tooltip" data-placement="right"-->
+                               <!--title="{{'link.actions.tweetIt.tooltip' | translate}}">-->
+                        <!--<span class="ion-social-twitter" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                    <!--<md-button aria-label="Go to" class="md-fab md-raised md-mini"-->
+                               <!--ng-click="vm.redirectToLink()"-->
+                               <!--data-toggle="tooltip" data-placement="right"-->
+                               <!--title="{{'link.actions.goTo.tooltip' | translate}}">-->
+                        <!--<span class="ion-forward" data-pack="default" data-tags="sort"></span>-->
+                    <!--</md-button>-->
+                <!--</md-fab-actions>-->
+            <!--</md-fab-speed-dial>-->
         </md-content>
         </md-content>
     </md-card-actions>
-</md-card>
+</div>

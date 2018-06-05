@@ -17,9 +17,9 @@
             'ngMaterial',
             'angular-jqcloud',
             'ngOnboarding',
-            'ngclipboard',
+            'angular-clipboard',
             'angularFileUpload',
-            'angularGrid',
+            'ui.bootstrap.fontawesome'
             // jhipster-needle-angularjs-add-module JHipster will add new module here
         ])
         .config(function(ngOnboardingDefaultsProvider) {

@@ -49,6 +49,7 @@ angular.module('linkguardianApp')
 
                 // ask to add manually
                 $scope.askForDemo = function () {
+                    $scope.forceCloseLinkMenu();
                     $mdDialog.show({
                         controller: AskForDemoDialogController,
                         templateUrl: TEMPLATES_PATH + 'askForDemoDialog.html',
@@ -239,7 +240,10 @@ angular.module('linkguardianApp')
                 function replaceLinkInList(newLink) {
                     // for each properties
                     var index = findIndexOfLinkWithId(newLink.id);
+                    $log.log("index of link : " + index);
                     if (angular.isDefined(index)) {
+
+                        console.log("is read " + newLink.read);
 
                         var currentLink = $scope.links[index];
 
@@ -270,6 +274,10 @@ angular.module('linkguardianApp')
                 // ####################
 
                 $scope.addUrlInProgress = false;
+
+                $scope.agCallback = function() {
+                    console.log("agCallback");
+                };
 
                 var addLinkSuccessCallbackFactory = function(toast) {
                     return function (link) {
@@ -329,6 +337,7 @@ angular.module('linkguardianApp')
                 };
 
                 $scope.addLink = function () {
+                    $scope.forceCloseLinkMenu();
                     var toast = ToasterService.displaySpinner(translateFilter('link.messages.add.inProgress'));
                     $scope.addUrlInProgress = true;
                     $log.log("adding new link : " + JSON.stringify($scope.newLink));
@@ -372,6 +381,7 @@ angular.module('linkguardianApp')
 
                 // when click on search
                 $scope.refreshLinks = function () {
+                    $scope.forceCloseLinkMenu();
                     $log.log("call refreshlinks");
                     // TODO : remove when adding a new link seems to force to refresh all links
                     //console.trace();
@@ -484,10 +494,10 @@ angular.module('linkguardianApp')
 
                     var removeIt = false;
 
-                    // unread
                     if ($scope.search.type == 'UNREAD') {
+                        // unread
                         removeIt = !link.read;
-                    } else {
+                    } else if ($scope.search.type == 'READ') {
                         // read
                         removeIt = link.read;
                     }
@@ -509,11 +519,18 @@ angular.module('linkguardianApp')
                     // }
 
                     if (removeIt) {
+                        $log.log("remove link from list " + link.id);
                         removeLinkFromList(link.id);
                     } else {
+                        $log.log("replace link in list " + link.id);
                         replaceLinkInList(link);
                     }
                 };
+
+                $scope.forceCloseLinkMenu = function() {
+                    $scope.$root.$broadcast('close-all-link-circular-menu-event');
+                };
+                $scope.owner = "owner";
 
                 // ####################
                 // link modification
@@ -638,6 +655,7 @@ angular.module('linkguardianApp')
                 };
 
                 $scope.openCloudOfTagDialog = function () {
+                    $scope.forceCloseLinkMenu();
                     $mdDialog.show({
                         controller: CloudOfTagController,
                         templateUrl: TEMPLATES_PATH + 'cloudOfTagsDialog.html',
@@ -655,7 +673,7 @@ angular.module('linkguardianApp')
 
                         });
                 };
-                
+
                 var mainScope = $scope;
 
                 // // force to load links, especially for mobile

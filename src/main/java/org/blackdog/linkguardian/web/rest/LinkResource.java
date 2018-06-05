@@ -551,7 +551,8 @@ public class LinkResource {
             if ( link.getUser().getLogin().equals(name) )
             {
                 link.setRead(value);
-                this.linkRepository.saveAndFlush(link);
+                link = this.linkRepository.saveAndFlush(link);
+                log.info("read attribute is now " + link.isRead() + " for link " + link.getId());
                 return new ResponseEntity<>(LinkResponse.of("success", link), HttpStatus.OK);
             }
             else
@@ -585,6 +586,62 @@ public class LinkResource {
     public ResponseEntity<LinkResponse> markAsUnread(Long id)
     {
         return changeReadAttribute(id, false);
+    }
+
+    /**
+     * change the read attribute empty a link
+     * @param id
+     * @param value
+     */
+    public ResponseEntity<LinkResponse> changeLockedAttribute(Long id, boolean value)
+    {
+        log.info("calling changeReadAttribute for link : " + id + " read : " +value);
+
+        Link link = this.linkRepository.findOne(id);
+
+        if ( link == null ) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName(); //get logged in username
+            if ( link.getUser().getLogin().equals(name) )
+            {
+                link.setLocked(value);
+                link = this.linkRepository.saveAndFlush(link);
+                log.info("locked attribute is now " + link.isLocked() + " for link " + link.getId());
+                return new ResponseEntity<>(LinkResponse.of("success", link), HttpStatus.OK);
+            }
+            else
+            {
+                return new ResponseEntity<>(LinkResponse.of("forbidden"), HttpStatus.FORBIDDEN);
+            }
+        }
+    }
+
+    /**
+     * mark a link as locked
+     * @param id
+     */
+    @RequestMapping(value = "/my_links/lock",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<LinkResponse> markAsLocked(Long id)
+    {
+        return changeLockedAttribute(id, true);
+    }
+
+    /**
+     * mark a link as unlocked
+     * @param id
+     */
+    @RequestMapping(value = "/my_links/unlock",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<LinkResponse> markAsUnlocked(Long id)
+    {
+        return changeLockedAttribute(id, false);
     }
 
     public ResponseEntity<LinkResponse> importLink(Long id)

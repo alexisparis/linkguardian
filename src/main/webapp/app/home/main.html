@@ -171,15 +171,17 @@
 </div>
 
 <div infinite-scroll="isAuthenticated() == true && loadAdditionalLinks()"
-   infinite-scroll-disabled='searchInProgress'
-   performant-scroll="true"
-   class="container overflow-y-visible links-container">
-  <div class="dynamic-grid"
-       angular-grid="links" ag-grid-width="250" ag-gutter-size="5" ag-id="gallery" ag-grid-no="auto">
-    <div ng-repeat="currentLink in links" class="link-container">
-        <link-view ref="currentLink" link-deleted-callback="linkDeleted(currentLink)" link-modified-callback="linkModified(currentLink)"/>
+     infinite-scroll-disabled='searchInProgress'
+     performant-scroll="true"
+     class="container overflow-y-visible links-container">
+    <div class="dynamic-grid"
+         angular-grid="links" ag-grid-width="250" ag-gutter-size="5" ag-id="gallery"
+         ag-grid-no="auto" ag-callback="agCallback()">
+        <div ng-repeat="currentLink in links" class="link-container">
+            <link-view ref="currentLink" link-deleted-callback="linkDeleted(currentLink)"
+                       link-modified-callback="linkModified(currentLink)"/>
+        </div>
     </div>
-  </div>
 </div>
 <div ng-show="searchInProgress == true" class="container">
     <md-progress-circular class="margin-auto" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>

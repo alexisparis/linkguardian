@@ -97,7 +97,21 @@
                         id: '@id',
                         score : '@score'
                     }
-                }
+                },
+                'markAsLocked' : {
+                    url : 'api/my_links/lock',
+                    method : 'PUT',
+                    params:{
+                        id: '@id'
+                    }
+                },
+                'markAsUnlocked' : {
+                    url : 'api/my_links/unlock',
+                    method : 'PUT',
+                    params:{
+                        id: '@id'
+                    }
+                },
             });
         });
     ;

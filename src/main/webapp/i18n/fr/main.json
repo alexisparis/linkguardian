@@ -120,20 +120,30 @@
                 "forbidden": "Non autorisé"
             },
             "delete": {
-                "inProgress": "suppression du lien...",
+                "inProgress": "Suppression du lien...",
                 "forbidden": "Non autorisé",
                 "success": "Lien supprimé",
                 "not_found": "Le lien n'existe pas"
             },
             "markAsRead": {
-                "inProgress": "marque le lien comme lu...",
+                "inProgress": "Marque le lien comme lu...",
                 "forbidden": "Non autorisé",
                 "success": "Lien marqué comme lu"
             },
             "markAsUnread": {
-                "inProgress": "marque le lien comme non-lu...",
+                "inProgress": "Marque le lien comme non-lu...",
                 "forbidden": "Non autorisé",
                 "success": "Lien marqué comme non-lu"
+            },
+            "markAsLocked": {
+                "inProgress": "Verrouillage du lien...",
+                "forbidden": "Non autorisé",
+                "success": "Lien verrouillé"
+            },
+            "markAsUnlocked": {
+                "inProgress": "Déverrouillage du lien...",
+                "forbidden": "Non autorisé",
+                "success": "Lien déverrouillé"
             },
             "add": {
                 "inProgress": "ajout du lien...",

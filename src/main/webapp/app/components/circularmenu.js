@@ -1,3 +1,5 @@
+// mainly based on https://cuppalabs.github.io/angular-fan-menu/examples/index2.html
+// https://github.com/CuppaLabs/angular-fan-menu#angular-fan-menu-for-web-and-mobile
 angular.module("linkguardianApp").directive("circularMenu",function(){
     return {
         restrict: 'EA',
@@ -250,14 +252,19 @@ angular.module("linkguardianApp").directive("circularMenu",function(){
                 });
             };
 
-            scope.$root.$on('link-circular-menu-opening', function (event, data) {
+            scope.$root.$on('link-circular-menu-open-event', function (event, data) {
                 if ( scope.open == "menuopen" && data.menuId != scope.menuId ) {
+                    scope.toggleMenu();
+                }
+            });
+            scope.$root.$on('close-all-link-circular-menu-event', function (event, data) {
+                if ( scope.open == "menuopen" ) {
                     scope.toggleMenu();
                 }
             });
 
             scope.openWings = function(wings){
-                scope.$root.$broadcast('link-circular-menu-opening', {
+                scope.$root.$broadcast('link-circular-menu-open-event', {
                     menuId : scope.menuId
                 });
                 angular.forEach(wings,function(item){

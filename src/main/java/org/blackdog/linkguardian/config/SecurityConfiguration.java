@@ -141,6 +141,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.PUT, "/api/my_links/read").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers(HttpMethod.PUT, "/api/my_links/unread").hasAuthority(AuthoritiesConstants.USER)
 
+            .antMatchers(HttpMethod.PUT, "/api/my_links/lock").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers(HttpMethod.PUT, "/api/my_links/unlock").hasAuthority(AuthoritiesConstants.USER)
+
             .antMatchers(HttpMethod.GET, "/api/my_links/count_per_tags").hasAuthority(AuthoritiesConstants.USER)
 
             // else... only admin
