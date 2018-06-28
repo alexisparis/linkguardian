@@ -311,14 +311,7 @@ public class LinkResource {
         }
         else
         {
-            LinkTarget target = new LinkTarget();
-            target.setStringUrl(newurl);
-            target.setResponseCode(200);
-
-            Set<String> tags = this.tagsNormalizer.split(tag, " ", true);
-            return new ManualLinkProcessorTemplateMethod(this.linkService).
-                process(
-                    LinkTargetProcessorTemplateMethod.CallContext.newInstance(target, user, newurl, description, tags));
+            return this.linkService.manuallyAddUrl(user, newurl, description, tag);
         }
     }
 

@@ -18,12 +18,15 @@ import org.blackdog.linkguardian.repository.LinkRepository;
 import org.blackdog.linkguardian.repository.ToxicLinkRepository;
 import org.blackdog.linkguardian.repository.search.LinkSearchRepository;
 import org.blackdog.linkguardian.service.exception.LinkException;
+import org.blackdog.linkguardian.service.template.LinkTargetProcessorTemplateMethod;
+import org.blackdog.linkguardian.service.template.impl.ManualLinkProcessorTemplateMethod;
 import org.blackdog.linkguardian.service.util.TagsNormalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -339,5 +342,21 @@ public class LinkService {
         }
 
         return target;
+    }
+
+    public ResponseEntity<org.blackdog.linkguardian.service.LinkResponse> manuallyAddUrl(User user, String newurl, String description, String tag) {
+
+        Set<String> tags = this.tagsNormalizer.split(tag, " ", true);
+        return this.manuallyAddUrl(user, newurl, description, tags);
+    }
+
+    public ResponseEntity<org.blackdog.linkguardian.service.LinkResponse> manuallyAddUrl(User user, String newurl, String description, Iterable<String> tags) {
+
+        LinkTarget target = new LinkTarget();
+        target.setStringUrl(newurl);
+        target.setResponseCode(200);
+
+        return new ManualLinkProcessorTemplateMethod(this).
+            process(LinkTargetProcessorTemplateMethod.CallContext.newInstance(target, user, newurl, description, tags));
     }
 }

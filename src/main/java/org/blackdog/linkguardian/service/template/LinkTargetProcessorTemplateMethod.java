@@ -14,7 +14,7 @@ public class LinkTargetProcessorTemplateMethod<R> {
 
     private final Logger log = LoggerFactory.getLogger(LinkTargetProcessorTemplateMethod.class);
 
-    private LinkService linkService;
+    protected LinkService linkService;
 
     public LinkTargetProcessorTemplateMethod(LinkService linkService) {
         this.linkService = linkService;
@@ -59,7 +59,7 @@ public class LinkTargetProcessorTemplateMethod<R> {
                 } catch (LinkException e) {
                     log.error("error while trying to save new link with url : " + context.getUrl(), e);
 
-                    this.linkService.createToxicLink(context.getUser(), context.getUrl(), e.getMessage());
+                    createToxicLink(context.getUser(), context.getUrl(), e.getMessage());
 
                     if (e.getCause() != null) {
                             /*if ( e.getCause() instanceof MalformedURLException )
@@ -76,11 +76,15 @@ public class LinkTargetProcessorTemplateMethod<R> {
                     return onLinkException(context, e);
                 }
             } else {
-                this.linkService.createToxicLink(context.getUser(), context.getUrl(), context.getTarget().getError().name());
+                createToxicLink(context.getUser(), context.getUrl(), context.getTarget().getError().name());
 
                 return onTargetDeterminationError(context, context.getTarget().getError());
             }
         }
+    }
+
+    protected void createToxicLink(User user, String url, String error) {
+        this.linkService.createToxicLink(user, url, error);
     }
 
     protected R onLinkCreated(CallContext context, Link newLink) {

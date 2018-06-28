@@ -13,13 +13,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.blackdog.linkguardian.config.DefaultProfileUtil;
+import org.blackdog.linkguardian.domain.BookmarkBatch;
+import org.blackdog.linkguardian.domain.BookmarkBatchItem;
 import org.blackdog.linkguardian.domain.ToxicLink;
 import org.blackdog.linkguardian.domain.User;
+import org.blackdog.linkguardian.domain.enumeration.BookmarkBatchItemStatus;
 import org.blackdog.linkguardian.domain.transfer.CountPerUser;
 import org.blackdog.linkguardian.report.ActivityReport;
 import org.blackdog.linkguardian.service.exception.MailNotSentException;
@@ -195,7 +200,7 @@ public class MailService {
     }
 
     @Async
-    public void sendBookmarkBatchFinishedEmail(User user) {
+    public void sendBookmarkBatchFinishedEmail(User user, Map<BookmarkBatchItemStatus, Long> countPerStatus) {
         log.debug("Sending bookmark batch finished e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
@@ -209,8 +214,23 @@ public class MailService {
             log.error("could not send bookmark batch finished mail to " + user.getEmail(), e);
         }
 
+        StringBuilder message = new StringBuilder();
+        message.append("<div>new bookmark batch finished mail sent to " + user.getEmail() + "</div>");
+        message.append("<div>count per status : ");
+        message.append("<ul>");
+
+        countPerStatus.entrySet()
+            .forEach(entry -> {
+                message.append("<li>");
+                message.append(entry.getKey() + " : " + entry.getValue() + " items");
+                message.append("</li>");
+            });
+
+        message.append("</ul>");
+        message.append("</div>");
+
         // warn admin
-        sendGenericAdminEmail("new bookmark batch finished mail sent", "new bookmark batch finished mail sent to " + user.getEmail());
+        sendGenericAdminEmail("new bookmark batch finished mail sent", message.toString());
     }
 
     @Async

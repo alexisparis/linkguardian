@@ -62,6 +62,15 @@
             </encoder>
         </appender>
         <appender name="MAILER-PROD" class="ch.qos.logback.classic.net.SMTPAppender">
+            <!-- https://logback.qos.ch/manual/filters.html -->
+            <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+                <evaluator>
+                    <expression>return logger.contains("net.htmlparser.jericho");</expression>
+                </evaluator>
+                <OnMismatch>NEUTRAL</OnMismatch>
+                <OnMatch>DENY</OnMatch>
+            </filter>
+
             <smtpHost>ns0.ovh.net</smtpHost>
             <smtpPort>587</smtpPort>
             <STARTTLS>true</STARTTLS>
@@ -91,6 +100,13 @@
             </encoder>
         </appender>
         <appender name="MAILER-INT" class="ch.qos.logback.classic.net.SMTPAppender">
+            <!--<filter class="ch.qos.logback.core.filter.EvaluatorFilter">-->
+                <!--<evaluator>-->
+                    <!--<expression>return logger.contains("net.htmlparser.jericho");</expression>-->
+                <!--</evaluator>-->
+                <!--<OnMismatch>NEUTRAL</OnMismatch>-->
+                <!--<OnMatch>DENY</OnMatch>-->
+            <!--</filter>-->
             <smtpHost>ns0.ovh.net</smtpHost>
             <smtpPort>587</smtpPort>
             <STARTTLS>true</STARTTLS>
